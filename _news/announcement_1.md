@@ -1,7 +1,7 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2020-2-14
 inline: true
 ---
 
-A simple inline announcement.
+Our paper "Valentine: Evaluating Matching Techniques for Dataset Discovery" got accepted in ICDE 2021 :heavy_heart_exclamation:
