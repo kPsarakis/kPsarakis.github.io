@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 description: PhD Candidate, [Web Information Systems Group](https://www.tudelft.nl/ewi/over-de-faculteit/afdelingen/software-technology/web-information-systems/), Department of Software Technology, Faculty of EEMCS, TU Delft
 
