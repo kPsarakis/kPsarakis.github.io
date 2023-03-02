@@ -7,8 +7,7 @@ first_name: Kyriakos
 middle_name:
 last_name: Psarakis
 email: K.Psarakis@tudelft.nl
-description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+description: # the ">" symbol means to ignore newlines until "footer_text:"
 footer_text:
 keywords: Kyriakos Psarakis
 
