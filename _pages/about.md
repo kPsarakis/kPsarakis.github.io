@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: PhD Candidate, <a href="https://www.tudelft.nl/en/">TU Delft</a>, <a href="https://www.tudelft.nl/ewi/over-de-faculteit/afdelingen/software-technology">Software Technology</a>, <a href="https://www.wis.ewi.tudelft.nl/">Web Information Systems</a>
 
