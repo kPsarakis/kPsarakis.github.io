@@ -41,24 +41,40 @@ nav_order: 5
             <td><a href="https://repository.tudelft.nl/islandora/object/uuid:ec6c45d7-ea0b-4a80-ae5f-dcb34e651e0e">Distributed Dataflow Transactions</a></td>
             <td>2022</td>
         </tr>
+        <tr class="active-row">
+            <td>Martijn Comans</td>
+            <td>Benchmarking SFaaS</td>
+            <td>Ongoing</td>
+        </tr>
+        <tr class="active-row">
+            <td>Mathieu Post</td>
+            <td>Consistent Querying of Entities</td>
+            <td>Ongoing</td>
+        </tr>
+        <tr class="active-row">
+            <td>Nikos Gavalas</td>
+            <td>Incremental Snapshotting in Transactional Dataflow SFaaS Systems</td>
+            <td>Ongoing</td>
+        </tr>
+        <tr class="active-row">
+            <td>Konstantinos Chronas</td>
+            <td>Dataset Creation for Schema Matching</td>
+            <td>Ongoing</td>
+        </tr>
+        <tr class="active-row">
+            <td>Marcus Schutte</td>
+            <td>Supporting Weak Isolation Models in Deterministic Databases</td>
+            <td>Ongoing</td>
+        </tr>
+        <tr class="active-row">
+            <td>Wouter van Lil</td>
+            <td>Consistency in Stateful FaaS Plaforms</td>
+            <td>Ongoing</td>
+        </tr>
         <!-- and so on... -->
     </tbody>
 </table>
 
-
-[//]: # (* **Martijn Comans**)
-
-[//]: # (* **Mathieu Post**)
-
-[//]: # (* **Nikos Gavalas**)
-
-[//]: # (* **Konstantinos Chronas**)
-
-[//]: # (* **Marcus Schutte**)
-
-[//]: # (* **Wouter van Lil**)
-
 [//]: # (* **Gianni Wiemers** &#40;with Georgios Siachamis&#41;)
 
 [//]: # (* **Theodoros Veneti** &#40;with Georgios Siachamis&#41;)
-
