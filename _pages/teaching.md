@@ -57,7 +57,7 @@ nav_order: 2
             <td>Ongoing</td>
         </tr>
         <tr class="active-row">
-            <td>Konstantinos Chronas</td>
+            <td><a href="https://www.linkedin.com/in/konstantinos-chronas-7a62ba102">Konstantinos Chronas</a></td>
             <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A7ff34c5d-dea6-42ce-a501-8148d079f3a1?collection=education">Generating Labeled Datasets for Schema Matching</a></td>
             <td>2023</td>
         </tr>
