@@ -42,9 +42,9 @@ nav_order: 2
             <td>2022</td>
         </tr>
         <tr class="active-row">
-            <td>Martijn Comans</td>
-            <td>Benchmarking SFaaS</td>
-            <td>Ongoing</td>
+            <td><a href="https://www.linkedin.com/in/martijn-comans/?originalSubdomain=nl">Martijn Comans</a> </td>
+            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A81909c05-72d1-4251-b183-aac8046dac64?collection=education">Benchmarking Stateful Serverless Functions</a></td>
+            <td>2023</td>
         </tr>
         <tr class="active-row">
             <td>Mathieu Post</td>
@@ -69,6 +69,11 @@ nav_order: 2
         <tr class="active-row">
             <td>Wouter van Lil</td>
             <td>Consistency in Stateful FaaS Plaforms</td>
+            <td>Ongoing</td>
+        </tr>
+        <tr class="active-row">
+            <td>Theodoros Veneti</td>
+            <td>State Migration in SFaaS Systems</td>
             <td>Ongoing</td>
         </tr>
         <!-- and so on... -->
