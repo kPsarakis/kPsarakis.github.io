@@ -63,7 +63,7 @@ nav_order: 2
         </tr>
         <tr class="active-row">
             <td><a href="https://www.linkedin.com/in/marcus-schutte-0836b91b6/">Marcus Schutte</a></td>
-            <td><a href="">Supporting Weak Isolation Models in Deterministic Databases</a></td>
+            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A1d6d9c85-6a0e-4208-9605-09f5d292ac2a">Minimizing aborts in an epoch based transaction protocol for deterministic databases</a></td>
             <td>2023</td>
         </tr>
         <tr class="active-row">

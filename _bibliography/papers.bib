@@ -138,3 +138,22 @@ pages="336--351",
 abstract="The increasing need for data trading across businesses nowadays has created a demand for data marketplaces. However, despite the intentions of both data providers and consumers, today's data marketplaces remain mere data catalogs. We believe that marketplaces of the future require a set of value-added services, such as advanced search and discovery, that have been proposed in the database research community for years, but are not yet put to practice. With this paper, we report on the effort to engineer and develop an open-source modular data market platform to enable both entrepreneurs and researchers to setup and experiment with data marketplaces. To this end, we implemented and extended existing methods for data profiling, dataset search {\&} discovery, and data recommendation. These methods are available as open-source libraries. In this paper we report on how those tools were assembled together to build topio.market, a real-world web platform for trading geospatial data, that is currently in a beta phase.",
 isbn="978-3-031-34444-2"
 }
+
+@inproceedings{10.1145/3583678.3596891,
+          abbr = {DEBS},
+author = {Siachamis, George and Psarakis, Kyriakos and Fragkoulis, Marios and Papapetrou, Odysseas and van Deursen, Arie and Katsifodimos, Asterios},
+title = {Adaptive Distributed Streaming Similarity Joins},
+year = {2023},
+isbn = {9798400701221},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3583678.3596891},
+doi = {10.1145/3583678.3596891},
+abstract = {How can we perform similarity joins of multi-dimensional streams in a distributed fashion, achieving low latency? Can we adaptively repartition those streams in order to retain high performance under concept drifts? Current approaches to similarity joins are either restricted to single-node deployments or focus on set-similarity joins, failing to cover the ubiquitous case of metric-space similarity joins. In this paper, we propose the first adaptive distributed streaming similarity join approach that gracefully scales with variable velocity and distribution of multi-dimensional data streams. Our approach can adaptively rebalance the load of nodes in the case of concept drifts, allowing for similarity computations in the general metric space. We implement our approach on top of Apache Flink and evaluate its data partitioning and load balancing schemes on a set of synthetic datasets in terms of latency, comparisons ratio, and data duplication ratio.},
+booktitle = {Proceedings of the 17th ACM International Conference on Distributed and Event-Based Systems},
+pages = {25–36},
+numpages = {12},
+keywords = {data streams, distributed computations, similarity joins, load balancing, data partitioning},
+location = {Neuchatel, Switzerland},
+series = {DEBS '23}
+}
