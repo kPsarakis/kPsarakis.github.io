@@ -67,9 +67,9 @@ nav_order: 2
             <td>2023</td>
         </tr>
         <tr class="active-row">
-            <td>Wouter van Lil</td>
-            <td>Consistency in Stateful FaaS Plaforms</td>
-            <td>Ongoing</td>
+            <td><a href="https://www.linkedin.com/in/wouter-van-lil-9a2577173/">Wouter van Lil</a></td>
+            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A68eef74c-7a32-4e43-8d41-778d7ea575c2?collection=education">Consistency in Stateful FaaS Plaforms</a></td>
+            <td>2023</td>
         </tr>
         <tr class="active-row">
             <td>Theodoros Veneti</td>
