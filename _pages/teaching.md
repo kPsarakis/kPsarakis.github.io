@@ -72,9 +72,9 @@ nav_order: 2
             <td>2023</td>
         </tr>
         <tr class="active-row">
-            <td>Theodoros Veneti</td>
-            <td>State Migration in SFaaS Systems</td>
-            <td>Ongoing</td>
+            <td><a href="https://www.linkedin.com/in/theodoros-venetis-43b38918b/">Theodoros Veneti</a></td>
+            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A5d602f53-1fb3-41a0-81dd-28ffd0d20787">Online state migration in modern stream processing engines</a></td>
+            <td>2023</td>
         </tr>
         <!-- and so on... -->
     </tbody>
