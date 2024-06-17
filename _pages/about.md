@@ -9,7 +9,7 @@ profile:
   image: kyriakos.jpg
   image_circular: false # crops the image to make it circular
   address: >
-    <p>3.W.920</p>
+    <p>1.E.240</p>
     <p>V. Mourik Broekmanweg 6</p>
     <p>Delft, Netherlands</p>
 
