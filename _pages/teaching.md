@@ -47,11 +47,6 @@ nav_order: 2
             <td>2023</td>
         </tr>
         <tr class="active-row">
-            <td>Mathieu Post</td>
-            <td>Consistent Querying of Entities</td>
-            <td>Ongoing</td>
-        </tr>
-        <tr class="active-row">
             <td><a href="https://www.linkedin.com/in/nikosgavalas/">Nikos Gavalas</a></td>
             <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3Acd55a655-6445-4f38-b5c5-35b9094a62c4?collection=education">Incremental Snapshotting in Transactional Dataflow SFaaS Systems</a></td>
             <td>2023</td>
