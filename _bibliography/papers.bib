@@ -147,7 +147,7 @@ year = {2023},
 isbn = {9798400701221},
 publisher = {Association for Computing Machinery},
 address = {New York, NY, USA},
-url = {https://doi.org/10.1145/3583678.3596891},
+pdf = {https://doi.org/10.1145/3583678.3596891},
 doi = {10.1145/3583678.3596891},
 abstract = {How can we perform similarity joins of multi-dimensional streams in a distributed fashion, achieving low latency? Can we adaptively repartition those streams in order to retain high performance under concept drifts? Current approaches to similarity joins are either restricted to single-node deployments or focus on set-similarity joins, failing to cover the ubiquitous case of metric-space similarity joins. In this paper, we propose the first adaptive distributed streaming similarity join approach that gracefully scales with variable velocity and distribution of multi-dimensional data streams. Our approach can adaptively rebalance the load of nodes in the case of concept drifts, allowing for similarity computations in the general metric space. We implement our approach on top of Apache Flink and evaluate its data partitioning and load balancing schemes on a set of synthetic datasets in terms of latency, comparisons ratio, and data duplication ratio.},
 booktitle = {Proceedings of the 17th ACM International Conference on Distributed and Event-Based Systems},
@@ -205,4 +205,22 @@ In this paper, we argue that the principles behind the streaming dataflow execut
   author={Psarakis, Kyriakos and Christodoulou, George and Fragkoulis, Marios and Katsifodimos, Asterios},
   pdf = {styx_cidr.pdf},
   year={2025}
+}
+
+@inproceedings{10.1145/3629104.3666036,
+author = {Siachamis, George and Christodoulou, George and Psarakis, Kyriakos and Fragkoulis, Marios and van Deursen, Arie and Katsifodimos, Asterios},
+title = {Evaluating Stream Processing Autoscalers},
+year = {2024},
+isbn = {9798400704437},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+pdf = {https://doi.org/10.1145/3629104.3666036},
+doi = {10.1145/3629104.3666036},
+abstract = {While the concept of large-scale stream processing is very popular nowadays, efficient dynamic allocation of resources is still an open issue in the area. The database research community has yet to evaluate different autoscaling techniques for stream processing engines under a robust benchmarking setting and evaluation framework. As a result, no conclusions can be made about the current solutions and problems that remain unsolved. Therefore, we address this issue with a principled evaluation approach.This paper evaluates the state-of-the-art control-based solutions in the autoscaling area with diverse, dynamic workloads, applying specific metrics. We investigate different aspects of the autoscaling problem as performance and convergence. Our experiments reveal that current control-based autoscaling techniques fail to account for generated lag cost by rescaling or underprovisioning and cannot efficiently handle practical scenarios of intensely dynamic workloads. Unexpectedly, we discovered that an autoscaling method not tailored for streaming can outperform others in certain scenarios.},
+booktitle = {Proceedings of the 18th ACM International Conference on Distributed and Event-Based Systems},
+pages = {110–122},
+numpages = {13},
+keywords = {Autoscaling, Data streams, Elastic provisioning, Reconfiguration},
+location = {Villeurbanne, France},
+series = {DEBS '24}
 }
