@@ -165,7 +165,7 @@ series = {DEBS '23}
       pdf = {https://arxiv.org/pdf/2312.06893.pdf},
       title={Styx: Transactional Stateful Functions on Streaming Dataflows},
       author={Kyriakos Psarakis and George Siachamis and George Christodoulou and Marios Fragkoulis and Asterios Katsifodimos},
-      year={2024},
+      year={2025},
       eprint={2312.06893},
       archivePrefix={arXiv},
       primaryClass={cs.DC}
@@ -194,10 +194,15 @@ series = {DEBS '23}
       primaryClass={cs.DC}
 }
 
-@article{psarakis2021stateful,
+@inproceedings{psarakis2025transactional,
   title={Transactional Cloud Applications Go with the (Data)Flow},
+  abstract={
+Traditional monolithic applications are migrated to the cloud, typically using a microservice-like architecture. Although this migration leads to significant benefits such as scalability and development agility, it also leaves behind the transactional guarantees that database systems have provided to monolithic applications for decades. In the cloud era, developers build transactional and fault-tolerant distributed applications by explicitly programming transaction protocols at the application level.
+
+In this paper, we argue that the principles behind the streaming dataflow execution model and deterministic transactional protocols provide a powerful and suitable substrate for executing transactional cloud applications. To this end, we introduce Styx, a transactional application runtime based on streaming dataflows that enables an object-oriented programming model for scalable, fault-tolerant cloud applications with serializable guarantees.},
   abbr = {CIDR},
   journal = {CIDR},
   author={Psarakis, Kyriakos and Christodoulou, George and Fragkoulis, Marios and Katsifodimos, Asterios},
+  pdf = {styx_cidr.pdf},
   year={2025}
 }
