@@ -10,6 +10,10 @@
   - firstname: ["George", "G.", "Georgios"]
     url: https://www.wis.ewi.tudelft.nl/siachamis
 
+"Christodoulou":
+  - firstname: ["George", "G.", "Christodoulou"]
+    url: https://giorgoschristodoulou.github.io/
+
 "Visser":
   - firstname: ["Eelco", "E."]
     url: https://eelcovisser.org/
