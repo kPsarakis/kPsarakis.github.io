@@ -11,8 +11,16 @@
     url: https://www.wis.ewi.tudelft.nl/siachamis
 
 "Christodoulou":
-  - firstname: ["George", "G.", "Christodoulou"]
+  - firstname: ["George", "G."]
     url: https://giorgoschristodoulou.github.io/
+
+"van Deursen":
+  - firstname: ["Arie", "A."]
+    url: https://avandeursen.com/about/
+
+"Carbone":
+  - firstname: ["Paris", "P."]
+    url: https://people.kth.se/~parisc/
 
 "Visser":
   - firstname: ["Eelco", "E."]
