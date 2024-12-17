@@ -181,6 +181,12 @@ include: ["_pages"]
 exclude:
   - bin/
   - CONTRIBUTING.md
+  - _pages/blog.md
+  - _pages/dropdown.md
+  - _pages/news.md
+  - _pages/profiles.md
+  - _pages/projects.md
+  - _pages/repositories.md
   - CUSTOMIZE.md
   - Dockerfile
   - docker-compose.yml

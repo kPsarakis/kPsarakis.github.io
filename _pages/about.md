@@ -21,6 +21,6 @@ social: true  # includes social icons at the bottom of the page
 I'm working at the intersection of stream processing and serverless computing under the supervision of [Asterios Katsifodimos](http://asterios.katsifodimos.com/).
 
 
-Prior to that I obtained my MSc in Computer Science at TU Delft with a thesis at [Holistic Schema Matching at Scale](https://repository.tudelft.nl/islandora/object/uuid%3Af4ebeda3-6465-49da-813b-f1e6e0820c60) in collaboration with [ING Netherlands](https://www.ing.nl/en/personal).
+Prior to that I obtained my MSc in Computer Science at TU Delft with a thesis at [Holistic Schema Matching at Scale](https://repository.tudelft.nl/islandora/object/uuid%3Af4ebeda3-6465-49da-813b-f1e6e0820c60) in collaboration with ING Bank Netherlands.
 My first degree was a diploma (Integrated master's degree) in Electrical and Computer Engineering at the [Technical University of Crete](https://www.tuc.gr/index.php?id=5397).
 
