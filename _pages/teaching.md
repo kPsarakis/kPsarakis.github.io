@@ -28,6 +28,21 @@ nav_order: 3
     </thead>
     <tbody>
         <tr class="active-row">
+            <td><a href="https://www.linkedin.com/in/martijn-de-heus-b75308146">Martijn de Heus</a></td>
+            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A25b6e54a-116a-444f-9cb7-693d595bb058">Distributed Transactions on SFaaS using Coordinator Functions</a></td>
+            <td>2021</td>
+        </tr>
+        <tr class="active-row">
+            <td><a href="https://www.linkedin.com/in/wouter-zorgdrager-a4746512a">Wouter Zorgdrager</a></td>
+            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A876a7a53-8afd-49e2-8d95-af00aab5cfc4">Anyone Can Cloud: Democratizing Cloud Application Programming</a></td>
+            <td>2021</td>
+        </tr>
+        <tr class="active-row">
+            <td><a href="https://www.linkedin.com/in/axcwalker">Alex Walker</a></td>
+            <td><a href="https://repository.tudelft.nl/islandora/object/uuid:ec6c45d7-ea0b-4a80-ae5f-dcb34e651e0e">Distributed Dataflow Transactions</a></td>
+            <td>2022</td>
+        </tr>
+        <tr class="active-row">
             <td><a href="https://www.linkedin.com/in/martijn-comans/?originalSubdomain=nl">Martijn Comans</a> </td>
             <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A81909c05-72d1-4251-b183-aac8046dac64?collection=education">Benchmarking Stateful Serverless Functions</a></td>
             <td>2023</td>
@@ -53,25 +68,11 @@ nav_order: 3
             <td>2023</td>
         </tr>
         <tr class="active-row">
-            <td><a href="https://www.linkedin.com/in/theodoros-venetis-43b38918b/">Theodoros Venetis</a></td>
+            <td><a href="https://www.linkedin.com/in/theodoros-venetis-43b38918b/">Theodoros Veneti</a></td>
             <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A5d602f53-1fb3-41a0-81dd-28ffd0d20787">Online state migration in modern stream processing engines</a></td>
             <td>2023</td>
         </tr>
-        <tr class="active-row">
-            <td><a href="https://www.linkedin.com/in/axcwalker">Alex Walker</a></td>
-            <td><a href="https://repository.tudelft.nl/islandora/object/uuid:ec6c45d7-ea0b-4a80-ae5f-dcb34e651e0e">Distributed Dataflow Transactions</a></td>
-            <td>2022</td>
-        </tr>
-        <tr>
-            <td><a href="https://www.linkedin.com/in/martijn-de-heus-b75308146">Martijn de Heus</a></td>
-            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A25b6e54a-116a-444f-9cb7-693d595bb058">Distributed Transactions on SFaaS using Coordinator Functions</a></td>
-            <td>2021</td>
-        </tr>
-        <tr class="active-row">
-            <td><a href="https://www.linkedin.com/in/wouter-zorgdrager-a4746512a">Wouter Zorgdrager</a></td>
-            <td><a href="https://repository.tudelft.nl/islandora/object/uuid%3A876a7a53-8afd-49e2-8d95-af00aab5cfc4">Anyone Can Cloud: Democratizing Cloud Application Programming</a></td>
-            <td>2021</td>
-        </tr>
+        <!-- and so on... -->
     </tbody>
 </table>
 
