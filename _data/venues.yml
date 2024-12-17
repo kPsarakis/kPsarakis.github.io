@@ -1,6 +1,24 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
-  color: "#00369f"
+"CIDR":
+  url: https://www.cidrdb.org/
+#  color: "#00369f"
 
-"PhysRev":
-  url: https://journals.aps.org/
+"ICDE":
+  url: https://ieeexplore.ieee.org/xpl/conhome/1000178/all-proceedings
+
+"EDBT":
+  url: https://edbt.org/
+
+"DEBS":
+  url: https://dl.acm.org/conference/debs
+
+"ICWE":
+  url: https://link.springer.com/conference/icwe
+
+"Information Systems":
+  url: https://www.sciencedirect.com/journal/information-systems
+
+"VLDB":
+  url: https://vldb.org/
+
+"SIGMOD":
+  url: https://sigmod.org/

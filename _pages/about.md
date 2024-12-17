@@ -6,9 +6,9 @@ subtitle: PhD Candidate, <a href="https://www.tudelft.nl/en/">TU Delft</a>, <a h
 
 profile:
   align: right
-  image: kyriakos.jpg
+  image: kyriakos.png
   image_circular: false # crops the image to make it circular
-  address: >
+  more_info: >
     <p>1.E.240</p>
     <p>V. Mourik Broekmanweg 6</p>
     <p>Delft, Netherlands</p>
