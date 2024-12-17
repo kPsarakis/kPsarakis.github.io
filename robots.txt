@@ -1,4 +1,9 @@
 User-agent: *
+Disallow:
+
+Sitemap: https://kpsarakis.com/sitemap.xml
+
+User-agent: *
 Disallow: /publications/
 
 Sitemap: https://kpsarakis.com/sitemap.xml
