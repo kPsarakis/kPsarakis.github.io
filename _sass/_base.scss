@@ -1387,7 +1387,9 @@ ninja-keys::part(ninja-input-wrapper) {
 }
 
 .styled-table tbody tr:hover {
-    background-color: #eaf4ff;
+    background-color: var(--global-hover-color, #eaf4ff); /* Use fallback if the variable is undefined */
+    color: #333; /* Ensure text remains dark and readable */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .styled-table tbody tr.active-row {
