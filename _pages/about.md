@@ -6,8 +6,8 @@ subtitle: PhD Candidate, <a href="https://www.tudelft.nl/en/">TU Delft</a>, <a h
 
 profile:
   align: right
-  image: kyriakos.png
-  image_circular: false # crops the image to make it circular
+  image: kyriakos.webp
+  image_circular: true # crops the image to make it circular
   more_info: >
     <p>1.E.240</p>
     <p>V. Mourik Broekmanweg 6</p>
