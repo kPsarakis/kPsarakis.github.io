@@ -12,25 +12,6 @@ isbn = {9781450385558},
 publisher = {Association for Computing Machinery},
 address = {New York, NY, USA},
 url = {https://doi-org.tudelft.idm.oclc.org/10.1145/3465480.3466920},
-doi = {10.1145/3465480.3466920},
-abstract = {Serverless computing is currently the fastest-growing cloud services segment. The
-most prominent serverless offering is Function-as-a-Service (FaaS), where users write
-functions and the cloud automates deployment, maintenance, and scalability. Although
-FaaS is a good fit for executing stateless functions, it does not adequately support
-stateful constructs like microservices and scalable, low-latency cloud applications,
-mainly because it lacks proper state management support and the ability to perform
-function-to-function calls. Most importantly, executing transactions across stateful
-functions remains an open problem.In this paper, we introduce a programming model
-and implementation for transaction orchestration of stateful serverless functions.
-Our programming model supports serializable distributed transactions with two-phase
-commit, as well as relaxed transactional guarantees with Sagas. We design and implement
-our programming model on Apache Flink StateFun. We choose to build our solution on
-top of StateFun in order to leverage Flink's exactly-once processing and state management
-guarantees. We base our evaluation on the YCSB benchmark, which we extended with transactional
-operations and adapted for the SFaaS programming model. Our experiments show that
-our transactional orchestration adds 10% overhead to the original system and that
-Sagas can achieve up to 34% more transactions per second than two-phase commit transactions
-at a sub-200ms latency.},
 booktitle = {Proceedings of the 15th ACM International Conference on Distributed and Event-Based Systems},
 pages = {31–42},
 numpages = {12},
@@ -46,14 +27,11 @@ series = {DEBS '21}
       title={Valentine: Evaluating Matching Techniques for Dataset Discovery},
       year={2021},
       pages={468-479},
-      abstract={Data scientists today search large data lakes to discover and integrate datasets. In order to bring together disparate data sources, dataset discovery methods rely on some form of schema matching: the process of establishing correspondences between datasets. Traditionally, schema matching has been used to find matching pairs of columns between a source and a target schema. However, the use of schema matching in dataset discovery methods differs from its original use. Nowadays schema matching serves as a building block for indicating and ranking inter-dataset relationships. Surprisingly, although a discovery method’s success relies highly on the quality of the underlying matching algorithms, the latest discovery methods employ existing schema matching algorithms in an ad-hoc fashion due to the lack of openly-available datasets with ground truth, reference method implementations, and evaluation metrics.In this paper, we aim to rectify the problem of evaluating the effectiveness and efficiency of schema matching methods for the specific needs of dataset discovery. To this end, we propose Valentine, an extensible open-source experiment suite to execute and organize large-scale automated matching experiments on tabular data. Valentine includes implementations of seminal schema matching methods that we either implemented from scratch (due to absence of open source code) or imported from open repositories. The contributions of Valentine are: i) the definition of four schema matching scenarios as encountered in dataset discovery methods, ii) a principled dataset fabrication process tailored to the scope of dataset discovery methods and iii) the most comprehensive evaluation of schema matching techniques to date, offering insight on the strengths and weaknesses of existing techniques, that can serve as a guide for employing schema matching in future dataset discovery methods.},
-      doi={10.1109/ICDE51399.2021.00047},
       ISSN={2375-026X},
       month={April},
       abbr = {ICDE},
            google_scholar_id={u-x6o8ySG0sC},
       pdf = {https://arxiv.org/pdf/2010.07386.pdf},
-      arxiv = {arXiv:2010.07386},
       blog = {https://delftdata.github.io/valentine/},
 }
 
@@ -71,8 +49,6 @@ volume = {14},
 number = {12},
 issn = {2150-8097},
 url = {https://doi.org/10.14778/3476311.3476366},
-doi = {10.14778/3476311.3476366},
-abstract = {Capturing relationships among heterogeneous datasets in large data lakes - traditionally termed schema matching - is one of the most challenging problems that corporations and institutions face nowadays. Discovering and integrating datasets heavily relies on the effectiveness of the schema matching methods in use. However, despite the wealth of research, evaluation of schema matching methods is still a daunting task: there is a lack of openly-available datasets with ground truth, reference method implementations, and comprehensible GUIs that would facilitate development of both novel state-of-the-art schema matching techniques and novel data discovery methods.Our recently proposed Valentine is the first system to offer an open-source experiment suite to organize, execute and orchestrate large-scale matching experiments. In this demonstration we present its functionalities and enhancements: i) a scalable system, with a user-centric GUI, that enables the fabrication of datasets and the evaluation of matching methods on schema matching scenarios tailored to the scope of tabular dataset discovery, ii) a scalable holistic matching system that can receive tabular datasets from heterogeneous sources and provide with similarity scores among their columns, in order to facilitate modern procedures in data lakes, such as dataset discovery.},
 journal = {Proc. VLDB Endow.},
 month = {oct},
 pages = {2871–2874},
@@ -91,12 +67,10 @@ numpages = {4}
     pages = {102015},
     year = {2022},
     issn = {0306-4379},
-    doi = {https://doi.org/10.1016/j.is.2022.102015},
     url = {https://www.sciencedirect.com/science/article/pii/S0306437922000229},
       google_scholar_id={IjCSPb-OGe4C},
     author = {Martijn {de Heus} and Kyriakos Psarakis and Marios Fragkoulis and Asterios Katsifodimos},
     keywords = {Serverless, Transactions, FaaS, Two-phase commit, Sagas, Streaming dataflows},
-    abstract = {Serverless computing is currently the fastest-growing cloud services segment. The most prominent serverless offering is Function-as-a-Service (FaaS), where users write functions and the cloud automates deployment, maintenance, and scalability. Although FaaS is a good fit for executing stateless functions, it does not adequately support stateful constructs like microservices and scalable, low-latency cloud applications. Recently, there have been multiple attempts to add first-class support for state in FaaS systems, such as Microsoft Orleans, Azure Durable Functions, or Beldi. These approaches execute business code inside stateless functions, handing over their state to an external database. In contrast, approaches such as Apache Flink’s StateFun follow a different design: a dataflow system such as Apache Flink handles all state management, messaging, and checkpointing by executing a stateful dataflow graph providing exactly-once state processing guarantees. This design relieves programmers from having to “pollute” their business logic with distributed systems error checking, management, and mitigation. Although programmers can easily develop applications without worrying about messaging and state management, executing transactions across stateful functions remains an open problem. In this paper, we introduce a programming model and implementation for transaction orchestration of stateful serverless functions. Our programming model supports serializable distributed transactions with two-phase commit, as well as eventually consistent workflows with Sagas. We design and implement our programming model on Apache Flink StateFun to leverage Flink’s exactly-once processing and state management guarantees. Our experiments show that the approach of building transactional systems on top of dataflow graphs can achieve very high throughput, but with latency overhead due to checkpointing mechanism guaranteeing the exactly-once processing. We compare our approach to Beldi that implements two-phase commit on AWS lambda functions backed by DynamoDB for state management, as well as an implementation of a system that makes use of CockroachDB as its backend.}
 }
 
 @inproceedings{psarakis2021stateful,
@@ -123,6 +97,7 @@ numpages = {4}
 
 @InProceedings{10.1007/978-3-031-34444-2_25,
       abbr = {ICWE},
+      pdf={https://link.springer.com/content/pdf/10.1007/978-3-031-34444-2.pdf#page=346},
 author="Ionescu, Andra
 and Patroumpas, Kostas
 and Psarakis, Kyriakos
@@ -142,7 +117,6 @@ publisher="Springer Nature Switzerland",
 address="Cham",
 pages="336--351",
 google_scholar_id={_FxGoFyzp5QC},
-abstract="The increasing need for data trading across businesses nowadays has created a demand for data marketplaces. However, despite the intentions of both data providers and consumers, today's data marketplaces remain mere data catalogs. We believe that marketplaces of the future require a set of value-added services, such as advanced search and discovery, that have been proposed in the database research community for years, but are not yet put to practice. With this paper, we report on the effort to engineer and develop an open-source modular data market platform to enable both entrepreneurs and researchers to setup and experiment with data marketplaces. To this end, we implemented and extended existing methods for data profiling, dataset search {\&} discovery, and data recommendation. These methods are available as open-source libraries. In this paper we report on how those tools were assembled together to build topio.market, a real-world web platform for trading geospatial data, that is currently in a beta phase.",
 isbn="978-3-031-34444-2"
 }
 
@@ -155,8 +129,6 @@ isbn = {9798400701221},
 publisher = {Association for Computing Machinery},
 address = {New York, NY, USA},
 pdf = {https://dl.acm.org/doi/pdf/10.1145/3583678.3596891},
-doi = {10.1145/3583678.3596891},
-abstract = {How can we perform similarity joins of multi-dimensional streams in a distributed fashion, achieving low latency? Can we adaptively repartition those streams in order to retain high performance under concept drifts? Current approaches to similarity joins are either restricted to single-node deployments or focus on set-similarity joins, failing to cover the ubiquitous case of metric-space similarity joins. In this paper, we propose the first adaptive distributed streaming similarity join approach that gracefully scales with variable velocity and distribution of multi-dimensional data streams. Our approach can adaptively rebalance the load of nodes in the case of concept drifts, allowing for similarity computations in the general metric space. We implement our approach on top of Apache Flink and evaluate its data partitioning and load balancing schemes on a set of synthetic datasets in terms of latency, comparisons ratio, and data duplication ratio.},
 booktitle = {Proceedings of the 17th ACM International Conference on Distributed and Event-Based Systems},
 pages = {25–36},
 numpages = {12},
@@ -207,10 +179,6 @@ series = {DEBS '23}
 
 @inproceedings{psarakis2025transactional,
   title={Transactional Cloud Applications Go with the (Data)Flow},
-  abstract={
-Traditional monolithic applications are migrated to the cloud, typically using a microservice-like architecture. Although this migration leads to significant benefits such as scalability and development agility, it also leaves behind the transactional guarantees that database systems have provided to monolithic applications for decades. In the cloud era, developers build transactional and fault-tolerant distributed applications by explicitly programming transaction protocols at the application level.
-
-In this paper, we argue that the principles behind the streaming dataflow execution model and deterministic transactional protocols provide a powerful and suitable substrate for executing transactional cloud applications. To this end, we introduce Styx, a transactional application runtime based on streaming dataflows that enables an object-oriented programming model for scalable, fault-tolerant cloud applications with serializable guarantees.},
   abbr = {CIDR},
   booktitle = {15th Annual Conference on Innovative Data Systems Research (CIDR)},
   author={Psarakis, Kyriakos and Christodoulou, George and Fragkoulis, Marios and Katsifodimos, Asterios},
@@ -228,8 +196,6 @@ isbn = {9798400704437},
 publisher = {Association for Computing Machinery},
 address = {New York, NY, USA},
 pdf = {https://dl.acm.org/doi/pdf/10.1145/3629104.3666036},
-doi = {10.1145/3629104.3666036},
-abstract = {While the concept of large-scale stream processing is very popular nowadays, efficient dynamic allocation of resources is still an open issue in the area. The database research community has yet to evaluate different autoscaling techniques for stream processing engines under a robust benchmarking setting and evaluation framework. As a result, no conclusions can be made about the current solutions and problems that remain unsolved. Therefore, we address this issue with a principled evaluation approach.This paper evaluates the state-of-the-art control-based solutions in the autoscaling area with diverse, dynamic workloads, applying specific metrics. We investigate different aspects of the autoscaling problem as performance and convergence. Our experiments reveal that current control-based autoscaling techniques fail to account for generated lag cost by rescaling or underprovisioning and cannot efficiently handle practical scenarios of intensely dynamic workloads. Unexpectedly, we discovered that an autoscaling method not tailored for streaming can outperform others in certain scenarios.},
 booktitle = {Proceedings of the 18th ACM International Conference on Distributed and Event-Based Systems},
 pages = {110–122},
 numpages = {13},
