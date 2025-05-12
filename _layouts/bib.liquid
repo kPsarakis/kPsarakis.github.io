@@ -41,6 +41,9 @@
           %}
         {% endif %}
       {% endif %}
+        {% if entry.tag %}
+            <span class="award badge w-100">{{entry.tag}}</span>
+        {% endif %}
     </div>
   {% endif %}
 
@@ -210,9 +213,9 @@
       {% endif %}
       {% if entry.pdf %}
         {% if entry.pdf contains '://' %}
-          <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+          <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button"><img src="https://img.shields.io/badge/PDF-red?logo=adobeacrobatreader"></a>
         {% else %}
-          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button"><img src="https://img.shields.io/badge/PDF-red?logo=adobeacrobatreader"></a>
         {% endif %}
       {% endif %}
       {% if entry.supp %}
@@ -228,7 +231,7 @@
         <a href="{{ entry.video }}" class="btn btn-sm z-depth-0" role="button">Video</a>
       {% endif %}
       {% if entry.blog %}
-        <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
+        <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button"><img src="https://img.shields.io/badge/Blog-blue?logo=rss"></a>
       {% endif %}
       {% if entry.code %}
         <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
