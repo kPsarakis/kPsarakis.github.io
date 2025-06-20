@@ -102,9 +102,11 @@
 
     <!-- Links -->
     <div class="links">
-      {% if entry.pdf %}
-        <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" role="button"><img src="https://img.shields.io/badge/PDF-red?logo=adobeacrobatreader"></a>
-      {% endif %}
+        {% if entry.pdf %}
+          <a href="{{ entry.pdf | relative_url }}" role="button">
+            <img src="https://img.shields.io/badge/PDF-red?logo=adobeacrobatreader">
+          </a>
+        {% endif %}
       {% if entry.blog %}
         <a href="{{ entry.blog }}" role="button"><img src="https://img.shields.io/badge/Blog-blue?logo=rss"></a>
       {% endif %}
