@@ -1,10 +1,10 @@
 metadata:
-  last_updated: '2025-05-12 12:56:20'
+  last_updated: '2025-06-20 14:14:16'
 papers:
   6L9Kz3AAAAAJ:u-x6o8ySG0sC:
     title: 'Valentine: Evaluating matching techniques for dataset discovery'
     year: '2021'
-    citations: 132
+    citations: 138
   6L9Kz3AAAAAJ:9yKSN-GCB0IC:
     title: Distributed Transactions on Serverless Stateful Functions
     year: '2021'
@@ -29,7 +29,7 @@ papers:
   6L9Kz3AAAAAJ:WF5omc3nYNoC:
     title: 'Topio Marketplace: Search and Discovery of Geospatial Data'
     year: '2023'
-    citations: 6
+    citations: 7
   6L9Kz3AAAAAJ:UebtZRa9Y70C:
     title: 'CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows'
     year: '2024'
@@ -37,7 +37,7 @@ papers:
   6L9Kz3AAAAAJ:LkGwnXOMwfcC:
     title: Adaptive distributed streaming similarity joins
     year: '2023'
-    citations: 4
+    citations: 3
   6L9Kz3AAAAAJ:ufrVoPGSRksC:
     title: Towards evaluating stream processing autoscalers
     year: '2023'
@@ -57,7 +57,7 @@ papers:
   6L9Kz3AAAAAJ:_FxGoFyzp5QC:
     title: 'Topio: An Open-Source Web Platform for Trading Geospatial Data'
     year: '2023'
-    citations: 1
+    citations: 2
   6L9Kz3AAAAAJ:qjMakFHDy7sC:
     title: Holistic Schema Matching at Scale
     year: '2020'

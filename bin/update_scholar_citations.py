@@ -13,7 +13,7 @@ from scholarly import scholarly
 
 # Configuration
 SCHOLAR_USER_ID = "6L9Kz3AAAAAJ"  # Your Google Scholar ID
-OUTPUT_FILE = "_data/citations.yml"
+OUTPUT_FILE = "../_data/citations.yml"
 MAX_RETRIES = 3
 
 # Create data directory if it doesn't exist
