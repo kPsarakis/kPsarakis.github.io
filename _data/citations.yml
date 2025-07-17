@@ -1,22 +1,22 @@
 metadata:
-  last_updated: '2025-06-20 14:14:16'
+  last_updated: '2025-07-17 13:25:28'
 papers:
   6L9Kz3AAAAAJ:u-x6o8ySG0sC:
     title: 'Valentine: Evaluating matching techniques for dataset discovery'
     year: '2021'
-    citations: 138
+    citations: 142
   6L9Kz3AAAAAJ:9yKSN-GCB0IC:
     title: Distributed Transactions on Serverless Stateful Functions
     year: '2021'
-    citations: 33
+    citations: 35
   6L9Kz3AAAAAJ:2osOgNQ5qMEC:
     title: 'Valentine in Action: Matching Tabular Data at Scale'
     year: '2021'
-    citations: 14
+    citations: 15
   6L9Kz3AAAAAJ:eQOLeE2rZwMC:
     title: 'Stateful Entities: Object-oriented Cloud Applications as Distributed Dataflows'
     year: '2024'
-    citations: 11
+    citations: 13
   6L9Kz3AAAAAJ:IjCSPb-OGe4C:
     title: Transactions Across Serverless Functions Leveraging Stateful Dataflows
     year: '2022'
@@ -25,19 +25,19 @@ papers:
     title: Multi-label classification for automatic tag prediction in the context
       of programming challenges
     year: '2019'
-    citations: 8
+    citations: 10
   6L9Kz3AAAAAJ:WF5omc3nYNoC:
     title: 'Topio Marketplace: Search and Discovery of Geospatial Data'
     year: '2023'
-    citations: 7
+    citations: 8
   6L9Kz3AAAAAJ:UebtZRa9Y70C:
     title: 'CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows'
     year: '2024'
-    citations: 5
+    citations: 8
   6L9Kz3AAAAAJ:LkGwnXOMwfcC:
     title: Adaptive distributed streaming similarity joins
     year: '2023'
-    citations: 3
+    citations: 4
   6L9Kz3AAAAAJ:ufrVoPGSRksC:
     title: Towards evaluating stream processing autoscalers
     year: '2023'
@@ -45,7 +45,7 @@ papers:
   6L9Kz3AAAAAJ:qxL8FJ1GzNcC:
     title: Transactional Cloud Applications Go with the (Data) Flow
     year: '2025'
-    citations: 2
+    citations: 4
   6L9Kz3AAAAAJ:hqOjcs7Dif8C:
     title: Evaluating stream processing autoscalers
     year: '2024'
@@ -70,4 +70,12 @@ papers:
     title: 'SiMa: Effective and Efficient Data Silo Federation Using Graph Neural
       Networks'
     year: '2022'
+    citations: 4
+  6L9Kz3AAAAAJ:mVmsd5A6BfQC:
+    title: 'Styx: Transactional Stateful Functions on Streaming Dataflows'
+    year: '2025'
+    citations: 5
+  6L9Kz3AAAAAJ:dhFuZR0502QC:
+    title: 'Transactional Cloud Applications: Status Quo, Challenges, and Opportunities'
+    year: '2025'
     citations: 0
