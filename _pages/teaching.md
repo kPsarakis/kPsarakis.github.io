@@ -28,6 +28,16 @@ nav_order: 3
     </thead>
     <tbody>
         <tr class="active-row">
+            <td><a href="https://www.linkedin.com/in/smruti-kshirsagar/">Smruti Kshirsagar</a></td>
+            <td><a href="https://resolver.tudelft.nl/uuid:60d4f13b-19d7-4f3e-9477-75566477d7df">Global-State Querying in Stream Processing using Snapshots (H-Styx)</a></td>
+            <td><a href="https://resolver.tudelft.nl/uuid:60d4f13b-19d7-4f3e-9477-75566477d7df">2025</a></td>
+        </tr>
+        <tr class="active-row">
+            <td><a href="https://www.linkedin.com/in/mitali-patil-594255183/">Mitali Patil</a></td>
+            <td><a href="https://resolver.tudelft.nl/uuid:b63c5f60-53b7-41db-9807-3bc5650f9ebd">Live Global State Queries in Stream Processing</a></td>
+            <td><a href="https://resolver.tudelft.nl/uuid:b63c5f60-53b7-41db-9807-3bc5650f9ebd">2025</a></td>
+        </tr>
+        <tr class="active-row">
             <td><a href="https://www.linkedin.com/in/theodoros-venetis-43b38918b/">Theodoros Veneti</a></td>
             <td><a href="https://repository.tudelft.nl/record/uuid:5d602f53-1fb3-41a0-81dd-28ffd0d20787">Online state migration in modern stream processing engines</a></td>
             <td><a href="https://repository.tudelft.nl/record/uuid:5d602f53-1fb3-41a0-81dd-28ffd0d20787">2023</a></td>

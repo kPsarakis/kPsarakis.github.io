@@ -1,18 +1,18 @@
 metadata:
-  last_updated: '2025-07-17 13:25:28'
+  last_updated: '2025-07-28 13:18:34'
 papers:
   6L9Kz3AAAAAJ:u-x6o8ySG0sC:
     title: 'Valentine: Evaluating matching techniques for dataset discovery'
     year: '2021'
-    citations: 142
+    citations: 147
   6L9Kz3AAAAAJ:9yKSN-GCB0IC:
     title: Distributed Transactions on Serverless Stateful Functions
     year: '2021'
-    citations: 35
+    citations: 36
   6L9Kz3AAAAAJ:2osOgNQ5qMEC:
     title: 'Valentine in Action: Matching Tabular Data at Scale'
     year: '2021'
-    citations: 15
+    citations: 16
   6L9Kz3AAAAAJ:eQOLeE2rZwMC:
     title: 'Stateful Entities: Object-oriented Cloud Applications as Distributed Dataflows'
     year: '2024'
@@ -41,7 +41,7 @@ papers:
   6L9Kz3AAAAAJ:ufrVoPGSRksC:
     title: Towards evaluating stream processing autoscalers
     year: '2023'
-    citations: 3
+    citations: 4
   6L9Kz3AAAAAJ:qxL8FJ1GzNcC:
     title: Transactional Cloud Applications Go with the (Data) Flow
     year: '2025'
