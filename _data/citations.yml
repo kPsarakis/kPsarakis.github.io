@@ -1,10 +1,10 @@
 metadata:
-  last_updated: '2025-07-28 13:18:34'
+  last_updated: '2025-10-28 08:51:36'
 papers:
   6L9Kz3AAAAAJ:u-x6o8ySG0sC:
     title: 'Valentine: Evaluating matching techniques for dataset discovery'
     year: '2021'
-    citations: 147
+    citations: 159
   6L9Kz3AAAAAJ:9yKSN-GCB0IC:
     title: Distributed Transactions on Serverless Stateful Functions
     year: '2021'
@@ -16,7 +16,7 @@ papers:
   6L9Kz3AAAAAJ:eQOLeE2rZwMC:
     title: 'Stateful Entities: Object-oriented Cloud Applications as Distributed Dataflows'
     year: '2024'
-    citations: 13
+    citations: 14
   6L9Kz3AAAAAJ:IjCSPb-OGe4C:
     title: Transactions Across Serverless Functions Leveraging Stateful Dataflows
     year: '2022'
@@ -33,11 +33,11 @@ papers:
   6L9Kz3AAAAAJ:UebtZRa9Y70C:
     title: 'CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows'
     year: '2024'
-    citations: 8
+    citations: 10
   6L9Kz3AAAAAJ:LkGwnXOMwfcC:
     title: Adaptive distributed streaming similarity joins
     year: '2023'
-    citations: 4
+    citations: 5
   6L9Kz3AAAAAJ:ufrVoPGSRksC:
     title: Towards evaluating stream processing autoscalers
     year: '2023'
@@ -45,7 +45,7 @@ papers:
   6L9Kz3AAAAAJ:qxL8FJ1GzNcC:
     title: Transactional Cloud Applications Go with the (Data) Flow
     year: '2025'
-    citations: 4
+    citations: 5
   6L9Kz3AAAAAJ:hqOjcs7Dif8C:
     title: Evaluating stream processing autoscalers
     year: '2024'
@@ -74,8 +74,12 @@ papers:
   6L9Kz3AAAAAJ:mVmsd5A6BfQC:
     title: 'Styx: Transactional Stateful Functions on Streaming Dataflows'
     year: '2025'
-    citations: 5
+    citations: 8
   6L9Kz3AAAAAJ:dhFuZR0502QC:
     title: 'Transactional Cloud Applications: Status Quo, Challenges, and Opportunities'
+    year: '2025'
+    citations: 0
+  6L9Kz3AAAAAJ:L8Ckcad2t8MC:
+    title: 'Styx in Action: Transactional Cloud Applications Made Easy'
     year: '2025'
     citations: 0

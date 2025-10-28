@@ -1,4 +1,59 @@
 {% if site.bib_search %}
   <script src="{{ '/assets/js/bibsearch.js' | relative_url | bust_file_cache }}" type="module"></script>
-  <input type="text" id="bibsearch" spellcheck="false" autocomplete="off" class="search bibsearch-form-input" placeholder="Type to filter">
+
+  <div class="bibsearch-row">
+    <input
+      type="text"
+      id="bibsearch"
+      spellcheck="false"
+      autocomplete="off"
+      class="search bibsearch-form-input"
+      placeholder="Type to filter"
+    >
+
+    {% assign citations = site.data.total_citations.sources %}
+    {% if citations %}
+      <div class="bib-metrics">
+        {% assign default_source = citations.google_scholar %}
+        {% if default_source %}
+          <span class="metric"><span class="label">Citations</span> <strong>{{ default_source.total_citations }}</strong></span>
+          <span class="metric"><span class="label">h</span>=<strong>{{ default_source.h_index }}</strong></span>
+          {% if default_source.i10_index %}
+            <span class="metric"><span class="label">i10</span>=<strong>{{ default_source.i10_index }}</strong></span>
+          {% endif %}
+          {% if default_source.updated %}
+            <span class="metric-updated">· updated {{ default_source.updated }}</span>
+          {% endif %}
+        {% endif %}
+
+        {% if citations.size > 1 %}
+          <label class="metric-source">
+            <select id="metric-source-select" onchange="updateCitationMetrics(this.value)">
+              {% for key in citations %}
+                <option value="{{ key[0] }}">{{ key[0] | replace: '_', ' ' | capitalize }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  <script>
+    const citationData = {{ site.data.total_citations.sources | jsonify }};
+    function updateCitationMetrics(sourceKey) {
+      const src = citationData[sourceKey];
+      if (!src) return;
+      document.querySelector('.metric strong:nth-child(1)').textContent = src.total_citations ?? '—';
+      document.querySelector('.metric strong:nth-child(2)').textContent = src.h_index ?? '—';
+      const i10El = document.querySelector('.metric:nth-child(3)');
+      if (src.i10_index) {
+        i10El.style.display = '';
+        i10El.querySelector('strong').textContent = src.i10_index;
+      } else {
+        i10El.style.display = 'none';
+      }
+      document.querySelector('.metric-updated').textContent = src.updated ? `· updated ${src.updated}` : '';
+    }
+  </script>
 {% endif %}

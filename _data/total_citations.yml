@@ -1,0 +1,16 @@
+sources:
+  google_scholar:
+    total_citations: 1234
+    h_index: 21
+    i10_index: 35
+    updated: 2025-10-01
+
+  scopus:
+    total_citations: 980
+    h_index: 19
+    updated: 2025-09-30
+
+  researchgate:
+    total_citations: 1102
+    h_index: 20
+    updated: 2025-09-15
