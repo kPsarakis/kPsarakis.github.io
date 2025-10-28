@@ -1,7 +1,76 @@
 {% if site.bib_search %}
   <script src="{{ '/assets/js/bibsearch.js' | relative_url | bust_file_cache }}" type="module"></script>
 
-  <div class="bibsearch-row" style="align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+<style>
+  .citations-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between; /* pushes table to right */
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .citations-row .bibsearch-form-input {
+    flex: 0 1 260px;
+    min-width: 200px;
+    max-width: 320px;
+    margin-bottom: 0;
+  }
+
+  .citations-table {
+    margin: 0;
+    font-size: 0.55rem;              /* compact text size */
+    min-width: unset;
+    width: auto;
+    color: #000 !important;
+    border-collapse: collapse;
+    line-height: 1.1;
+  }
+
+  .citations-table caption {
+    caption-side: bottom;
+    text-align: right;
+    font-size: 0.6rem;
+    font-style: italic;
+    color: #777;
+    padding-top: 2px;
+  }
+
+  .citations-table th,
+  .citations-table td {
+    padding: 2px 5px;               /* tight spacing */
+    border-right: 1px solid #e0e0e0;
+  }
+
+  /* remove right border from last column (fix top-right black line) */
+  .citations-table th:last-child,
+  .citations-table td:last-child {
+    border-right: none !important;
+  }
+
+  .citations-table thead tr {
+    background: linear-gradient(90deg, var(--global-hover-color), #5e72e4);
+    color: #fff !important;
+    font-weight: 600;
+  }
+
+  .citations-table tbody tr td {
+    color: #000 !important;
+    background-color: #fff;
+  }
+
+  .citations-table tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa !important;
+  }
+
+  .citations-table tbody tr:hover {
+    background-color: var(--global-hover-color, #eaf4ff);
+    color: #000 !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+</style>
+
+  <div class="citations-row">
     <input
       type="text"
       id="bibsearch"
@@ -9,63 +78,66 @@
       autocomplete="off"
       class="search bibsearch-form-input"
       placeholder="Type to filter"
-      style="margin-bottom:0;"
     >
 
     {% assign sources = site.data.total_citations.sources %}
     {% if sources %}
-      <div style="flex:1 1 auto; min-width:300px; max-width:650px;">
-        <table class="styled-table styled-table--small">
-          <thead>
-            <tr>
-              <th>Source</th>
-              <th>Citations</th>
-              <th>h</th>
-              <th>i10</th>
-              <th>Updated</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% assign preferred_order = "google_scholar,scopus,researchgate" | split: "," %}
-            {% for key in preferred_order %}
-              {% assign row = sources[key] %}
-              {% if row %}
-                <tr>
-                  <td>
-                    {% case key %}
-                      {% when "google_scholar" %}Google Scholar
-                      {% when "scopus" %}Scopus
-                      {% when "researchgate" %}ResearchGate
-                      {% else %}{{ key | replace: "_", " " | capitalize }}
-                    {% endcase %}
-                  </td>
-                  <td>{{ row.total_citations | default: "—" }}</td>
-                  <td>{{ row.h_index | default: "—" }}</td>
-                  <td>{% if row.i10_index %}{{ row.i10_index }}{% else %}—{% endif %}</td>
-                  <td>{% if row.updated %}{{ row.updated }}{% else %}—{% endif %}</td>
-                </tr>
-              {% endif %}
-            {% endfor %}
+      {% comment %}
+      Determine the most recent "updated" date among all sources.
+      {% endcomment %}
+      {% assign latest_update = "" %}
+      {% for s in sources %}
+        {% assign d = s[1].updated %}
+        {% if d and d > latest_update %}
+          {% assign latest_update = d %}
+        {% endif %}
+      {% endfor %}
 
-            {%- comment -%}
-            Render any remaining sources not listed in the preferred order
-            {%- endcomment -%}
-            {% for pair in sources %}
-              {% assign key = pair[0] %}
-              {% unless preferred_order contains key %}
-                {% assign row = pair[1] %}
-                <tr>
-                  <td>{{ key | replace: "_", " " | capitalize }}</td>
-                  <td>{{ row.total_citations | default: "—" }}</td>
-                  <td>{{ row.h_index | default: "—" }}</td>
-                  <td>{% if row.i10_index %}{{ row.i10_index }}{% else %}—{% endif %}</td>
-                  <td>{% if row.updated %}{{ row.updated }}{% else %}—{% endif %}</td>
-                </tr>
-              {% endunless %}
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+      <table class="styled-table citations-table">
+        <caption>Updated at {{ latest_update }}</caption>
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Citations</th>
+            <th>h</th>
+            <th>i10</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% assign preferred_order = "google_scholar,scopus,researchgate" | split: "," %}
+          {% for key in preferred_order %}
+            {% assign row = sources[key] %}
+            {% if row %}
+              <tr>
+                <td>
+                  {% case key %}
+                    {% when "google_scholar" %}Google Scholar
+                    {% when "scopus" %}Scopus
+                    {% when "researchgate" %}ResearchGate
+                    {% else %}{{ key | replace: "_", " " | capitalize }}
+                  {% endcase %}
+                </td>
+                <td>{{ row.total_citations | default: "—" }}</td>
+                <td>{{ row.h_index | default: "—" }}</td>
+                <td>{% if row.i10_index %}{{ row.i10_index }}{% else %}—{% endif %}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+
+          {% for pair in sources %}
+            {% assign key = pair[0] %}
+            {% unless preferred_order contains key %}
+              {% assign row = pair[1] %}
+              <tr>
+                <td>{{ key | replace: "_", " " | capitalize }}</td>
+                <td>{{ row.total_citations | default: "—" }}</td>
+                <td>{{ row.h_index | default: "—" }}</td>
+                <td>{% if row.i10_index %}{{ row.i10_index }}{% else %}—{% endif %}</td>
+              </tr>
+            {% endunless %}
+          {% endfor %}
+        </tbody>
+      </table>
     {% endif %}
   </div>
 {% endif %}
