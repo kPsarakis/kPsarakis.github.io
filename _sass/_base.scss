@@ -1397,3 +1397,113 @@ ninja-keys::part(ninja-input-wrapper) {
     color: var(--global-hover-color);
     background-color: #f0f8ff;
 }
+
+
+/* Style for bibmetrics */
+
+/*******************************************************************************
+ * Citation Metrics styling (used in Publications page search bar)
+ ******************************************************************************/
+
+.bibsearch-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+
+  // Ensure the search input matches your newsletter and base inputs
+  .bibsearch-form-input {
+    color: var(--global-text-color);
+    background: var(--global-bg-color);
+    border: 1px solid var(--global-divider-color);
+    outline: none;
+    min-width: 220px;
+    max-width: 350px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px;
+    border-radius: 6px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: var(--global-theme-color);
+    }
+  }
+}
+
+// Metrics container next to search box
+.bib-metrics {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 6px;
+  padding: 6px 10px;
+  box-shadow: rgba(0, 0, 0, 0.03) 0px 1px 2px;
+
+  .metric {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 0.9;
+
+    .label {
+      color: var(--global-text-color-light);
+      font-weight: 500;
+    }
+
+    strong {
+      color: var(--global-text-color);
+      font-weight: 600;
+    }
+  }
+
+  .metric-updated {
+    font-size: 0.85rem;
+    color: var(--global-text-color-light);
+  }
+
+  .metric-source {
+    margin-left: 0.25rem;
+
+    select {
+      font: inherit;
+      background: var(--global-bg-color);
+      color: var(--global-text-color);
+      border: 1px solid var(--global-divider-color);
+      border-radius: 6px;
+      padding: 4px 6px;
+      cursor: pointer;
+
+      &:hover {
+        border-color: var(--global-theme-color);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--global-theme-color);
+      }
+    }
+  }
+}
+
+// Responsive refinement for smaller screens
+@media (max-width: 576px) {
+  .bibsearch-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .bib-metrics {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}
