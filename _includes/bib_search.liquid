@@ -1,7 +1,7 @@
 {% if site.bib_search %}
   <script src="{{ '/assets/js/bibsearch.js' | relative_url | bust_file_cache }}" type="module"></script>
 
-  <div class="bibsearch-row">
+  <div class="bibsearch-row" style="align-items:flex-start; flex-wrap:wrap; gap:1rem;">
     <input
       type="text"
       id="bibsearch"
@@ -9,66 +9,59 @@
       autocomplete="off"
       class="search bibsearch-form-input"
       placeholder="Type to filter"
+      style="margin-bottom:0;"
     >
 
-    {% assign citations = site.data.total_citations.sources %}
-    {% if citations %}
-      {% assign default_key = citations.google_scholar ? 'google_scholar' : citations.first[0] %}
-      {% assign s = citations[default_key] %}
-
-      <div class="bib-metrics" id="bib-metrics">
-        <span class="metric"><span class="label">Citations</span> <strong id="metric-total">{{ s.total_citations }}</strong></span>
-        <span class="metric"><span class="label">h</span>=<strong id="metric-h">{{ s.h_index }}</strong></span>
-        <span class="metric" id="metric-i10-wrap" {% unless s.i10_index %}style="display:none"{% endunless %}>
-          <span class="label">i10</span>=<strong id="metric-i10">{{ s.i10_index }}</strong>
-        </span>
-        <span class="metric-updated" id="metric-updated">{% if s.updated %}· updated {{ s.updated }}{% endif %}</span>
-
-        {% if citations.size > 1 %}
-          <label class="metric-source">
-            <select id="metric-source-select">
-              {% for pair in citations %}
-                {% assign key = pair[0] %}
-                <option value="{{ key }}" {% if key == default_key %}selected{% endif %}>
-                  {{ key | replace: '_', ' ' | capitalize }}
-                </option>
-              {% endfor %}
-            </select>
-          </label>
-        {% endif %}
+    {% assign sources = site.data.total_citations.sources %}
+    {% if sources %}
+      <div style="flex:1 1 auto; min-width:400px; max-width:700px;">
+        <table class="styled-table" style="margin:0; font-size:0.9rem; min-width:unset;">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Citations</th>
+              <th>h</th>
+              <th>i10</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% assign preferred_order = "google_scholar,scopus,researchgate" | split: "," %}
+            {% for key in preferred_order %}
+              {% assign row = sources[key] %}
+              {% if row %}
+                <tr>
+                  <td>
+                    {% case key %}
+                      {% when "google_scholar" %}Google Scholar
+                      {% when "scopus" %}Scopus
+                      {% when "researchgate" %}ResearchGate
+                      {% else %}{{ key | replace: "_", " " | capitalize }}
+                    {% endcase %}
+                  </td>
+                  <td>{{ row.total_citations | default: "—" }}</td>
+                  <td>{{ row.h_index | default: "—" }}</td>
+                  <td>{% if row.i10_index %}{{ row.i10_index }}{% else %}—{% endif %}</td>
+                  <td>{% if row.updated %}{{ row.updated }}{% else %}—{% endif %}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+            {% for pair in sources %}
+              {% assign key = pair[0] %}
+              {% unless preferred_order contains key %}
+                {% assign row = pair[1] %}
+                <tr>
+                  <td>{{ key | replace: "_", " " | capitalize }}</td>
+                  <td>{{ row.total_citations | default: "—" }}</td>
+                  <td>{{ row.h_index | default: "—" }}</td>
+                  <td>{% if row.i10_index %}{{ row.i10_index }}{% else %}—{% endif %}</td>
+                  <td>{% if row.updated %}{{ row.updated }}{% else %}—{% endif %}</td>
+                </tr>
+              {% endunless %}
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-
-      <script>
-        // Inline data from _data/total_citations.yml
-        const CITATIONS = {{ site.data.total_citations.sources | jsonify }};
-
-        function renderMetrics(key) {
-          const s = CITATIONS[key];
-          if (!s) return;
-          const $total = document.getElementById('metric-total');
-          const $h = document.getElementById('metric-h');
-          const $i10wrap = document.getElementById('metric-i10-wrap');
-          const $i10 = document.getElementById('metric-i10');
-          const $updated = document.getElementById('metric-updated');
-
-          $total.textContent = (s.total_citations ?? '—');
-          $h.textContent = (s.h_index ?? '—');
-
-          if (typeof s.i10_index === 'number') {
-            $i10.textContent = s.i10_index;
-            $i10wrap.style.display = '';
-          } else {
-            $i10wrap.style.display = 'none';
-          }
-
-          $updated.textContent = s.updated ? `· updated ${s.updated}` : '';
-        }
-
-        const select = document.getElementById('metric-source-select');
-        if (select) {
-          select.addEventListener('change', (e) => renderMetrics(e.target.value));
-        }
-      </script>
     {% endif %}
   </div>
 {% endif %}
