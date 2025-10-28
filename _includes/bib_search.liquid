@@ -14,8 +14,8 @@
 
     {% assign sources = site.data.total_citations.sources %}
     {% if sources %}
-      <div style="flex:1 1 auto; min-width:400px; max-width:700px;">
-        <table class="styled-table" style="margin:0; font-size:0.9rem; min-width:unset;">
+      <div style="flex:1 1 auto; min-width:300px; max-width:650px;">
+        <table class="styled-table styled-table--small">
           <thead>
             <tr>
               <th>Source</th>
@@ -46,6 +46,10 @@
                 </tr>
               {% endif %}
             {% endfor %}
+
+            {%- comment -%}
+            Render any remaining sources not listed in the preferred order
+            {%- endcomment -%}
             {% for pair in sources %}
               {% assign key = pair[0] %}
               {% unless preferred_order contains key %}

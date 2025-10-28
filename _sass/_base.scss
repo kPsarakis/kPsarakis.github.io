@@ -1397,3 +1397,33 @@ ninja-keys::part(ninja-input-wrapper) {
     color: var(--global-hover-color);
     background-color: #f0f8ff;
 }
+
+
+/* Compact inline version for citation metrics */
+.styled-table.styled-table--small {
+  font-size: 0.85rem;
+  min-width: unset;
+  width: auto;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  thead tr {
+    background: linear-gradient(90deg, #e6e6e6, #f3f3f3);
+    color: #000;
+  }
+
+  th, td {
+    padding: 6px 10px;
+    color: #000;
+    border-right: 1px solid #e0e0e0;
+  }
+
+  tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:hover {
+    background-color: #eaf4ff;
+    color: #000;
+  }
+}
