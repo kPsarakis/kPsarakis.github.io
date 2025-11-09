@@ -111,9 +111,9 @@
               <tr>
                 <td>
                   {% case key %}
-                    {% when "google_scholar" %}Google Scholar
-                    {% when "scopus" %}Scopus
-                    {% when "researchgate" %}ResearchGate
+                      {% when "google_scholar" %}<a href="https://scholar.google.com/citations?user=6L9Kz3AAAAAJ">Google Scholar</a>
+                    {% when "scopus" %}<a href="https://www.scopus.com/authid/detail.uri?authorId=57219694054">Scopus</a>
+                    {% when "researchgate" %}<a href="https://www.researchgate.net/profile/Kyriakos-Psarakis">ResearchGate</a>
                     {% else %}{{ key | replace: "_", " " | capitalize }}
                   {% endcase %}
                 </td>
