@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2025-12-08 08:52:01'
+  last_updated: '2026-01-18 14:24:57'
 papers:
   6L9Kz3AAAAAJ:u-x6o8ySG0sC:
     title: 'Valentine: Evaluating matching techniques for dataset discovery'
@@ -16,11 +16,11 @@ papers:
   6L9Kz3AAAAAJ:eQOLeE2rZwMC:
     title: 'Stateful Entities: Object-oriented Cloud Applications as Distributed Dataflows'
     year: '2024'
-    citations: 15
+    citations: 16
   6L9Kz3AAAAAJ:IjCSPb-OGe4C:
     title: Transactions Across Serverless Functions Leveraging Stateful Dataflows
     year: '2022'
-    citations: 12
+    citations: 13
   6L9Kz3AAAAAJ:roLk4NBRz8UC:
     title: Multi-label classification for automatic tag prediction in the context
       of programming challenges
@@ -33,7 +33,7 @@ papers:
   6L9Kz3AAAAAJ:UebtZRa9Y70C:
     title: 'CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows'
     year: '2024'
-    citations: 10
+    citations: 11
   6L9Kz3AAAAAJ:LkGwnXOMwfcC:
     title: Adaptive distributed streaming similarity joins
     year: '2023'
@@ -45,11 +45,11 @@ papers:
   6L9Kz3AAAAAJ:qxL8FJ1GzNcC:
     title: Transactional Cloud Applications Go with the (Data) Flow
     year: '2025'
-    citations: 5
+    citations: 6
   6L9Kz3AAAAAJ:hqOjcs7Dif8C:
     title: Evaluating stream processing autoscalers
     year: '2024'
-    citations: 2
+    citations: 3
   6L9Kz3AAAAAJ:3fE2CSJIrl8C:
     title: 'Styx: Transactional Stateful Functions on Streaming Dataflows'
     year: '2023'
@@ -74,17 +74,26 @@ papers:
   6L9Kz3AAAAAJ:mVmsd5A6BfQC:
     title: 'Styx: Transactional Stateful Functions on Streaming Dataflows'
     year: '2025'
-    citations: 9
+    citations: 11
   6L9Kz3AAAAAJ:dhFuZR0502QC:
     title: 'Transactional Cloud Applications: Status Quo, Challenges, and Opportunities'
     year: '2025'
-    citations: 0
+    citations: 1
   6L9Kz3AAAAAJ:L8Ckcad2t8MC:
     title: 'Styx in Action: Transactional Cloud Applications Made Easy'
     year: '2025'
-    citations: 0
+    citations: 1
   6L9Kz3AAAAAJ:IWHjjKOFINEC:
     title: 'Democratizing Scalable Cloud Applications: Transactional Stateful Functions
       on Streaming Dataflows'
+    year: '2026'
+    citations: 0
+  6L9Kz3AAAAAJ:hFOr9nPyWt4C:
+    title: 'Democratizing Scalable Cloud Applications: Transactional Stateful Functions
+      on Streaming Dataflows'
+    year: '2026'
+    citations: 0
+  6L9Kz3AAAAAJ:-f6ydRqryjwC:
+    title: 'Event Horizon: Asymmetric Dependencies for Fast Geo-Distributed Operations'
     year: '2026'
     citations: 0

@@ -1427,3 +1427,42 @@ ninja-keys::part(ninja-input-wrapper) {
     color: #000;
   }
 }
+
+/* Video button */
+.links .video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.18);
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 1;
+  transform: translateY(-1px);
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.links .video-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+  text-decoration: none;
+}
+
+.links .video-btn:focus-visible {
+  outline: 3px solid rgba(66,133,244,0.45);
+  outline-offset: 2px;
+}
+
+.links .video-btn__icon {
+  width: 0;
+  height: 0;
+  border-left: 9px solid currentColor;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  opacity: 0.9;
+}
+
+.links .video-btn__text {
+  font-size: 0.85rem;
+}

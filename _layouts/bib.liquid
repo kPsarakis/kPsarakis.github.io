@@ -103,13 +103,23 @@
     <!-- Links -->
     <div class="links">
         {% if entry.pdf %}
-          <a href="{{ entry.pdf | relative_url }}" role="button">
-            <img src="https://img.shields.io/badge/PDF-red?logo=adobeacrobatreader">
+          <a href="{{ entry.pdf | relative_url }}" role="button" aria-label="Open PDF">
+            <img src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white">
           </a>
         {% endif %}
       {% if entry.blog %}
         <a href="{{ entry.blog }}" role="button"><img src="https://img.shields.io/badge/Blog-blue?logo=rss"></a>
       {% endif %}
+        {% if entry.video %}
+          {% assign video_url = entry.video %}
+          {% unless video_url contains '://' %}
+            {% assign video_url = video_url | relative_url %}
+          {% endunless %}
+
+          <a href="{{ video_url }}" role="button" aria-label="Watch video">
+            <img src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white">
+          </a>
+        {% endif %}
       {% if site.enable_publication_badges.google_scholar and entry.google_scholar_id %}
         <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.data.socials.scholar_userid }}&citation_for_view={{ site.data.socials.scholar_userid }}:{{ entry.google_scholar_id }}" aria-label="Google Scholar link" role="button">
           {% assign citation_count = 0 %}
