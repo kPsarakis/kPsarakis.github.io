@@ -1,14 +1,14 @@
 metadata:
-  last_updated: '2026-01-18 14:24:57'
+  last_updated: '2026-02-10 08:28:01'
 papers:
   6L9Kz3AAAAAJ:u-x6o8ySG0sC:
     title: 'Valentine: Evaluating matching techniques for dataset discovery'
     year: '2021'
-    citations: 169
+    citations: 173
   6L9Kz3AAAAAJ:9yKSN-GCB0IC:
     title: Distributed Transactions on Serverless Stateful Functions
     year: '2021'
-    citations: 38
+    citations: 39
   6L9Kz3AAAAAJ:2osOgNQ5qMEC:
     title: 'Valentine in Action: Matching Tabular Data at Scale'
     year: '2021'
@@ -20,7 +20,7 @@ papers:
   6L9Kz3AAAAAJ:IjCSPb-OGe4C:
     title: Transactions Across Serverless Functions Leveraging Stateful Dataflows
     year: '2022'
-    citations: 13
+    citations: 14
   6L9Kz3AAAAAJ:roLk4NBRz8UC:
     title: Multi-label classification for automatic tag prediction in the context
       of programming challenges
@@ -57,7 +57,7 @@ papers:
   6L9Kz3AAAAAJ:_FxGoFyzp5QC:
     title: 'Topio: An Open-Source Web Platform for Trading Geospatial Data'
     year: '2023'
-    citations: 3
+    citations: 4
   6L9Kz3AAAAAJ:qjMakFHDy7sC:
     title: Holistic Schema Matching at Scale
     year: '2020'
