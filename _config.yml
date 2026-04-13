@@ -7,7 +7,7 @@ first_name: Kyriakos
 middle_name:
 last_name: Psarakis
 contact_note:
-description: Personal website of Kyriakos Psarakis — Software Engineer at Ververica, PhD in Data Systems from TU Delft. Research on stream processing, distributed systems, and serverless computing.
+description:
 footer_text:
 keywords: Kyriakos Psarakis
 
@@ -38,7 +38,7 @@ repo_trophies:
 # will use title and url fields
 # Take a look to https://github.com/jekyll/jekyll-feed for more customization
 
-rss_icon: true
+rss_icon: false
 
 # -----------------------------------------------------------------------------
 # Layout
@@ -62,7 +62,7 @@ max_width: 930px
 # see https://schema.org/docs/faq.html for more information
 serve_og_meta: true # Include Open Graph meta tags in the HTML head
 serve_schema_org: true # Include Schema.org in the HTML head
-og_image: assets/img/kyriakos.webp # The site-wide (default for all links) Open Graph preview image
+og_image: # The site-wide (default for all links) Open Graph preview image
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
