@@ -20,6 +20,12 @@ MAX_RETRIES = 3
 os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
 
 
+def quoted_presenter(dumper, data):
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='"')
+
+yaml.add_representer(str, quoted_presenter)
+
+
 def get_scholar_citations():
     """
     Fetch citation data from Google Scholar for all papers by the specified author
@@ -28,21 +34,22 @@ def get_scholar_citations():
 
     # Initialize citation data structure
     citation_data = {
-        'metadata': {
-            'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        },
-        'papers': {}  # Initialize as empty dict, not None
+        "metadata": {"last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")},
+        "papers": {},  # Initialize as empty dict, not None
     }
 
     # Try to load existing data first to avoid unnecessary requests
     if os.path.exists(OUTPUT_FILE):
         try:
-            with open(OUTPUT_FILE, 'r') as f:
+            with open(OUTPUT_FILE, "r") as f:
                 existing_data = yaml.safe_load(f)
                 if existing_data and isinstance(existing_data, dict):
                     # Keep existing metadata if available
-                    if 'papers' in existing_data and existing_data['papers'] is not None:
-                        citation_data['papers'] = existing_data['papers']
+                    if (
+                        "papers" in existing_data
+                        and existing_data["papers"] is not None
+                    ):
+                        citation_data["papers"] = existing_data["papers"]
         except Exception as e:
             print(f"Warning: Could not read existing citation data: {e}")
 
@@ -54,7 +61,7 @@ def get_scholar_citations():
             author_data = scholarly.fill(author)
             break
         except Exception as e:
-            wait_time = (2 ** attempt) + random.uniform(0, 1)  # Exponential backoff
+            wait_time = (2**attempt) + random.uniform(0, 1)  # Exponential backoff
             print(f"Attempt {attempt + 1}/{MAX_RETRIES} failed: {e}")
             if attempt < MAX_RETRIES - 1:
                 print(f"Retrying in {wait_time:.1f} seconds...")
@@ -68,18 +75,20 @@ def get_scholar_citations():
         return citation_data
 
     # Process publications
-    if 'publications' in author_data:
-        for pub in author_data['publications']:
+    if "publications" in author_data:
+        for pub in author_data["publications"]:
             try:
                 # Get publication ID
                 pub_id = None
-                if 'pub_id' in pub and pub['pub_id']:
-                    pub_id = pub['pub_id']
-                elif 'author_pub_id' in pub and pub['author_pub_id']:
-                    pub_id = pub['author_pub_id']
+                if "pub_id" in pub and pub["pub_id"]:
+                    pub_id = pub["pub_id"]
+                elif "author_pub_id" in pub and pub["author_pub_id"]:
+                    pub_id = pub["author_pub_id"]
 
                 if not pub_id:
-                    print(f"Warning: No ID found for publication: {pub.get('bib', {}).get('title', 'Unknown')}")
+                    print(
+                        f"Warning: No ID found for publication: {pub.get('bib', {}).get('title', 'Unknown')}"
+                    )
                     continue
 
                 # Get publication metadata
@@ -87,22 +96,22 @@ def get_scholar_citations():
                 year = "Unknown Year"
                 citations = 0
 
-                if 'bib' in pub:
-                    if 'title' in pub['bib']:
-                        title = pub['bib']['title']
-                    if 'pub_year' in pub['bib']:
-                        year = pub['bib']['pub_year']
+                if "bib" in pub:
+                    if "title" in pub["bib"]:
+                        title = pub["bib"]["title"]
+                    if "pub_year" in pub["bib"]:
+                        year = pub["bib"]["pub_year"]
 
-                if 'num_citations' in pub:
-                    citations = pub['num_citations']
+                if "num_citations" in pub:
+                    citations = pub["num_citations"]
 
                 print(f"Found: {title} ({year}) - Citations: {citations}")
 
                 # Store citation data
-                citation_data['papers'][pub_id] = {
-                    'title': title,
-                    'year': year,
-                    'citations': citations
+                citation_data["papers"][pub_id] = {
+                    "title": title,
+                    "year": year,
+                    "citations": citations,
                 }
 
             except Exception as e:
@@ -112,7 +121,7 @@ def get_scholar_citations():
 
     # Save to YAML file
     try:
-        with open(OUTPUT_FILE, 'w') as f:
+        with open(OUTPUT_FILE, "w") as f:
             yaml.dump(citation_data, f, default_flow_style=False, sort_keys=False)
         print(f"Citation data saved to {OUTPUT_FILE}")
     except Exception as e:
