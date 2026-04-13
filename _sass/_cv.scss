@@ -37,6 +37,19 @@ a.btncv:hover {
  * CV TIME_TABLE styles
  *****************************/
 
+.cv-date-column {
+  width: 75px;
+}
+
+.cv-year-badge {
+  min-width: 75px;
+}
+
+.cv-icon-cell {
+  vertical-align: top;
+  text-align: center;
+}
+
 p.location {
   font-size: 0.7rem;
   white-space: nowrap;

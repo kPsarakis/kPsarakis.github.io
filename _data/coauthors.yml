@@ -71,9 +71,9 @@
     url: https://rnlaigner.github.io/
 
 "ng":
-- firstname: ["Harald", "H."]
-  url: https://haraldng.github.io/
+  - firstname: ["Harald", "H."]
+    url: https://haraldng.github.io/
 
 "arns":
-- firstname: ["Jonathan", "J."]
-  url: https://notpeerreviewed.com/
+  - firstname: ["Jonathan", "J."]
+    url: https://notpeerreviewed.com/

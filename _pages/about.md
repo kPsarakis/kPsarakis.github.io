@@ -11,9 +11,9 @@ profile:
   more_info: >
     <i class="fa fa-map-marker-alt" aria-hidden="true"></i> <p>Delft, The Netherlands</p>
 
-news: false  # includes a list of news items
+news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
-social: true  # includes social icons at the bottom of the page
+social: true # includes social icons at the bottom of the page
 ---
 
 I am a Software Engineer at [Ververica](https://www.ververica.com/), where I work on stream processing systems that power large-scale, real-time data applications. I enjoy building systems that make data processing more intuitive, scalable, and developer-friendly; helping shape the next generation of data platforms.

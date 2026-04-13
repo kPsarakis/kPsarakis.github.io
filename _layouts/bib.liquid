@@ -34,7 +34,7 @@
         {% endif %}
       {% endif %}
       {% if entry.tag %}
-        <span class="award badge w-100">{{entry.tag}}</span>
+        <span class="award badge w-100">{{ entry.tag }}</span>
       {% endif %}
     </div>
   {% endif %}
@@ -73,19 +73,30 @@
           {%- if forloop.last and author_array_limit == author_array_size %}and&nbsp;{% endif -%}
         {% endif %}
         {%- if author_is_self -%}
-          <em>{{- author.first }} {{ author_last_html -}}</em>
+          <em>
+            {{- author.first }}
+            {{ author_last_html -}}
+          </em>
         {%- else -%}
           {%- if coauthor_url -%}
-            <a href="{{ coauthor_url }}">{{- author.first }} {{ author_last_html -}}</a>
+            <a href="{{ coauthor_url }}">
+              {{- author.first }}
+              {{ author_last_html -}}
+            </a>
           {%- else -%}
-            {{- author.first }} {{ author_last_html -}}
+            {{- author.first }}
+            {{ author_last_html -}}
           {% endif %}
         {%- endif -%}
       {% endfor %}
       {%- assign more_authors = author_array_size | minus: author_array_limit -%}
       {% if more_authors > 0 %}
         , and
-        <span class="more-authors" title="click to view more authors" onclick="var e=$(this);e.attr('title','');var t=e.text()=='{{ more_authors }} more authors'?'{{ entry.author_array | slice: author_array_limit, more_authors | map: 'first' | join: ', ' }}':'{{ more_authors }} more authors';var p=0;var a=setInterval(function(){e.html(t.substring(0,p+1));if(++p==t.length){clearInterval(a);}}, '{{ site.more_authors_animation_delay }}');">
+        <span
+          class="more-authors"
+          title="click to view more authors"
+          onclick="var e=$(this);e.attr('title','');var t=e.text()=='{{ more_authors }} more authors'?'{{ entry.author_array | slice: author_array_limit, more_authors | map: 'first' | join: ', ' }}':'{{ more_authors }} more authors';var p=0;var a=setInterval(function(){e.html(t.substring(0,p+1));if(++p==t.length){clearInterval(a);}}, '{{ site.more_authors_animation_delay }}');"
+        >
           {{- more_authors }} more authors
         </span>
       {% endif %}
@@ -102,28 +113,32 @@
 
     <!-- Links -->
     <div class="links">
-        {% if entry.pdf %}
-          <a href="{{ entry.pdf | relative_url }}" role="button" aria-label="Open PDF">
-            <img src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white">
-          </a>
-        {% endif %}
+      {% if entry.pdf %}
+        <a href="{{ entry.pdf | relative_url }}" role="button" aria-label="Open PDF">
+          <img src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white">
+        </a>
+      {% endif %}
       {% if entry.blog %}
         <a href="{{ entry.blog }}" role="button"><img src="https://img.shields.io/badge/Blog-blue?logo=rss"></a>
       {% endif %}
-        {% if entry.video %}
-          {% assign video_url = entry.video %}
-          {% unless video_url contains '://' %}
-            {% assign video_url = video_url | relative_url %}
-          {% endunless %}
+      {% if entry.video %}
+        {% assign video_url = entry.video %}
+        {% unless video_url contains '://' %}
+          {% assign video_url = video_url | relative_url %}
+        {% endunless %}
 
-          <a href="{{ video_url }}" role="button" aria-label="Watch video">
-            <img src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white">
-          </a>
-        {% endif %}
+        <a href="{{ video_url }}" role="button" aria-label="Watch video">
+          <img src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white">
+        </a>
+      {% endif %}
       {% if site.enable_publication_badges.google_scholar and entry.google_scholar_id %}
-        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.data.socials.scholar_userid }}&citation_for_view={{ site.data.socials.scholar_userid }}:{{ entry.google_scholar_id }}" aria-label="Google Scholar link" role="button">
+        <a
+          href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.data.socials.scholar_userid }}&citation_for_view={{ site.data.socials.scholar_userid }}:{{ entry.google_scholar_id }}"
+          aria-label="Google Scholar link"
+          role="button"
+        >
           {% assign citation_count = 0 %}
-          {% assign scholar_id_key = site.scholar_userid | append: ":" | append: entry.google_scholar_id %}
+          {% assign scholar_id_key = site.scholar_userid | append: ':' | append: entry.google_scholar_id %}
           {% assign publication_key = entry.google_scholar_id %}
           {% if site.data.citations.papers[scholar_id_key] %}
             {% assign citation_count = site.data.citations.papers[scholar_id_key].citations %}
@@ -138,7 +153,10 @@
               {% endif %}
             {% endfor %}
           {% endif %}
-          <img src="https://img.shields.io/badge/scholar-{{ citation_count }}-4285F4?logo=googlescholar&labelColor=beige" alt="{{ citation_count }} Google Scholar citations">
+          <img
+            src="https://img.shields.io/badge/scholar-{{ citation_count }}-4285F4?logo=googlescholar&labelColor=beige"
+            alt="{{ citation_count }} Google Scholar citations"
+          >
         </a>
       {% endif %}
     </div>
