@@ -9,11 +9,11 @@ nav_order: 3
 
 ### Courses
 
-* Quarter 4 2020/21/22/23/24 - **Head Teaching Assistant** - TU Delft: MSc IN4331: Web-scale Data Management.
+- Quarter 4 2020/21/22/23/24 - **Head Teaching Assistant** - TU Delft: MSc IN4331: Web-scale Data Management.
   I created a system that evaluated the efficiency and consistency of distributed microservices developed by the student teams and, assisted the teams to reach that goal.
-* Quarter 3 2020/21 - **Head Teaching Assistant** - TU Delft: Online Learning Taming Big Data Streams: Real-time Data Processing at Scale.
+- Quarter 3 2020/21 - **Head Teaching Assistant** - TU Delft: Online Learning Taming Big Data Streams: Real-time Data Processing at Scale.
   I helped create the lab assignments and assisted students.
-* Quarter 1 2019 - **Teaching Assistant** - TU Delft: BSc CSE2520: Big Data Processing.
+- Quarter 1 2019 - **Teaching Assistant** - TU Delft: BSc CSE2520: Big Data Processing.
   I assisted students during the lab hours.
 
 ### MSc Thesis Supervision
@@ -85,8 +85,5 @@ nav_order: 3
     </tbody>
 </table>
 
-
-[//]: # (* **Gianni Wiemers** &#40;with Georgios Siachamis&#41;)
-
-[//]: # (* **Theodoros Veneti** &#40;with Georgios Siachamis&#41;)
-
+[//]: # "* **Gianni Wiemers** (with Georgios Siachamis)"
+[//]: # "* **Theodoros Veneti** (with Georgios Siachamis)"
