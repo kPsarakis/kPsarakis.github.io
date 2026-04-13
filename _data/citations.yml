@@ -1,10 +1,10 @@
 metadata:
-  last_updated: "2026-03-07 15:56:23"
+  last_updated: "2026-04-13 11:27:30"
 papers:
   6L9Kz3AAAAAJ:u-x6o8ySG0sC:
     title: "Valentine: Evaluating matching techniques for dataset discovery"
     year: "2021"
-    citations: 175
+    citations: 184
   6L9Kz3AAAAAJ:9yKSN-GCB0IC:
     title: Distributed Transactions on Serverless Stateful Functions
     year: "2021"
@@ -20,12 +20,12 @@ papers:
   6L9Kz3AAAAAJ:IjCSPb-OGe4C:
     title: Transactions Across Serverless Functions Leveraging Stateful Dataflows
     year: "2022"
-    citations: 15
+    citations: 19
   6L9Kz3AAAAAJ:roLk4NBRz8UC:
     title: Multi-label classification for automatic tag prediction in the context
       of programming challenges
     year: "2019"
-    citations: 10
+    citations: 11
   6L9Kz3AAAAAJ:WF5omc3nYNoC:
     title: "Topio Marketplace: Search and Discovery of Geospatial Data"
     year: "2023"
@@ -33,7 +33,7 @@ papers:
   6L9Kz3AAAAAJ:UebtZRa9Y70C:
     title: "CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows"
     year: "2024"
-    citations: 11
+    citations: 12
   6L9Kz3AAAAAJ:LkGwnXOMwfcC:
     title: Adaptive distributed streaming similarity joins
     year: "2023"
@@ -74,11 +74,11 @@ papers:
   6L9Kz3AAAAAJ:mVmsd5A6BfQC:
     title: "Styx: Transactional Stateful Functions on Streaming Dataflows"
     year: "2025"
-    citations: 12
+    citations: 13
   6L9Kz3AAAAAJ:dhFuZR0502QC:
     title: "Transactional Cloud Applications: Status Quo, Challenges, and Opportunities"
     year: "2025"
-    citations: 2
+    citations: 3
   6L9Kz3AAAAAJ:L8Ckcad2t8MC:
     title: "Styx in Action: Transactional Cloud Applications Made Easy"
     year: "2025"
