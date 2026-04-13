@@ -1351,7 +1351,7 @@ ninja-keys::part(ninja-input-wrapper) {
     min-width: 500px;
     border-radius: 8px;
     overflow: hidden;
-    background: #fff;
+    background: var(--global-bg-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -1379,7 +1379,7 @@ ninja-keys::part(ninja-input-wrapper) {
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f8f9fa;
+    background-color: var(--global-code-bg-color);
 }
 
 .styled-table tbody tr:last-of-type {
@@ -1395,7 +1395,7 @@ ninja-keys::part(ninja-input-wrapper) {
 .styled-table tbody tr.active-row {
     font-weight: bold;
     color: var(--global-hover-color);
-    background-color: #f0f8ff;
+    background-color: var(--global-code-bg-color);
 }
 
 
@@ -1408,23 +1408,23 @@ ninja-keys::part(ninja-input-wrapper) {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
   thead tr {
-    background: linear-gradient(90deg, #e6e6e6, #f3f3f3);
-    color: #000;
+    background: linear-gradient(90deg, var(--global-divider-color), var(--global-code-bg-color));
+    color: var(--global-text-color);
   }
 
   th, td {
     padding: 6px 10px;
-    color: #000;
-    border-right: 1px solid #e0e0e0;
+    color: var(--global-text-color);
+    border-right: 1px solid var(--global-divider-color);
   }
 
   tbody tr:nth-of-type(even) {
-    background-color: #f9f9f9;
+    background-color: var(--global-code-bg-color);
   }
 
   tbody tr:hover {
-    background-color: #eaf4ff;
-    color: #000;
+    background-color: var(--global-card-bg-color);
+    color: var(--global-text-color);
   }
 }
 
