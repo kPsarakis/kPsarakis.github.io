@@ -401,23 +401,23 @@ ul.task-list input[type="checkbox"] {
   text-align: center;
 
   .contact-icons {
-    font-size: 4rem;
+    font-size: 2.5rem;
 
     a {
       img {
-        width: 3.2rem;
-        height: 3.2rem;
-        margin-bottom: 1rem;
+        width: 2rem;
+        height: 2rem;
+        margin-bottom: 0.5rem;
       }
 
       svg {
-        width: 3.5rem;
-        height: 4rem;
-        margin-bottom: 0.5rem;
+        width: 2.2rem;
+        height: 2.5rem;
+        margin-bottom: 0.3rem;
 
         image {
-          width: 3.5rem;
-          height: 3.5rem;
+          width: 2.2rem;
+          height: 2.2rem;
         }
       }
 
@@ -1361,6 +1361,10 @@ ninja-keys::part(ninja-input-wrapper) {
   text-align: left;
 }
 
+html[data-theme="dark"] .styled-table thead tr {
+  color: #{$white-color};
+}
+
 .styled-table th {
   padding: 16px;
   font-weight: 600;
@@ -1392,6 +1396,10 @@ ninja-keys::part(ninja-input-wrapper) {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+html[data-theme="dark"] .styled-table tbody tr:hover {
+  color: #{$white-color};
 }
 
 .styled-table tbody tr.active-row {
