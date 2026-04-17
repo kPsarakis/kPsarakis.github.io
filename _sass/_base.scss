@@ -192,6 +192,39 @@ ul.task-list input[type="checkbox"] {
 
 // Profile
 
+// Mobile-only: small photo next to name in header
+.profile-mobile {
+  display: none;
+}
+
+.post-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .post-title {
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .profile-mobile {
+    display: block;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--global-divider-color);
+  }
+
+  // Hide the full-size profile block on mobile
+  .profile {
+    display: none;
+  }
+}
+
 .profile {
   width: 100%;
 
