@@ -13,7 +13,7 @@ nav_order: 4
     </a>
   </div>
   <iframe
-    src="{{ '/assets/pdf/Kyriakos_CV.pdf' | relative_url }}"
+    src="{{ '/assets/pdf/Kyriakos_CV.pdf' | relative_url }}#navpanes=0&view=FitH"
     class="cv-embed-iframe"
     title="Curriculum Vitae"
     loading="lazy"
