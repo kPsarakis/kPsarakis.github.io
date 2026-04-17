@@ -233,6 +233,14 @@ let determineComputedTheme = () => {
 };
 
 let initTheme = () => {
+  // One-time migration: reset any override set by the old 3-way toggle
+  // so existing visitors default back to system preference.
+  const schemaVersion = "2";
+  if (localStorage.getItem("theme-schema") !== schemaVersion) {
+    localStorage.removeItem("theme");
+    localStorage.setItem("theme-schema", schemaVersion);
+  }
+
   let themeSetting = determineThemeSetting();
 
   setThemeSetting(themeSetting);
