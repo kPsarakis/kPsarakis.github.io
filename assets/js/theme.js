@@ -1,12 +1,13 @@
 // Has to be in the head tag, otherwise a flicker effect will occur.
 
-// Toggle through light, dark, and system theme settings.
+// Toggle between system theme and its opposite.
+// If following system: switch to the opposite of the system preference.
+// If overriding: go back to system.
 let toggleThemeSetting = () => {
   let themeSetting = determineThemeSetting();
   if (themeSetting == "system") {
-    setThemeSetting("light");
-  } else if (themeSetting == "light") {
-    setThemeSetting("dark");
+    const systemIsDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setThemeSetting(systemIsDark ? "light" : "dark");
   } else {
     setThemeSetting("system");
   }

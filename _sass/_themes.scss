@@ -42,14 +42,15 @@
   --global-danger-block-text: #600;
   --global-danger-block-title: #c00;
 
+  // Light mode: show moon icon (clicking switches to dark)
   #light-toggle-system {
-    padding-left: 10px;
-    padding-top: 12px;
-    display: block;
+    display: none;
   }
 
   #light-toggle-dark {
-    display: none;
+    padding-left: 10px;
+    padding-top: 12px;
+    display: block;
   }
 
   #light-toggle-light {
@@ -121,39 +122,24 @@ html[data-theme="dark"] {
   }
 }
 
-html[data-theme-setting="dark"] {
+// Dark mode (computed): show sun icon (clicking switches to light)
+html[data-theme="dark"] {
   #light-toggle-system {
     display: none;
   }
 
   #light-toggle-dark {
-    padding-left: 10px;
-    padding-top: 12px;
-    display: block;
+    display: none;
   }
 
   #light-toggle-light {
-    display: none;
+    padding-left: 10px;
+    padding-top: 12px;
+    display: block;
   }
 
   #back-to-top {
     color: var(--global-back-to-top-text-color);
     background: var(--global-back-to-top-bg-color);
-  }
-}
-
-html[data-theme-setting="light"] {
-  #light-toggle-system {
-    display: none;
-  }
-
-  #light-toggle-dark {
-    display: none;
-  }
-
-  #light-toggle-light {
-    padding-left: 10px;
-    padding-top: 12px;
-    display: block;
   }
 }
