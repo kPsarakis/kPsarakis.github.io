@@ -213,8 +213,7 @@ ul.task-list input[type="checkbox"] {
   .profile-mobile {
     display: block;
     width: 64px;
-    height: 64px;
-    object-fit: cover;
+    height: auto;
     flex-shrink: 0;
     border: 2px solid var(--global-divider-color);
   }
