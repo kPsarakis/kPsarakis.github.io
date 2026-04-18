@@ -1457,11 +1457,10 @@ html[data-theme="dark"] .styled-table thead tr {
 
 .styled-table tbody tr:hover,
 .styled-table tbody tr.active-row:hover {
-  background-color: var(--global-hover-color);
-  color: var(--global-bg-color);
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  /* Lightened theme-hover (≈35% hover tint on white) so text stays
+     readable without relying on a color swap. */
+  background-color: color-mix(in srgb, var(--global-hover-color) 35%, white);
+  transition: background-color 0.3s ease;
 }
 
 html[data-theme="dark"] .styled-table tbody tr:hover {
