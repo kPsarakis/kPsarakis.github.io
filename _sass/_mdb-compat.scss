@@ -92,6 +92,16 @@ h6 {
   color: #747373;
 }
 
+/*
+ * MDB color utilities (MDB v4.20: _free/data/_colors.scss).
+ * The CV/resume year badges use `danger-color-dark` for their red pill
+ * background (see _includes/cv/time_table.liquid, _includes/resume/*).
+ * BS5 has no equivalent utility, so carry the single rule we reference.
+ */
+.danger-color-dark {
+  background-color: #c00 !important;
+}
+
 .z-depth-0 {
   box-shadow: none !important;
 }

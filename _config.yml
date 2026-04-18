@@ -403,6 +403,14 @@ enable_video_embedding: false # enables video embedding for bibtex entries. If f
 # Integrity hashes not provided by the libraries were generated using https://www.srihash.org/
 third_party_libraries:
   download: false # if true, download the versions of the libraries specified below and use the downloaded files
+  bootstrap:
+    integrity:
+      css: "sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g="
+      js: "sha256-CDOy6cOibCWEdsRiZuaHf8dSGGJRYuBGC+mjoJimHGw="
+    url:
+      css: "https://cdn.jsdelivr.net/npm/bootstrap@{{version}}/dist/css/bootstrap.min.css"
+      js: "https://cdn.jsdelivr.net/npm/bootstrap@{{version}}/dist/js/bootstrap.bundle.min.js"
+    version: "5.3.3"
   bootstrap-table:
     integrity:
       css: "sha256-tt89sB/8HsQNDZ4kdNYrRSrBOEgMUi5OMeSRwZBF5zE="

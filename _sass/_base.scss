@@ -38,6 +38,7 @@ table {
 a,
 table.table a {
   color: var(--global-theme-color);
+  text-decoration: none;
 
   &:hover {
     color: var(--global-theme-color);
@@ -239,11 +240,11 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
-.profile.float-right {
+.profile.float-end {
   margin-left: 1rem;
 }
 
-.profile.float-left {
+.profile.float-start {
   margin-right: 1rem;
 }
 

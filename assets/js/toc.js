@@ -103,10 +103,14 @@
     if (!nav) return;
     if (!build(nav)) return;
 
-    // Bootstrap scrollspy (BS4 jQuery plugin API; will become
-    // new bootstrap.ScrollSpy(...) in Phase 3).
-    if (window.jQuery && typeof window.jQuery.fn.scrollspy === "function") {
-      window.jQuery("body").scrollspy({ target: "#toc-sidebar", offset: 80 });
+    // Bootstrap 5 scrollspy — vanilla API, no jQuery.
+    // BS4's `offset: 80` (pixels above viewport top considered "active")
+    // translates to rootMargin shrinking the top of the observer root.
+    if (typeof bootstrap !== "undefined" && bootstrap.ScrollSpy) {
+      new bootstrap.ScrollSpy(document.body, {
+        target: "#toc-sidebar",
+        rootMargin: "-80px 0px 0px 0px",
+      });
     }
   }
 

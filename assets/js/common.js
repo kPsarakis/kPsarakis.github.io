@@ -39,7 +39,7 @@ $(document).ready(function () {
   });
 
   // trigger popovers
-  $('[data-toggle="popover"]').popover({
-    trigger: "hover",
+  document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function (el) {
+    new bootstrap.Popover(el, { trigger: "hover" });
   });
 });
