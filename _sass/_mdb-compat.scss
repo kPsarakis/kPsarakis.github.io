@@ -1,17 +1,17 @@
 /*
  * Minimal mdbootstrap@4 compatibility shim.
  *
- * The site used mdbootstrap for:
- *   1. Body typography — MDB set body to Roboto + font-weight 300.
- *      Without it, body falls back to BS4's system-font stack at 400,
- *      which visibly thickens every paragraph. Restored below.
- *   2. The .z-depth-* shadow utilities (referenced in markup — see
- *      _layouts/bib.liquid, _includes/cv/*.liquid, _pages/cv.md).
- *   3. Global restyle of .btn / .card / .navbar (implicit, not
- *      referenced by class — add specific rules here if regressions
- *      surface.)
+ * Restores the bits of MDB v4.20 the templates still depend on after
+ * dropping the library:
+ *   - Body + heading typography (Roboto, weight 300).
+ *   - .badge, .card default styling (white text, border-radius, shadow,
+ *     muted .card-text).
+ *   - .z-depth-0 / .z-depth-1 shadow utilities.
+ *   - The .danger-color-dark color utility used by CV/resume year
+ *     badges.
  *
- * All values taken verbatim from MDB v4.20.
+ * All values taken verbatim from MDB v4.20 (assets/css/mdb.min.css in
+ * the pre-migration tree at commit 087fccf2).
  */
 
 /* Body typography (MDB v4.20: _free/_typography.scss) */
@@ -112,26 +112,8 @@ h6 {
     0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
 }
 
-.z-depth-2 {
-  box-shadow:
-    0 8px 17px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-}
-
-.z-depth-3 {
-  box-shadow:
-    0 12px 15px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19) !important;
-}
-
-.z-depth-4 {
-  box-shadow:
-    0 16px 28px 0 rgba(0, 0, 0, 0.22),
-    0 25px 55px 0 rgba(0, 0, 0, 0.21) !important;
-}
-
-.z-depth-5 {
-  box-shadow:
-    0 27px 24px 0 rgba(0, 0, 0, 0.2),
-    0 40px 77px 0 rgba(0, 0, 0, 0.22) !important;
-}
+/*
+ * Only z-depth-0 and z-depth-1 are referenced in markup; the deeper
+ * MDB shadow levels (2-5) were dropped when none of the templates used
+ * them. Add them back here if a future template needs a heavier shadow.
+ */
