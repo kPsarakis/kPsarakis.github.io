@@ -28,6 +28,19 @@ body {
   line-height: 1.5;
 }
 
+/*
+ * Badges (MDB v4.20: _free/_badges.scss).
+ * BS4's plain .badge has no color — it relies on .badge-primary /
+ * .badge-success / etc. variants. MDB set white-on-default. The site's
+ * _layouts/bib.liquid and _includes/bib_search.liquid use the bare
+ * .badge class with an inline background-color from _data/venues.yml,
+ * and expect white text (the PhD Thesis / venue pills on /publications).
+ */
+.badge {
+  color: #fff;
+  font-weight: 700;
+}
+
 .z-depth-0 {
   box-shadow: none !important;
 }
