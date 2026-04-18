@@ -29,6 +29,21 @@ body {
 }
 
 /*
+ * Headings (MDB v4.20: _free/_typography.scss line ~45).
+ * BS4 defaults headings to weight 500; MDB lightened them to 300 to
+ * match its "Material" aesthetic. Restored here so the post-title
+ * last name (outside the .font-weight-bold span) stays thin.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 300;
+}
+
+/*
  * Badges (MDB v4.20: _free/_badges.scss).
  * BS4's plain .badge has no color — it relies on .badge-primary /
  * .badge-success / etc. variants. MDB set white-on-default. The site's
