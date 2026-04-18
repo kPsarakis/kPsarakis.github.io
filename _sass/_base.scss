@@ -1458,6 +1458,7 @@ html[data-theme="dark"] .styled-table thead tr {
 .styled-table tbody tr:hover {
   background-color: var(--global-hover-color);
   color: var(--global-bg-color);
+  font-weight: bold;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -1468,7 +1469,6 @@ html[data-theme="dark"] .styled-table tbody tr:hover {
 }
 
 .styled-table tbody tr.active-row {
-  font-weight: bold;
   color: var(--global-hover-color);
   background-color: var(--global-code-bg-color);
 }
