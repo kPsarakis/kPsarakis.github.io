@@ -1,16 +1,32 @@
 /*
  * Minimal mdbootstrap@4 compatibility shim.
  *
- * The site used mdbootstrap for two things:
- *   1. The .z-depth-* shadow utilities (actually used in markup — see
+ * The site used mdbootstrap for:
+ *   1. Body typography — MDB set body to Roboto + font-weight 300.
+ *      Without it, body falls back to BS4's system-font stack at 400,
+ *      which visibly thickens every paragraph. Restored below.
+ *   2. The .z-depth-* shadow utilities (referenced in markup — see
  *      _layouts/bib.liquid, _includes/cv/*.liquid, _pages/cv.md).
- *   2. Global restyle of .btn / .card / .navbar / typography (implicit,
- *      not referenced by class — if a regression appears, add the
- *      specific rule here.)
+ *   3. Global restyle of .btn / .card / .navbar (implicit, not
+ *      referenced by class — add specific rules here if regressions
+ *      surface.)
  *
- * Shadow values match MDB v4.20's defaults verbatim so existing markup
- * renders identically.
+ * All values taken verbatim from MDB v4.20.
  */
+
+/* Body typography (MDB v4.20: _free/_typography.scss) */
+body {
+  font-family:
+    "Roboto",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+}
 
 .z-depth-0 {
   box-shadow: none !important;
