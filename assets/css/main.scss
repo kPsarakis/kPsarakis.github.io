@@ -3,26 +3,47 @@
 ---
 @charset "utf-8";
 
-// Dimensions
-$max-content-width: {{ site.max_width }};
+// Our own modules — fully @use-based. Configuration flows through the
+// `with (…)` blocks so leaf modules stay configurable without relying on
+// global-variable leakage (which @use, unlike @import, does not provide).
+//
+// $max-content-width comes from _config.yml via front matter; the icon-font
+// display mode overrides FA's default of `block` and tabler-icons' `null`
+// (which emits nothing, i.e. browser default — effectively `block` too).
+@use "variables" with (
+  $max-content-width: {{ site.max_width }}
+);
+@use "themes";
+@use "layout";
+@use "base";
+@use "mdb-compat";
+@use "distill";
+@use "cv";
+@use "tabs";
+@use "typograms";
 
-// Icon-font loading strategy: `swap` lets text render immediately in a
-// fallback while the icon font downloads, instead of the default
-// `block` (invisible for up to 3s). Icons flash in once the font is
-// ready. Set before the @imports so the `!default` variables pick us up.
+// Third-party icon bundles (FontAwesome 6, Tabler Icons) still use the
+// legacy @import internally across dozens of files. Rewriting them to
+// @use is a separate exercise — the cleaner path is upgrading to FA 7,
+// which ships in module-syntax. Until then, we keep them on @import and
+// feed configuration through top-level globals. Dart Sass supports
+// mixing @use and @import during the migration window; the deprecation
+// warnings that remain in the build log come from inside these bundles
+// and will disappear when they're upgraded.
+//
+// Font paths must be globals here, not inside _sass/_variables.scss —
+// @use puts those into a scoped namespace that the @import-loaded
+// bundles below cannot see. Tabler's own default is "./fonts", which
+// would resolve to /assets/css/fonts (wrong); we need "../fonts" so
+// it lands at /assets/fonts where jekyll-imagemagick drops the files.
+// FontAwesome's upstream default happens to match what we want but
+// we set it explicitly so a future FA upgrade doesn't bite us.
+$fa-font-path: "../webfonts";
 $fa-font-display: swap;
+$ti-font-path: "../fonts";
 $ti-font-display: swap;
 
 @import
-  "variables",
-  "themes",
-  "layout",
-  "base",
-  "mdb-compat",
-  "distill",
-  "cv",
-  "tabs",
-  "typograms",
   "font-awesome/fontawesome",
   "font-awesome/brands",
   "font-awesome/solid",

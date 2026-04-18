@@ -2,6 +2,8 @@
  * Styles for the base elements of the theme.
  ******************************************************************************/
 
+@use "variables" as *;
+
 // Skip-to-main-content link — invisible until keyboard-focused, at which
 // point it pops into the top-left of the viewport so Tab users can jump
 // past the navbar. BS5's .visually-hidden-focusable handles the hide/show
