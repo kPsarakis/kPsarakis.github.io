@@ -1091,40 +1091,73 @@ progress::-moz-progress-bar {
   }
 }
 
-/* Table of Contents */
-nav[data-toggle="toc"] {
+/* Table of Contents (built by assets/js/toc.js) */
+#toc-sidebar {
   top: 5rem;
 
-  .nav .nav > li > a {
-    font-size: 0.75rem;
-  }
-
   .nav > li > a {
+    display: block;
+    padding: 4px 20px;
     color: var(--global-text-color);
     font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-left: 1px solid transparent;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      padding-left: 19px;
       color: var(--global-hover-color);
+      background-color: transparent;
       border-left-color: var(--global-hover-color);
     }
   }
 
-  .nav-link.active {
-    color: var(--global-theme-color);
-    border-left-color: var(--global-theme-color);
-    font-size: 0.75rem;
+  /* nested (deeper) headings: smaller, lighter, indented */
+  .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 0.7rem;
+    font-weight: 400;
 
-    &:hover {
-      color: var(--global-hover-color);
-      border-left-color: var(--global-hover-color);
+    &:hover,
+    &:focus {
+      padding-left: 29px;
     }
+  }
+
+  /* hide deeper levels unless their parent is active */
+  .nav-link + ul {
+    display: none;
+    padding-bottom: 10px;
+  }
+  .nav-link.active + ul {
+    display: block;
+  }
+
+  .nav-link.active,
+  .nav-link.active:hover,
+  .nav-link.active:focus {
+    padding-left: 18px;
+    color: var(--global-theme-color);
+    font-weight: 700;
+    background-color: transparent;
+    border-left: 2px solid var(--global-theme-color);
+  }
+
+  .nav .nav > li > .nav-link.active,
+  .nav .nav > li > .nav-link.active:hover,
+  .nav .nav > li > .nav-link.active:focus {
+    padding-left: 28px;
+    font-weight: 500;
   }
 }
 
 /* small screens */
 @media (max-width: 576px) {
   /* override stickyness so that the navigation does not follow scrolling */
-  nav[data-toggle="toc"] {
+  #toc-sidebar {
     visibility: hidden;
     height: 0;
     top: 0;
