@@ -2,6 +2,22 @@
  * Styles for the base elements of the theme.
  ******************************************************************************/
 
+// Skip-to-main-content link — invisible until keyboard-focused, at which
+// point it pops into the top-left of the viewport so Tab users can jump
+// past the navbar. BS5's .visually-hidden-focusable handles the hide/show
+// toggle; we just style the visible-on-focus appearance.
+.skip-link:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10000;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--global-theme-color);
+  color: var(--global-bg-color);
+  text-decoration: none;
+  border-radius: 0.25rem;
+}
+
 // Typography
 
 p,
