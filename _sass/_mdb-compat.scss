@@ -54,6 +54,42 @@ h6 {
 .badge {
   color: #fff;
   font-weight: 700;
+  border-radius: 0.125rem;
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/*
+ * Cards (MDB v4.20: _free/_cards.scss).
+ * BS4's .card comes with a 1px border and no shadow; MDB dropped the
+ * border and gave every card a subtle drop shadow. Card bodies reset
+ * to weight 400 (overriding our body 300 and our heading 300 rules
+ * above, matching what MDB did so card headings stay legible), and
+ * card-text gets the muted smaller treatment MDB applied — that's
+ * what styles the project description on /projects.
+ */
+.card {
+  font-weight: 400;
+  border: 0;
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card .card-body h1,
+.card .card-body h2,
+.card .card-body h3,
+.card .card-body h4,
+.card .card-body h5,
+.card .card-body h6 {
+  font-weight: 400;
+}
+
+.card .card-body .card-text {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #747373;
 }
 
 .z-depth-0 {
