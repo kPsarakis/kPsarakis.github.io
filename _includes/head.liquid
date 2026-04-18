@@ -11,8 +11,16 @@
   <link rel="preload" as="image" href="{{ page.profile.image | prepend: 'assets/img/' | relative_url | bust_file_cache }}" fetchpriority="high">
 {% endif %}
 
-<!-- Bootstrap -->
+<!-- Bootstrap & MDB -->
 <link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | relative_url | bust_file_cache }}">
+<link
+  rel="stylesheet"
+  href="{{ site.third_party_libraries.mdb.url.css }}"
+  integrity="{{ site.third_party_libraries.mdb.integrity.css }}"
+  crossorigin="anonymous"
+  media="print"
+  onload="this.media='all'"
+>
 
 <!-- Bootstrap Table -->
 {% if page.pretty_table %}
