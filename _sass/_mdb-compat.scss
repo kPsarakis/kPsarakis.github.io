@@ -1,0 +1,119 @@
+/*
+ * Minimal mdbootstrap@4 compatibility shim.
+ *
+ * Restores the bits of MDB v4.20 the templates still depend on after
+ * dropping the library:
+ *   - Body + heading typography (Roboto, weight 300).
+ *   - .badge, .card default styling (white text, border-radius, shadow,
+ *     muted .card-text).
+ *   - .z-depth-0 / .z-depth-1 shadow utilities.
+ *   - The .danger-color-dark color utility used by CV/resume year
+ *     badges.
+ *
+ * All values taken verbatim from MDB v4.20 (assets/css/mdb.min.css in
+ * the pre-migration tree at commit 087fccf2).
+ */
+
+/* Body typography (MDB v4.20: _free/_typography.scss) */
+body {
+  font-family:
+    "Roboto",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/*
+ * Headings (MDB v4.20: _free/_typography.scss line ~45).
+ * BS4 defaults headings to weight 500; MDB lightened them to 300 to
+ * match its "Material" aesthetic. Restored here so the post-title
+ * last name (outside the .font-weight-bold span) stays thin.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 300;
+}
+
+/*
+ * Badges (MDB v4.20: _free/_badges.scss).
+ * BS4's plain .badge has no color — it relies on .badge-primary /
+ * .badge-success / etc. variants. MDB set white-on-default. The site's
+ * _layouts/bib.liquid and _includes/bib_search.liquid use the bare
+ * .badge class with an inline background-color from _data/venues.yml,
+ * and expect white text (the PhD Thesis / venue pills on /publications).
+ */
+.badge {
+  color: #fff;
+  font-weight: 700;
+  border-radius: 0.125rem;
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/*
+ * Cards (MDB v4.20: _free/_cards.scss).
+ * BS4's .card comes with a 1px border and no shadow; MDB dropped the
+ * border and gave every card a subtle drop shadow. Card bodies reset
+ * to weight 400 (overriding our body 300 and our heading 300 rules
+ * above, matching what MDB did so card headings stay legible), and
+ * card-text gets the muted smaller treatment MDB applied — that's
+ * what styles the project description on /projects.
+ */
+.card {
+  font-weight: 400;
+  border: 0;
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card .card-body h1,
+.card .card-body h2,
+.card .card-body h3,
+.card .card-body h4,
+.card .card-body h5,
+.card .card-body h6 {
+  font-weight: 400;
+}
+
+.card .card-body .card-text {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #747373;
+}
+
+/*
+ * MDB color utilities (MDB v4.20: _free/data/_colors.scss).
+ * The CV/resume year badges use `danger-color-dark` for their red pill
+ * background (see _includes/cv/time_table.liquid, _includes/resume/*).
+ * BS5 has no equivalent utility, so carry the single rule we reference.
+ */
+.danger-color-dark {
+  background-color: #c00 !important;
+}
+
+.z-depth-0 {
+  box-shadow: none !important;
+}
+
+.z-depth-1 {
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+/*
+ * Only z-depth-0 and z-depth-1 are referenced in markup; the deeper
+ * MDB shadow levels (2-5) were dropped when none of the templates used
+ * them. Add them back here if a future template needs a heavier shadow.
+ */

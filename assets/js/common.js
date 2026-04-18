@@ -15,22 +15,6 @@ $(document).ready(function () {
     $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
     $(this).parent().parent().find(".bibtex.hidden").toggleClass("open");
   });
-  $("a").removeClass("waves-effect waves-light");
-
-  // bootstrap-toc
-  if ($("#toc-sidebar").length) {
-    // remove related publications years from the TOC
-    $(".publications h2").each(function () {
-      $(this).attr("data-toc-skip", "");
-    });
-    var navSelector = "#toc-sidebar";
-    var $myNav = $(navSelector);
-    Toc.init($myNav);
-    $("body").scrollspy({
-      target: navSelector,
-    });
-  }
-
   // add css to jupyter notebooks
   const cssLink = document.createElement("link");
   cssLink.href = "../css/jupyter.css";
@@ -53,7 +37,7 @@ $(document).ready(function () {
   });
 
   // trigger popovers
-  $('[data-toggle="popover"]').popover({
-    trigger: "hover",
+  document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function (el) {
+    new bootstrap.Popover(el, { trigger: "hover" });
   });
 });
