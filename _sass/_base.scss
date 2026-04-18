@@ -1455,7 +1455,8 @@ html[data-theme="dark"] .styled-table thead tr {
   border-bottom: 2px solid var(--global-hover-color);
 }
 
-.styled-table tbody tr:hover {
+.styled-table tbody tr:hover,
+.styled-table tbody tr.active-row:hover {
   background-color: var(--global-hover-color);
   color: var(--global-bg-color);
   transition:
