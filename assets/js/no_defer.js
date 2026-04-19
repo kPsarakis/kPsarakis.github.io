@@ -1,24 +1,27 @@
-// add bootstrap classes to tables
-$(document).ready(function () {
-  $("table").each(function () {
-    if (determineComputedTheme() == "dark") {
-      $(this).addClass("table-dark");
-    } else {
-      $(this).removeClass("table-dark");
-    }
+// Tag tables as bootstrap-table where appropriate, and toggle table-dark
+// based on the current theme. Loaded without `defer` so it runs before
+// bootstrap-table's init code sees the markup.
+(function () {
+  function decorateTables() {
+    var isDark = typeof determineComputedTheme === "function" && determineComputedTheme() === "dark";
 
-    // only select tables that are not inside an element with "news" (about page) or "card" (cv page) class
-    if (
-      $(this).parents('[class*="news"]').length == 0 &&
-      $(this).parents('[class*="card"]').length == 0 &&
-      $(this).parents('[class*="archive"]').length == 0 &&
-      $(this).parents("code").length == 0
-    ) {
-      // make table use bootstrap-table
-      $(this).attr("data-toggle", "table");
-      // add some classes to make the table look better
-      // $(this).addClass('table-sm');
-      $(this).addClass("table-hover");
-    }
-  });
-});
+    document.querySelectorAll("table").forEach(function (table) {
+      table.classList.toggle("table-dark", isDark);
+
+      // Skip tables nested inside news / card / archive / code blocks —
+      // bootstrap-table's styling would fight the surrounding component.
+      if (table.closest('[class*="news"], [class*="card"], [class*="archive"], code')) {
+        return;
+      }
+
+      table.setAttribute("data-toggle", "table");
+      table.classList.add("table-hover");
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", decorateTables);
+  } else {
+    decorateTables();
+  }
+})();

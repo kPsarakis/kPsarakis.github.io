@@ -5,6 +5,11 @@
 
 @use "sass:color";
 
+// Layout dimensions (configurable via @use ... with (...) from main.scss).
+// Default matches al-folio's legacy hard-coded value; main.scss overrides it
+// from site.max_width.
+$max-content-width: 800px !default;
+
 // Colors
 $red-color: #ff3636 !default;
 $red-color-dark: #b71c1c !default;
@@ -37,11 +42,11 @@ $black-color: #000000 !default;
 $code-bg-color-light: rgba($purple-color, 0.05);
 $code-bg-color-dark: #2c3237 !default;
 
-// Font awesome location
-$fa-font-path: "../webfonts";
-
-// Tabler icons location
-$ti-font-path: "../fonts";
+// Note: $fa-font-path and $ti-font-path used to live here, but they
+// only configure the vendored FontAwesome / tabler-icons bundles —
+// which are still loaded via @import and therefore don't see variables
+// from our @use-based _variables module. They now live in main.scss
+// as globals right before those @imports.
 
 // Back To Top button config
 $back-to-top-z-index: 10;

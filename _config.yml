@@ -478,12 +478,6 @@ third_party_libraries:
       js: "https://cdn.jsdelivr.net/npm/img-comparison-slider@{{version}}/dist/index.min.js"
       map: "https://cdn.jsdelivr.net/npm/img-comparison-slider@{{version}}/dist/index.js.map"
     version: "8.0.6"
-  jquery:
-    integrity:
-      js: "sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    url:
-      js: "https://cdn.jsdelivr.net/npm/jquery@{{version}}/dist/jquery.min.js"
-    version: "3.7.1"
   leaflet:
     integrity:
       css: "sha256-q9ba7o845pMPFU+zcAll8rv+gC+fSovKsOoNQ6cynuQ="
