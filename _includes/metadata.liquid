@@ -23,7 +23,28 @@
 -->
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="Permissions-Policy" content="interest-cohort=(), browsing-topics=(), geolocation=(), microphone=(), camera=()">
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+{%- comment -%}
+  CSP delivered via <meta>. <meta>-based CSP can't set the frame-ancestors
+  directive (that requires a real HTTP header), but every other directive
+  below is honoured.
+
+  - upgrade-insecure-requests: auto-rewrites any stray http:// subresource.
+  - object-src 'none':         blocks <object>, <embed>, <applet> entirely.
+                               The site uses none; forbid the legacy vectors.
+  - base-uri 'self':           forbids a <base href> injection from
+                               rewriting every relative URL on the page.
+  - form-action 'self':        submitted forms stay on-origin. Prevents a
+                               compromised / injected form target.
+  - frame-ancestors *:         no-op via <meta> but retained as a reminder
+                               to move this to a real header (see _config.yml
+                               or hosting config) once CSP is served HTTP-side.
+
+  Deliberately *not* locked down yet: script-src / style-src / connect-src.
+  Doing so correctly requires per-inline-script SHA-256 hashes for the
+  ~20 inline <script> blocks across _includes/ plus an external origin
+  allowlist, which is a multi-commit effort. Tracked as a follow-up.
+{%- endcomment -%}
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests; object-src 'none'; base-uri 'self'; form-action 'self'">
 
 {% capture author_name %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
 

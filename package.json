@@ -8,14 +8,18 @@
   },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.10.2",
+    "eslint": "^9.39.4",
+    "globals": "^15.15.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.3"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint ."
   },
   "lint-staged": {
-    "*.{liquid,html,md,scss,css,js,json,yml,yaml}": "prettier --write --ignore-unknown"
+    "*.{liquid,html,md,scss,css,js,json,yml,yaml}": "prettier --write --ignore-unknown",
+    "assets/js/**/!(*.min).js": "eslint --fix"
   }
 }

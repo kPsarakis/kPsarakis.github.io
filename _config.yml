@@ -229,13 +229,29 @@ defaults:
 
 sass:
   style: compressed
+  # Silence Dart Sass deprecation warnings originating from imported
+  # third-party stylesheets (e.g. the vendored Font Awesome 6.7.1 bundle
+  # under _sass/font-awesome/, which still uses the legacy @import
+  # syntax). Warnings for our own SCSS still surface.
+  quiet_deps: true
 
 # -----------------------------------------------------------------------------
 # Jekyll Minifier
 # -----------------------------------------------------------------------------
+# Audited: jekyll-minifier 0.2.2 (2024). Still maintained. Uses terser
+# for JS and htmlcompressor for HTML. Kept for now — the alternative
+# layout-based jekyll-compress-html gives similar output but would
+# require reshuffling every layout, and GitHub Pages / Cloudflare already
+# apply gzip at serve time, so the marginal win is small either way.
+#
+# Excludes:
+#   robots.txt               — preserve comments/whitespace for crawlers.
+#   assets/js/search/*.js    — already pre-minified ninja-keys bundle;
+#                              re-running terser on it is pointless and
+#                              occasionally breaks source-map references.
 
 jekyll-minifier:
-  exclude: ["robots.txt", "assets/js/search/*.js", "assets/libs/**/*"]
+  exclude: ["robots.txt", "assets/js/search/*.js"]
   uglifier_args:
     harmony: true
 
@@ -359,7 +375,17 @@ imagemagick:
     - ".png"
     - ".tiff"
     - ".gif"
+  # Output formats emitted alongside each source image. Order matters —
+  # the <picture> element in _includes/figure.liquid tries each <source>
+  # top-to-bottom, so put the newest / smallest format first. AVIF saves
+  # ~20-30% over WebP at equivalent quality on photographic content; the
+  # tradeoff is ImageMagick's AVIF encoder (heif delegate) is slower, so
+  # expect longer cold-build times.
+  #
+  # AVIF is supported in every modern browser (Chrome 85+, Firefox 93+,
+  # Safari 16+). Older browsers fall through to WebP, then the original.
   output_formats:
+    avif: "-quality 60"
     webp: "-quality 85"
 
 # Lazy loading images

@@ -14,9 +14,34 @@
       https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
     -->
     {% if site.imagemagick.enabled %}
+      {%- comment -%}
+        Emit <source> entries top-down in best-to-worst order — the
+        browser picks the first one it supports. AVIF first (≈20-30 %
+        smaller than WebP for photos), then WebP as a universal modern
+        fallback, then the original raster via <img src=...>.
+        Only emitted for raster sources that imagemagick actually
+        re-encodes; vector / unsupported extensions fall through to the
+        original path.
+      {%- endcomment -%}
+      {% assign is_raster = false %}
+      {% if ext == 'gif' or ext == 'jpeg' or ext == 'jpg' or ext == 'png' or ext == 'tiff' %}
+        {% assign is_raster = true %}
+      {% endif %}
+      {% if is_raster and site.imagemagick.output_formats.avif %}
+        <source
+          class="responsive-img-srcset"
+          srcset="{% for i in site.imagemagick.widths %}{{ img_path | relative_url }}-{{ i }}.avif {{ i }}w,{% endfor %}"
+          type="image/avif"
+          {% if include.sizes %}
+            sizes="{{ include.sizes }}"
+          {% else %}
+            sizes="95vw"
+          {% endif %}
+        >
+      {% endif %}
       <source
         class="responsive-img-srcset"
-        {% if ext == 'gif' or ext == 'jpeg' or ext == 'jpg' or ext == 'png' or ext == 'tiff' %}
+        {% if is_raster %}
           srcset="{% for i in site.imagemagick.widths %}{{ img_path | relative_url }}-{{ i }}.webp {{ i }}w,{% endfor %}"
           type="image/webp"
         {% else %}

@@ -23,13 +23,16 @@ codeBlocks.forEach(function (codeBlock) {
       // check if code block has line numbers
       // i.e. `kramdown.syntax_highlighter_opts.block.line_numbers` set to true in _config.yml
       // or using `jekyll highlight` liquid tag with `linenos` option
+      // `var` hoisting meant the original had two `var code` declarations
+      // in the same function scope — legal but lint-hostile. Declare once.
+      var code;
       if (codeBlock.querySelector("pre:not(.lineno)")) {
         // get code from code block ignoring line numbers
-        var code = codeBlock.querySelector("pre:not(.lineno)").innerText.trim();
+        code = codeBlock.querySelector("pre:not(.lineno)").innerText.trim();
       } else {
         // if (codeBlock.querySelector('code')) {
         // get code from code block when line numbers are not displayed
-        var code = codeBlock.querySelector("code").innerText.trim();
+        code = codeBlock.querySelector("code").innerText.trim();
       }
       window.navigator.clipboard.writeText(code);
       copyButton.innerText = "Copied";
