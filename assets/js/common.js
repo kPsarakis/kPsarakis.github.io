@@ -1,43 +1,92 @@
-$(document).ready(function () {
-  // add toggle functionality to abstract, award and bibtex buttons
-  $("a.abstract").click(function () {
-    $(this).parent().parent().find(".abstract.hidden").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden.open").toggleClass("open");
-  });
-  $("a.award").click(function () {
-    $(this).parent().parent().find(".abstract.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden.open").toggleClass("open");
-  });
-  $("a.bibtex").click(function () {
-    $(this).parent().parent().find(".abstract.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".award.hidden.open").toggleClass("open");
-    $(this).parent().parent().find(".bibtex.hidden").toggleClass("open");
-  });
-  // add css to jupyter notebooks
-  const cssLink = document.createElement("link");
-  cssLink.href = "../css/jupyter.css";
-  cssLink.rel = "stylesheet";
-  cssLink.type = "text/css";
+(function () {
+  // The abstract / award / bibtex buttons on every bibliography entry
+  // each reveal one of three sibling panels and hide the other two.
+  // Find the three panels inside the entry that owns the clicked button
+  // (two levels up from the anchor), then flip the classes.
+  function wireBibToggles() {
+    var TYPES = ["abstract", "award", "bibtex"];
 
-  let jupyterTheme = determineComputedTheme();
+    document.querySelectorAll("a.abstract, a.award, a.bibtex").forEach(function (anchor) {
+      var clickedType = TYPES.find(function (t) {
+        return anchor.classList.contains(t);
+      });
+      if (!clickedType) return;
 
-  $(".jupyter-notebook-iframe-container iframe").each(function () {
-    $(this).contents().find("head").append(cssLink);
+      anchor.addEventListener("click", function () {
+        var root = anchor.parentElement && anchor.parentElement.parentElement;
+        if (!root) return;
 
-    if (jupyterTheme == "dark") {
-      $(this).bind("load", function () {
-        $(this).contents().find("body").attr({
-          "data-jp-theme-light": "false",
-          "data-jp-theme-name": "JupyterLab Dark",
+        TYPES.forEach(function (type) {
+          var selector = type === clickedType ? "." + type + ".hidden" : "." + type + ".hidden.open";
+          root.querySelectorAll(selector).forEach(function (panel) {
+            panel.classList.toggle("open");
+          });
         });
       });
-    }
-  });
+    });
+  }
 
-  // trigger popovers
-  document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function (el) {
-    new bootstrap.Popover(el, { trigger: "hover" });
-  });
-});
+  // Inject our jupyter.css into the <head> of every same-origin Jupyter
+  // notebook iframe, and (in dark mode) flip the JupyterLab theme flags
+  // on <body> once the iframe finishes loading.
+  function styleJupyterIframes() {
+    var isDark = typeof determineComputedTheme === "function" && determineComputedTheme() === "dark";
+
+    function applyTo(iframe) {
+      var doc;
+      try {
+        doc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
+      } catch (_) {
+        return;
+      }
+      if (!doc) return;
+
+      if (doc.head) {
+        var link = doc.createElement("link");
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = "../css/jupyter.css";
+        doc.head.appendChild(link);
+      }
+
+      if (isDark && doc.body) {
+        doc.body.setAttribute("data-jp-theme-light", "false");
+        doc.body.setAttribute("data-jp-theme-name", "JupyterLab Dark");
+      }
+    }
+
+    document.querySelectorAll(".jupyter-notebook-iframe-container iframe").forEach(function (iframe) {
+      // Apply now if the iframe has already loaded (complete document),
+      // and re-apply on future loads to survive navigation inside the frame.
+      try {
+        if (iframe.contentDocument && iframe.contentDocument.readyState === "complete") {
+          applyTo(iframe);
+        }
+      } catch (_) {
+        /* cross-origin */
+      }
+      iframe.addEventListener("load", function () {
+        applyTo(iframe);
+      });
+    });
+  }
+
+  function initPopovers() {
+    if (typeof bootstrap === "undefined" || !bootstrap.Popover) return;
+    document.querySelectorAll('[data-bs-toggle="popover"]').forEach(function (el) {
+      new bootstrap.Popover(el, { trigger: "hover" });
+    });
+  }
+
+  function init() {
+    wireBibToggles();
+    styleJupyterIframes();
+    initPopovers();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
