@@ -88,10 +88,19 @@ jobs:
           pip3 install --upgrade nbconvert
           export JEKYLL_ENV=production
           bundle exec jekyll build
+      - name: Setup Node.js 🟢
+        uses: actions/setup-node@v4
+        with:
+          # Matches engines.node floor in package.json; mirrors eslint.yml.
+          node-version: "20"
+          cache: "npm"
+      - name: Install npm deps 📦
+        # `npm ci` is reproducible (respects package-lock) and faster than
+        # `npm install`. Gives us the pinned purgecss version instead of
+        # pulling whatever `npm install -g purgecss` resolves at build time.
+        run: npm ci
       - name: Purge unused CSS 🧹
-        run: |
-          npm install -g purgecss
-          purgecss -c purgecss.config.js
+        run: npx purgecss -c purgecss.config.js
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
