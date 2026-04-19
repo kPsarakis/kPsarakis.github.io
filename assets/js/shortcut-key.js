@@ -1,1 +1,1 @@
-document.addEventListener("readystatechange",()=>{if("interactive"===document.readyState){let e=navigator.platform.toUpperCase().indexOf("MAC")>=0,t=document.querySelector("#search-toggle .nav-link");t&&e&&(t.innerHTML='&#x2318; k <i class="ti ti-search"></i>')}});
+document.addEventListener("readystatechange",()=>{if("interactive"!==document.readyState)return;if(!(navigator.platform.toUpperCase().indexOf("MAC")>=0))return;const e=document.querySelector("#search-toggle .nav-link");e&&(e.innerHTML='&#x2318; k <i class="ti ti-search" aria-hidden="true"></i>')});
