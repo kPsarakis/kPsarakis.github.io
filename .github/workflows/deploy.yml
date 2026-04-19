@@ -84,8 +84,12 @@ jobs:
           propertyPath: "giscus.repo"
           value: ${{ github.repository }}
       - name: Install and Build 🔧
+        # `pip install -r requirements.txt` uses the pinned constraints
+        # in the repo so the build isn't at the mercy of whatever
+        # `--upgrade nbconvert` resolves to today. The actions/setup-python
+        # cache above keys on this file's hash.
         run: |
-          pip3 install --upgrade nbconvert
+          pip install -r requirements.txt
           export JEKYLL_ENV=production
           bundle exec jekyll build
       - name: Setup Node.js 🟢
