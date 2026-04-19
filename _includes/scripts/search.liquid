@@ -1,13 +1,18 @@
 {% if site.search_enabled %}
-  <script type="module" src="{{ '/assets/js/search/ninja-keys.min.js' | relative_url | bust_file_cache }}"></script>
   {%- comment -%}
-    Disable ninja-keys' built-in hotkey handler (hotkeys-js under the
-    hood). Its default is `cmd+k,ctrl+k`, which browsers intercept at
-    the chrome level (Firefox focuses the search bar, Chrome the
-    omnibox) — webpages never see those events. We bind our own
-    capture-phase keydown listener below so the handler runs before
-    any other stylesheet / framework listener and before the browser's
-    legacy quick-find on `/`.
+    ninja-keys.min.js + its lit/hotkeys-js dependency tree is ~200 KB of
+    JS. Most visitors never open the command palette, so we defer loading
+    until first activation — either the `/` / ⌘K hotkey, or a click on
+    the search button. The `<ninja-keys>` element sits in the DOM as an
+    un-upgraded HTMLElement until then; assigning `.data` and classList
+    tweaks pre-upgrade are preserved by the custom element upgrade path.
+
+    Also disables ninja-keys' built-in hotkey handler (hotkeys-js under
+    the hood). Its default `cmd+k,ctrl+k` is intercepted by browser
+    chrome (Firefox focuses the search bar, Chrome the omnibox) — pages
+    never see those events. We bind our own capture-phase listener below
+    so the handler runs before stylesheet / framework listeners and
+    before the browser's legacy quick-find on `/`.
   {%- endcomment -%}
   <ninja-keys hideBreadcrumbs noAutoLoadMdIcons placeholder="Type to start searching" openHotkey=""></ninja-keys>
   <script>
@@ -16,10 +21,27 @@
       if (!ninjaKeys) return;
 
       // Initial theme sync (re-run on theme toggle is handled in theme.js).
+      // classList on a pre-upgrade element survives the upgrade transition.
       if (typeof determineComputedTheme === 'function' && determineComputedTheme() === 'dark') {
         ninjaKeys.classList.add('dark');
       } else {
         ninjaKeys.classList.remove('dark');
+      }
+
+      // Lazy import of the ninja-keys web component. Fires at most once;
+      // subsequent calls reuse the cached promise.
+      const NINJA_KEYS_SRC = {{ '/assets/js/search/ninja-keys.min.js' | relative_url | bust_file_cache | jsonify }};
+      let ninjaLoader = null;
+      function ensureNinjaKeys() {
+        if (ninjaLoader) return ninjaLoader;
+        ninjaLoader = import(NINJA_KEYS_SRC)
+          .then(function () { return customElements.whenDefined('ninja-keys'); })
+          .catch(function (err) {
+            // Allow a retry on the next activation rather than getting stuck.
+            ninjaLoader = null;
+            throw err;
+          });
+        return ninjaLoader;
       }
 
       window.openSearchModal = function () {
@@ -28,7 +50,7 @@
         if (navbarNav && navbarNav.classList.contains('show') && typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
           bootstrap.Collapse.getOrCreateInstance(navbarNav).hide();
         }
-        ninjaKeys.open();
+        ensureNinjaKeys().then(function () { ninjaKeys.open(); });
       };
 
       // Skip the hotkey when the user is typing into a form control or
