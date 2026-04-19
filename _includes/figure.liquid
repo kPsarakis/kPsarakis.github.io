@@ -74,6 +74,20 @@
       {% elsif site.lazy_loading_images %}
         loading="lazy"
       {% endif %}
+      {% comment %}
+        `decoding="async"` lets the browser decode the image off the main
+        thread — cheap win that smooths out layout jank, especially on
+        large hero images.
+
+        `fetchpriority="high"` is only emitted when the caller explicitly
+        asked for `loading="eager"` (i.e. an LCP candidate above the fold).
+        It boosts the image up the network priority queue so it arrives
+        sooner — the one knob modern browsers expose for LCP tuning.
+      {% endcomment %}
+      decoding="async"
+      {% if include.loading == 'eager' %}
+        fetchpriority="high"
+      {% endif %}
       onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function(n){n.remove();});"
     >
   </picture>
