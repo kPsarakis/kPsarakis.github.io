@@ -229,6 +229,11 @@ defaults:
 
 sass:
   style: compressed
+  # Silence Dart Sass deprecation warnings originating from imported
+  # third-party stylesheets (e.g. the vendored Font Awesome 6.7.1 bundle
+  # under _sass/font-awesome/, which still uses the legacy @import
+  # syntax). Warnings for our own SCSS still surface.
+  quiet_deps: true
 
 # -----------------------------------------------------------------------------
 # Jekyll Minifier
