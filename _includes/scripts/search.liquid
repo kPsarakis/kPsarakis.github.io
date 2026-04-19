@@ -1,6 +1,13 @@
 {% if site.search_enabled %}
   <script type="module" src="{{ '/assets/js/search/ninja-keys.min.js' | relative_url | bust_file_cache }}"></script>
-  <ninja-keys hideBreadcrumbs noAutoLoadMdIcons placeholder="Type to start searching"></ninja-keys>
+  {%- comment -%}
+    Default openHotkey of ninja-keys is `cmd+k,ctrl+k`, but Ctrl+K is a
+    browser-level shortcut in Firefox and Chrome (focus address/search
+    bar) — webpages cannot preventDefault it, so it never reaches the
+    palette. We use `/` on non-Mac instead (GitHub / YouTube / Twitter
+    convention) and keep ⌘K on Mac where it still works inside the tab.
+  {%- endcomment -%}
+  <ninja-keys hideBreadcrumbs noAutoLoadMdIcons placeholder="Type to start searching" openHotkey="cmd+k,/"></ninja-keys>
   <script>
     let searchTheme = determineComputedTheme();
     const ninjaKeys = document.querySelector('ninja-keys');
