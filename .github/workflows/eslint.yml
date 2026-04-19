@@ -1,0 +1,46 @@
+name: ESLint
+
+# Linter gate for hand-written JS under assets/js/**. Configuration
+# lives in eslint.config.mjs (flat config, ESLint 9+); vendored
+# bundles and Liquid-templated JS are ignored there.
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+  push:
+    branches:
+      - master
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: eslint-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Matches the `engines.node` floor in package.json. LTS.
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        # `npm ci` respects package-lock.json exactly — faster and
+        # reproducible vs. `npm install` which may bump sub-deps.
+        run: npm ci
+
+      - name: Run ESLint
+        # --max-warnings 0 promotes every warning to a failure so the
+        # baseline can't silently erode via warn-level findings.
+        run: npx eslint . --max-warnings 0

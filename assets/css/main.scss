@@ -23,30 +23,39 @@
 @use "typograms";
 
 // Third-party icon bundles (FontAwesome 6, Tabler Icons) still use the
-// legacy @import internally across dozens of files. Rewriting them to
-// @use is a separate exercise — the cleaner path is upgrading to FA 7,
-// which ships in module-syntax. Until then, we keep them on @import and
-// feed configuration through top-level globals. Dart Sass supports
-// mixing @use and @import during the migration window; the deprecation
-// warnings that remain in the build log come from inside these bundles
-// and will disappear when they're upgraded.
+// legacy @import *internally* across dozens of files — that's fine,
+// `sass.quiet_deps: true` in _config.yml silences those. At this top
+// level we use @use-with-configuration instead, so Dart Sass doesn't
+// emit the 5× "Sass @import rules are deprecated" warnings from our
+// own entry point.
 //
-// Font paths must be globals here, not inside _sass/_variables.scss —
-// @use puts those into a scoped namespace that the @import-loaded
-// bundles below cannot see. Tabler's own default is "./fonts", which
-// would resolve to /assets/css/fonts (wrong); we need "../fonts" so
-// it lands at /assets/fonts where jekyll-imagemagick drops the files.
-// FontAwesome's upstream default happens to match what we want but
-// we set it explicitly so a future FA upgrade doesn't bite us.
-$fa-font-path: "../webfonts";
-$fa-font-display: swap;
-$ti-font-path: "../fonts";
-$ti-font-display: swap;
-
-@import
-  "font-awesome/fontawesome",
-  "font-awesome/brands",
-  "font-awesome/solid",
-  "font-awesome/regular",
-  "tabler-icons/tabler-icons.scss"
-;
+// Font-path tuning:
+//   FontAwesome defaults to "../webfonts" — matches jekyll-imagemagick's
+//   drop directory, but we set it explicitly so a future FA upgrade
+//   doesn't bite us if upstream changes the default.
+//   Tabler defaults to "./fonts" which would resolve to
+//   /assets/css/fonts (wrong). Must override to "../fonts".
+//
+// `font-display: swap` on both — browsers render fallback glyphs
+// immediately and swap in the icon font on load, which avoids invisible
+// icons during the font download and helps LCP.
+@use "font-awesome/fontawesome" with (
+  $fa-font-path: "../webfonts",
+  $fa-font-display: swap
+);
+@use "font-awesome/brands" with (
+  $fa-font-path: "../webfonts",
+  $fa-font-display: swap
+);
+@use "font-awesome/solid" with (
+  $fa-font-path: "../webfonts",
+  $fa-font-display: swap
+);
+@use "font-awesome/regular" with (
+  $fa-font-path: "../webfonts",
+  $fa-font-display: swap
+);
+@use "tabler-icons/tabler-icons" with (
+  $ti-font-path: "../fonts",
+  $ti-font-display: swap
+);
