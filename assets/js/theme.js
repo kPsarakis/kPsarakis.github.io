@@ -232,6 +232,7 @@ let determineComputedTheme = () => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars -- called from an inline <script> in _includes/head.liquid
 let initTheme = () => {
   // One-time migration: reset any override set by the old 3-way toggle
   // so existing visitors default back to system preference.
