@@ -107,6 +107,10 @@ jobs:
         run: npx purgecss -c purgecss.config.js
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4
+        # Pinned to v4.8.0's commit SHA (not the floating v4 major tag)
+        # so a compromised or accidentally-broken release on upstream's
+        # side can't silently push to our gh-pages branch. Bump by
+        # resolving a newer tag → SHA and updating both lines together.
+        uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
           folder: _site
