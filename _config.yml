@@ -197,6 +197,12 @@ exclude:
   - README.md
   - readme_preview/
   - vendor
+  # Dev tooling that doesn't start with `.` (Jekyll auto-hides dotfiles
+  # like .prettierrc/.gitattributes/.husky/, but these would otherwise
+  # be copied into _site/ and served publicly).
+  - eslint.config.mjs
+  - migration-changes.md
+  - requirements.txt
 keep_files:
   - CNAME
   - .nojekyll
