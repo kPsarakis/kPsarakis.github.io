@@ -16,10 +16,13 @@
   },
   "scripts": {
     "prepare": "husky",
-    "lint": "eslint ."
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "lint-staged": {
-    "*.{liquid,html,md,scss,css,js,json,yml,yaml}": "prettier --write --ignore-unknown",
-    "assets/js/**/!(*.min).js": "eslint --fix"
+    "*.{liquid,html,md,scss,css,js,mjs,cjs,json,yml,yaml}": "prettier --write --ignore-unknown",
+    "assets/js/**/!(*.min).js": "eslint --fix --max-warnings 0",
+    "*.{mjs,cjs}": "eslint --fix --max-warnings 0"
   }
 }
