@@ -1,52 +1,72 @@
 name: Deploy site
 
+# Positive path filter: list what *does* trigger a rebuild instead of
+# accepting everything and negatively excluding docs/CI. The previous
+# filter used `**.md`, `**.yml`, `**.js` etc. + a growing `!...`
+# block-list, which meant every new top-level dev file (migration
+# notes, eslint config, etc.) had to be added to the deny list or it
+# would spuriously trigger deploys. GitHub Actions doesn't support
+# YAML anchors here, so the two blocks below intentionally mirror
+# each other verbatim.
 on:
   push:
     branches:
       - master
       - main
     paths:
+      # Content collections & pages
+      - "_posts/**"
+      - "_news/**"
+      - "_projects/**"
+      - "_bibliography/**"
+      - "_data/**"
+      - "_pages/**"
+      # Templates, partials, styles, plugins
+      - "_layouts/**"
+      - "_includes/**"
+      - "_sass/**"
+      - "_plugins/**"
+      # Static assets (images, fonts, JS, CSS, PDFs)
       - "assets/**"
-      - "**.bib"
-      - "**.html"
-      - "**.js"
-      - "**.liquid"
-      - "**/*.md"
-      - "**.yml"
+      # Top-level public files Jekyll copies through
+      - "robots.txt"
+      - "*.html"
+      # Build configuration — any change here can alter the output
+      - "_config.yml"
       - "Gemfile"
       - "Gemfile.lock"
-      - "!.github/workflows/axe.yml"
-      - "!.github/workflows/broken-links.yml"
-      - "!.github/workflows/prettier.yml"
-      - "!lighthouse_results/**"
-      - "!CONTRIBUTING.md"
-      - "!CUSTOMIZE.md"
-      - "!FAQ.md"
-      - "!INSTALL.md"
-      - "!README.md"
+      - "requirements.txt"
+      - "package.json"
+      - "package-lock.json"
+      - "purgecss.config.js"
+      # The deploy workflow itself
+      - ".github/workflows/deploy.yml"
   pull_request:
     branches:
       - master
       - main
     paths:
+      - "_posts/**"
+      - "_news/**"
+      - "_projects/**"
+      - "_bibliography/**"
+      - "_data/**"
+      - "_pages/**"
+      - "_layouts/**"
+      - "_includes/**"
+      - "_sass/**"
+      - "_plugins/**"
       - "assets/**"
-      - "**.bib"
-      - "**.html"
-      - "**.js"
-      - "**.liquid"
-      - "**/*.md"
-      - "**.yml"
+      - "robots.txt"
+      - "*.html"
+      - "_config.yml"
       - "Gemfile"
       - "Gemfile.lock"
-      - "!.github/workflows/axe.yml"
-      - "!.github/workflows/broken-links.yml"
-      - "!.github/workflows/prettier.yml"
-      - "!lighthouse_results/**"
-      - "!CONTRIBUTING.md"
-      - "!CUSTOMIZE.md"
-      - "!FAQ.md"
-      - "!INSTALL.md"
-      - "!README.md"
+      - "requirements.txt"
+      - "package.json"
+      - "package-lock.json"
+      - "purgecss.config.js"
+      - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
 permissions:
