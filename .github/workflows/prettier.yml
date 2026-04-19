@@ -10,6 +10,13 @@ on:
       - master
       - main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: prettier-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     # available images: https://github.com/actions/runner-images#available-images
