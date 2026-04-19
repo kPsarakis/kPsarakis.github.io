@@ -375,7 +375,17 @@ imagemagick:
     - ".png"
     - ".tiff"
     - ".gif"
+  # Output formats emitted alongside each source image. Order matters —
+  # the <picture> element in _includes/figure.liquid tries each <source>
+  # top-to-bottom, so put the newest / smallest format first. AVIF saves
+  # ~20-30% over WebP at equivalent quality on photographic content; the
+  # tradeoff is ImageMagick's AVIF encoder (heif delegate) is slower, so
+  # expect longer cold-build times.
+  #
+  # AVIF is supported in every modern browser (Chrome 85+, Firefox 93+,
+  # Safari 16+). Older browsers fall through to WebP, then the original.
   output_formats:
+    avif: "-quality 60"
     webp: "-quality 85"
 
 # Lazy loading images
