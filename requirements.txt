@@ -1,5 +1,17 @@
-nbconvert
-pyyaml
-scholarly
-requests
-beautifulsoup4
+# Python dependencies used during the deploy workflow.
+#
+# nbconvert: converts Jupyter notebooks to HTML/Markdown during the
+#   Jekyll build (via jekyll-jupyter-notebook).
+# pyyaml, scholarly, requests, beautifulsoup4: retained from the
+#   al-folio template's bibliography/automation scripts; Jekyll itself
+#   does not use them, but downstream scripts (e.g. update_news.py,
+#   bin/*) may. Kept here so `pip install -r requirements.txt` covers
+#   both the build and any follow-up scripting.
+#
+# Upper bounds are loose — pin to the current major so a future v8
+# breaking change doesn't silently land on prod.
+nbconvert>=7,<8
+pyyaml>=6,<7
+scholarly>=1.7,<2
+requests>=2.31,<3
+beautifulsoup4>=4.12,<5
