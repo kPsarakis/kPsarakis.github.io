@@ -233,9 +233,20 @@ sass:
 # -----------------------------------------------------------------------------
 # Jekyll Minifier
 # -----------------------------------------------------------------------------
+# Audited: jekyll-minifier 0.2.2 (2024). Still maintained. Uses terser
+# for JS and htmlcompressor for HTML. Kept for now — the alternative
+# layout-based jekyll-compress-html gives similar output but would
+# require reshuffling every layout, and GitHub Pages / Cloudflare already
+# apply gzip at serve time, so the marginal win is small either way.
+#
+# Excludes:
+#   robots.txt               — preserve comments/whitespace for crawlers.
+#   assets/js/search/*.js    — already pre-minified ninja-keys bundle;
+#                              re-running terser on it is pointless and
+#                              occasionally breaks source-map references.
 
 jekyll-minifier:
-  exclude: ["robots.txt", "assets/js/search/*.js", "assets/libs/**/*"]
+  exclude: ["robots.txt", "assets/js/search/*.js"]
   uglifier_args:
     harmony: true
 
