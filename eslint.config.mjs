@@ -12,78 +12,78 @@
 //   - assets/js/highlight-search-term.js    (vendored bundle)
 //   - assets/js/distillpub/**                (vendored distill.pub transforms)
 //   - _site/, .jekyll-cache/, vendor/, node_modules/, .claude/
-import globals from 'globals';
-import js from '@eslint/js';
+import globals from "globals";
+import js from "@eslint/js";
 
 const browserLibGlobals = {
   // Third-party libs loaded via <script> on specific pages.
-  bootstrap: 'readonly',
-  MathJax: 'readonly',
-  mermaid: 'readonly',
-  anchors: 'readonly',
-  d3: 'readonly',
-  echarts: 'readonly',
-  vegaEmbed: 'readonly',
-  Diff2HtmlUI: 'readonly',
-  Masonry: 'readonly',
-  imagesLoaded: 'readonly',
-  medium_zoom: 'readonly',
-  mediumZoom: 'readonly',
+  bootstrap: "readonly",
+  MathJax: "readonly",
+  mermaid: "readonly",
+  anchors: "readonly",
+  d3: "readonly",
+  echarts: "readonly",
+  vegaEmbed: "readonly",
+  Diff2HtmlUI: "readonly",
+  Masonry: "readonly",
+  imagesLoaded: "readonly",
+  medium_zoom: "readonly",
+  mediumZoom: "readonly",
   // Our own cross-file globals defined in theme.js.
-  determineComputedTheme: 'readonly',
-  setHighlight: 'readonly',
-  setTheme: 'readonly',
-  toggleTheme: 'readonly',
-  initTheme: 'readonly',
-  openSearchModal: 'readonly',
+  determineComputedTheme: "readonly",
+  setHighlight: "readonly",
+  setTheme: "readonly",
+  toggleTheme: "readonly",
+  initTheme: "readonly",
+  openSearchModal: "readonly",
 };
 
 export default [
   {
     ignores: [
-      '**/*.min.js',
-      'assets/js/search-data.js',
-      'assets/js/typograms.js',
-      'assets/js/bibsearch.js',
-      'assets/js/highlight-search-term.js',
-      'assets/js/distillpub/**',
-      '_site/**',
-      '.jekyll-cache/**',
-      'vendor/**',
-      'node_modules/**',
-      '.claude/**',
-      'eslint.config.mjs',
+      "**/*.min.js",
+      "assets/js/search-data.js",
+      "assets/js/typograms.js",
+      "assets/js/bibsearch.js",
+      "assets/js/highlight-search-term.js",
+      "assets/js/distillpub/**",
+      "_site/**",
+      ".jekyll-cache/**",
+      "vendor/**",
+      "node_modules/**",
+      ".claude/**",
+      "eslint.config.mjs",
     ],
   },
   js.configs.recommended,
   // Classic browser scripts under assets/js/.
   {
-    files: ['assets/js/**/*.js'],
+    files: ["assets/js/**/*.js"],
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: 'script',
+      sourceType: "script",
       globals: { ...globals.browser, ...browserLibGlobals },
     },
     rules: {
-      'no-unused-vars': ['warn', { args: 'none', caughtErrors: 'none' }],
-      'no-empty': ['error', { allowEmptyCatch: true }],
+      "no-unused-vars": ["warn", { args: "none", caughtErrors: "none" }],
+      "no-empty": ["error", { allowEmptyCatch: true }],
     },
   },
   // theme.js *defines* several of the cross-file globals above, which
   // trips no-redeclare. Disable it for this one file rather than
   // scatter /* global */ comments across consumers.
   {
-    files: ['assets/js/theme.js'],
+    files: ["assets/js/theme.js"],
     rules: {
-      'no-redeclare': 'off',
+      "no-redeclare": "off",
     },
   },
   // Root-level CommonJS dev configs.
   {
-    files: ['*.config.cjs', 'purgecss.config.js'],
+    files: ["*.config.cjs", "purgecss.config.js"],
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: 'commonjs',
+      sourceType: "commonjs",
       globals: { ...globals.node },
     },
   },
