@@ -1,4 +1,6 @@
-$(document).ready(function () {
+// Override styles emitted by Distill web components so they respect our
+// CSS custom properties. Runs on DOMContentLoaded; no jQuery needed.
+function applyDistillOverrides() {
   // Override styles of the footnotes.
   document.querySelectorAll("d-footnote").forEach(function (footnote) {
     footnote.shadowRoot.querySelector("sup > span").setAttribute("style", "color: var(--global-theme-color);");
@@ -25,4 +27,10 @@ $(document).ready(function () {
       .shadowRoot.querySelector("style")
       .sheet.insertRule(".panel {border-color: var(--global-divider-color) !important;}");
   });
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", applyDistillOverrides);
+} else {
+  applyDistillOverrides();
+}

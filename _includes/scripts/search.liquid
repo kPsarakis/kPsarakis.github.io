@@ -12,10 +12,10 @@
     }
 
     const openSearchModal = () => {
-      // collapse navbarNav if expanded on mobile
-      const $navbarNav = $('#navbarNav');
-      if ($navbarNav.hasClass('show')) {
-        $navbarNav.collapse('hide');
+      // Collapse navbarNav if expanded on mobile, via Bootstrap 5 Collapse API.
+      const navbarNav = document.getElementById('navbarNav');
+      if (navbarNav && navbarNav.classList.contains('show') && typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+        bootstrap.Collapse.getOrCreateInstance(navbarNav).hide();
       }
       ninjaKeys.open();
     };

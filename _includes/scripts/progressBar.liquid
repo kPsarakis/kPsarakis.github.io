@@ -8,71 +8,69 @@
      * Couple of changes were made to the original code to make it compatible
      * with the `al-foio` theme.
      */
-    const progressBar = $('#progress');
-    /*
-     * We set up the bar after all elements are done loading.
-     * In some cases, if the images in the page are larger than the intended
-     * size they'll have on the page, they'll be resized via CSS to accomodate
-     * the desired size. This mistake, however, breaks the computations as the
-     * scroll size is computed as soon as the elements finish loading.
-     * To account for this, a minimal delay was introduced before computing the
-     * values.
-     */
-    window.onload = function () {
-      setTimeout(progressBarSetup, 50);
-    };
-    /*
-     * We set up the bar according to the browser.
-     * If the browser supports the progress element we use that.
-     * Otherwise, we resize the bar thru CSS styling
-     */
-    function progressBarSetup() {
-      if ('max' in document.createElement('progress')) {
-        initializeProgressElement();
-        $(document).on('scroll', function () {
-          progressBar.attr({ value: getCurrentScrollPosition() });
-        });
-        $(window).on('resize', initializeProgressElement);
-      } else {
-        resizeProgressBar();
-        $(document).on('scroll', resizeProgressBar);
-        $(window).on('resize', resizeProgressBar);
+    (function () {
+      var progressBar = document.getElementById('progress');
+      if (!progressBar) return;
+
+      // The vertical scroll position: pixels hidden above the viewport.
+      function getCurrentScrollPosition() {
+        return window.pageYOffset || document.documentElement.scrollTop || 0;
       }
-    }
-    /*
-     * The vertical scroll position is the same as the number of pixels that
-     * are hidden from view above the scrollable area. Thus, a value > 0 is
-     * how much the user has scrolled from the top
-     */
-    function getCurrentScrollPosition() {
-      return $(window).scrollTop();
-    }
 
-    function initializeProgressElement() {
-      let navbarHeight = $('#navbar').outerHeight(true);
-      $('body').css({ 'padding-top': navbarHeight });
-      $('progress-container').css({ 'padding-top': navbarHeight });
-      progressBar.css({ top: navbarHeight });
-      progressBar.attr({
-        max: getDistanceToScroll(),
-        value: getCurrentScrollPosition(),
+      // Outer height including margins, matching jQuery's outerHeight(true).
+      function outerHeightWithMargin(el) {
+        if (!el) return 0;
+        var rect = el.getBoundingClientRect();
+        var style = window.getComputedStyle(el);
+        return rect.height + parseFloat(style.marginTop || 0) + parseFloat(style.marginBottom || 0);
+      }
+
+      // Full scrollable distance — document height minus viewport height.
+      function getDistanceToScroll() {
+        var doc = document.documentElement;
+        var body = document.body;
+        var docHeight = Math.max(body.scrollHeight, doc.scrollHeight, body.offsetHeight, doc.offsetHeight, doc.clientHeight);
+        return docHeight - window.innerHeight;
+      }
+
+      function initializeProgressElement() {
+        var navbarHeight = outerHeightWithMargin(document.getElementById('navbar'));
+        document.body.style.paddingTop = navbarHeight + 'px';
+        // Note: 'progress-container' is a tag selector in the original; preserve behavior.
+        document.querySelectorAll('progress-container').forEach(function (el) {
+          el.style.paddingTop = navbarHeight + 'px';
+        });
+        progressBar.style.top = navbarHeight + 'px';
+        progressBar.setAttribute('max', getDistanceToScroll());
+        progressBar.setAttribute('value', getCurrentScrollPosition());
+      }
+
+      function getWidthPercentage() {
+        return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+      }
+
+      function resizeProgressBar() {
+        progressBar.style.width = getWidthPercentage() + '%';
+      }
+
+      function progressBarSetup() {
+        if ('max' in document.createElement('progress')) {
+          initializeProgressElement();
+          document.addEventListener('scroll', function () {
+            progressBar.setAttribute('value', getCurrentScrollPosition());
+          });
+          window.addEventListener('resize', initializeProgressElement);
+        } else {
+          resizeProgressBar();
+          document.addEventListener('scroll', resizeProgressBar);
+          window.addEventListener('resize', resizeProgressBar);
+        }
+      }
+
+      // Delay after full load so image resizes settle before measuring.
+      window.addEventListener('load', function () {
+        setTimeout(progressBarSetup, 50);
       });
-    }
-    /*
-     * The offset between the html document height and the browser viewport
-     * height will be greater than zero if vertical scroll is possible.
-     * This is the distance the user can scroll
-     */
-    function getDistanceToScroll() {
-      return $(document).height() - $(window).height();
-    }
-
-    function resizeProgressBar() {
-      progressBar.css({ width: getWidthPercentage() + '%' });
-    }
-    // The scroll ratio equals the percentage to resize the bar
-    function getWidthPercentage() {
-      return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
-    }
+    })();
   </script>
 {% endif %}

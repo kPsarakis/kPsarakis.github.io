@@ -95,7 +95,7 @@
         <span
           class="more-authors"
           title="click to view more authors"
-          onclick="var e=$(this);e.attr('title','');var t=e.text()=='{{ more_authors }} more authors'?'{{ entry.author_array | slice: author_array_limit, more_authors | map: 'first' | join: ', ' }}':'{{ more_authors }} more authors';var p=0;var a=setInterval(function(){e.html(t.substring(0,p+1));if(++p==t.length){clearInterval(a);}}, '{{ site.more_authors_animation_delay }}');"
+          onclick="var e=this;e.setAttribute('title','');var t=e.textContent.trim()=='{{ more_authors }} more authors'?'{{ entry.author_array | slice: author_array_limit, more_authors | map: 'first' | join: ', ' }}':'{{ more_authors }} more authors';var p=0;var a=setInterval(function(){e.innerHTML=t.substring(0,p+1);if(++p==t.length){clearInterval(a);}}, {{ site.more_authors_animation_delay }});"
         >
           {{- more_authors }} more authors
         </span>
