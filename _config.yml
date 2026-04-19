@@ -252,8 +252,12 @@ sass:
 
 jekyll-minifier:
   exclude: ["robots.txt", "assets/js/search/*.js"]
-  uglifier_args:
-    harmony: true
+  # NOTE: `uglifier_args: { harmony: true }` used to live here. It was a
+  # uglifier-specific toggle that enabled ES6 parsing; jekyll-minifier
+  # 0.2.x actually delegates to terser, which handles ES2015+ natively
+  # and rejects the key — emitting "Filtering out legacy 'harmony'
+  # option from uglifier_args" once per minified file (~140 warnings
+  # per full build). Drop it; behaviour is identical.
 
 # -----------------------------------------------------------------------------
 # Jekyll Archives
