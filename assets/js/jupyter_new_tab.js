@@ -1,18 +1,28 @@
-$(document).ready(function () {
-  // Let external links in jupyter notebooks open in new tab
-  let jupyterNotebooks = $(".jupyter-notebook-iframe-container");
-  jupyterNotebooks.each(function () {
-    let iframeBody = $(this).find("iframe").get(0).contentWindow.document.body;
-    // Get all <a> elements in the bodyElement
-    let links = $(iframeBody).find("a");
+// Force external links inside Jupyter notebook iframes to open in a new tab.
+(function () {
+  function rewriteIframeLinks() {
+    document.querySelectorAll(".jupyter-notebook-iframe-container").forEach(function (container) {
+      var iframe = container.querySelector("iframe");
+      if (!iframe) return;
 
-    // Loop through each <a> element
-    links.each(function () {
-      // Check if the <a> element has an 'href' attribute
-      if ($(this).attr("href")) {
-        // Set the 'target' attribute to '_blank' to open the link in a new tab/window
-        $(this).attr("target", "_blank");
+      // Same-origin iframes only — cross-origin access throws.
+      var doc;
+      try {
+        doc = iframe.contentWindow && iframe.contentWindow.document;
+      } catch (_) {
+        return;
       }
+      if (!doc || !doc.body) return;
+
+      doc.body.querySelectorAll("a[href]").forEach(function (a) {
+        a.setAttribute("target", "_blank");
+      });
     });
-  });
-});
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", rewriteIframeLinks);
+  } else {
+    rewriteIframeLinks();
+  }
+})();
