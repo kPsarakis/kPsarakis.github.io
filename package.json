@@ -1,4 +1,11 @@
 {
+  "name": "kpsarakis.github.io",
+  "private": true,
+  "description": "Personal academic website (al-folio fork). Node tooling here is dev-only — prettier + husky + lint-staged; the site itself is built by Jekyll.",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.10.2",
     "husky": "^9.1.7",
