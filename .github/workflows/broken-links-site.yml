@@ -5,6 +5,9 @@ on:
     workflows: [Deploy site]
     types: [completed]
 
+permissions:
+  contents: read
+
 jobs:
   check-links-on-site:
     # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
@@ -17,10 +20,10 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2.2"
+          ruby-version: "3.3.5"
           bundler-cache: true
       - name: Update _config.yml ⚙️
-        uses: fjogeleit/yaml-update-action@main
+        uses: fjogeleit/yaml-update-action@v0.15.0
         with:
           commitChange: false
           valueFile: "_config.yml"
@@ -39,7 +42,7 @@ jobs:
           npm install -g purgecss
           purgecss -c purgecss.config.js
       - name: Link Checker 🔗
-        uses: lycheeverse/lychee-action@v1.9.0
+        uses: lycheeverse/lychee-action@v2.1.0
         with:
           fail: true
           # only check local links
