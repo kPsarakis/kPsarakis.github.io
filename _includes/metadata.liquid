@@ -6,13 +6,24 @@
   {% if site.enable_bing_verification %}
     <meta name="msvalidate.01" content="{{ site.bing_site_verification }}">
   {% endif %}
-  <!--
-    Avoid warning on Google Chrome Error with Permissions-Policy header:
-    Origin trial controlled feature not enabled: 'interest-cohort'.
-    see https://stackoverflow.com/a/75119417
-  -->
-  <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 {% endif %}
+
+<!--
+  Security / privacy meta policies.
+  GitHub Pages doesn't let us set real HTTP response headers, so we use the
+  <meta> equivalents where the spec supports them:
+    - `referrer`: trims the Referer header on cross-origin navigations so
+       external sites only see our origin, not the full URL + query string.
+    - Permissions-Policy: opts out of Chrome's FLoC/Topics ad-targeting
+       surface (see https://stackoverflow.com/a/75119417) and disables a
+       couple of powerful APIs we never use.
+    - CSP `upgrade-insecure-requests`: auto-rewrites any stray `http://`
+       subresource URL to `https://` before the browser fetches it. No-op
+       if every asset is already https; cheap belt-and-braces otherwise.
+-->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="interest-cohort=(), browsing-topics=(), geolocation=(), microphone=(), camera=()">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
 {% capture author_name %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
 
