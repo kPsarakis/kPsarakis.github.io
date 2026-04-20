@@ -121,19 +121,23 @@
         the badge twice (once for the link, once for the image).
 
         Explicit width/height on every <img>: shields.io always
-        renders at 20px tall and the widths below match the
-        intrinsic SVG widths for these specific labels (measured
-        from the served SVG). Without these attrs the browser
-        doesn't reserve the box before the image arrives, which
-        Lighthouse flagged as a CLS risk. loading="lazy" defers the
-        fetch — these are below-the-fold on the publications list.
+        renders at 20px tall and the widths below are the exact
+        intrinsic SVG widths served by img.shields.io for these
+        specific label + logo combinations (measured via
+        `curl URL | grep width=`, not eyeballed — an earlier version
+        of this file used estimated widths and Lighthouse's
+        "incorrect aspect ratio" audit caught the mismatch).
+        Without these attrs the browser doesn't reserve the box
+        before the image arrives, which Lighthouse flagged as a
+        CLS risk. loading="lazy" defers the fetch — these are
+        below-the-fold on the publications list.
       {% endcomment %}
       {% if entry.pdf %}
         <a href="{{ entry.pdf | relative_url }}" role="button" aria-label="Open PDF">
           <img
             src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white"
             alt=""
-            width="82"
+            width="66"
             height="20"
             loading="lazy"
             decoding="async"
@@ -145,7 +149,7 @@
           <img
             src="https://img.shields.io/badge/Blog-blue?logo=rss"
             alt=""
-            width="58"
+            width="53"
             height="20"
             loading="lazy"
             decoding="async"
@@ -162,7 +166,7 @@
           <img
             src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white"
             alt=""
-            width="94"
+            width="101"
             height="20"
             loading="lazy"
             decoding="async"
@@ -199,11 +203,11 @@
           {% endcomment %}
           {% assign citation_digits = citation_count | append: '' | size %}
           {% if citation_digits <= 1 %}
-            {% assign scholar_badge_width = 84 %}
+            {% assign scholar_badge_width = 83 %}
           {% elsif citation_digits == 2 %}
-            {% assign scholar_badge_width = 91 %}
+            {% assign scholar_badge_width = 89 %}
           {% else %}
-            {% assign scholar_badge_width = 98 %}
+            {% assign scholar_badge_width = 97 %}
           {% endif %}
           <img
             src="https://img.shields.io/badge/scholar-{{ citation_count }}-4285F4?logo=googlescholar&labelColor=beige"
