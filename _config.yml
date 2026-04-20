@@ -431,7 +431,14 @@ enable_tooltips: false # enables automatic tooltip links generated for each sect
 enable_darkmode: true # enables switching between light/dark modes
 enable_navbar_social: false # enables displaying social links in the navbar on the about page
 enable_project_categories: true # enables categorization of projects into multiple categories
-enable_medium_zoom: true # enables image zoom feature (as on medium.com)
+# Disabled: the feature pulled in medium-zoom (~3 KiB gz) + our
+# zoom.js wiring (~1 KiB) + a theme.js hook that re-initializes on
+# dark-mode toggle. No page on this site actually benefits from
+# click-to-zoom images — the profile photo is already at its
+# display size and publication thumbnails aren't part of the
+# layout. Turning it off removes two <script> tags from every page
+# and a small chunk of dead JS from theme.js's critical path.
+enable_medium_zoom: false # enables image zoom feature (as on medium.com)
 enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
 enable_video_embedding: false # enables video embedding for bibtex entries. If false, the button opens the video link in a new window.
 
