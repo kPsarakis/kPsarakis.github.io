@@ -28,6 +28,8 @@ on:
       - "_plugins/**"
       # Static assets (images, fonts, JS, CSS, PDFs)
       - "assets/**"
+      # Post-build scripts (inline-critical-css etc.)
+      - "bin/**"
       # Top-level public files Jekyll copies through
       - "robots.txt"
       - "*.html"
@@ -118,6 +120,13 @@ jobs:
         run: npm ci
       - name: Purge unused CSS 🧹
         run: npx purgecss -c purgecss.config.js
+      - name: Inline critical CSS into every HTML page 🧬
+        # Must run AFTER purgecss so we inline the tree-shaken
+        # ~13 KiB payload, not the 600+ KiB raw SCSS output. Drops
+        # the last two render-blocking requests (~940 ms combined
+        # per Lighthouse) by replacing <link> tags with a single
+        # <style> block.
+        run: node bin/inline-critical-css.mjs
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
         # Pinned to v4.8.0's commit SHA (not the floating v4 major tag)

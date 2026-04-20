@@ -24,6 +24,7 @@
   "lint-staged": {
     "*.{liquid,html,md,scss,css,js,mjs,cjs,json,yml,yaml}": "prettier --write --ignore-unknown",
     "assets/js/**/!(*.min).js": "eslint --fix --max-warnings 0",
-    "*.{mjs,cjs}": "eslint --fix --max-warnings 0"
+    "*.{mjs,cjs}": "eslint --fix --max-warnings 0 --no-warn-ignored",
+    "bin/**/*.{mjs,cjs}": "eslint --fix --max-warnings 0"
   }
 }
