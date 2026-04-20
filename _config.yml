@@ -315,10 +315,10 @@ scholar:
 # Display different badges withs stats for your publications
 # Customize badge behavior in _layouts/bib.liquid
 enable_publication_badges:
-  altmetric: true # Altmetric badge (Customization options: https://badge-docs.altmetric.com/index.html)
-  dimensions: true # Dimensions badge (Customization options: https://badge.dimensions.ai/)
+  altmetric: false # Altmetric badge (Customization options: https://badge-docs.altmetric.com/index.html)
+  dimensions: false # Dimensions badge (Customization options: https://badge.dimensions.ai/)
   google_scholar: true # Google Scholar badge (https://scholar.google.com/intl/en/scholar/citations.html)
-  inspirehep: true # Inspire HEP badge (https://help.inspirehep.net/knowledge-base/citation-metrics/)
+  inspirehep: false # Inspire HEP badge (https://help.inspirehep.net/knowledge-base/citation-metrics/)
 
 # Filter out certain bibtex entry keywords used internally from the bib output
 filtered_bibtex_keywords:
@@ -436,13 +436,17 @@ enable_video_embedding: false # enables video embedding for bibtex entries. If f
 third_party_libraries:
   download: false # if true, download the versions of the libraries specified below and use the downloaded files
   bootstrap:
+    # CSS is self-hosted from assets/css/bootstrap.min.css (see head.liquid)
+    # so PurgeCSS can strip the ~87% unused rules. The url.css /
+    # integrity.css fields below are retained only for reference and
+    # possible rollback to the CDN version.
     integrity:
-      css: "sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g="
-      js: "sha256-CDOy6cOibCWEdsRiZuaHf8dSGGJRYuBGC+mjoJimHGw="
+      css: "sha256-2FMn2Zx6PuH5tdBQDRNwrOo60ts5wWPC9R8jK67b3t4="
+      js: "sha256-5P1JGBOIxI7FBAvT/mb1fCnI5n/NhQKzNUuW7Hq0fMc="
     url:
       css: "https://cdn.jsdelivr.net/npm/bootstrap@{{version}}/dist/css/bootstrap.min.css"
       js: "https://cdn.jsdelivr.net/npm/bootstrap@{{version}}/dist/js/bootstrap.bundle.min.js"
-    version: "5.3.3"
+    version: "5.3.8"
   bootstrap-table:
     integrity:
       css: "sha256-tt89sB/8HsQNDZ4kdNYrRSrBOEgMUi5OMeSRwZBF5zE="

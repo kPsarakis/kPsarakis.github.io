@@ -11,13 +11,12 @@
   <link rel="preload" as="image" href="{{ page.profile.image | prepend: 'assets/img/' | relative_url | bust_file_cache }}" fetchpriority="high">
 {% endif %}
 
-<!-- Bootstrap -->
-<link
-  rel="stylesheet"
-  href="{{ site.third_party_libraries.bootstrap.url.css }}"
-  integrity="{{ site.third_party_libraries.bootstrap.integrity.css }}"
-  crossorigin="anonymous"
->
+<!--
+  Bootstrap (self-hosted so PurgeCSS can tree-shake the ~96%
+  unused rules Lighthouse flagged; upstream CDN shipped the full
+  32 KiB compressed every page load)
+-->
+<link rel="stylesheet" href="{{ '/assets/css/bootstrap.min.css' | relative_url | bust_file_cache }}">
 
 <!-- Bootstrap Table -->
 {% if page.pretty_table %}
