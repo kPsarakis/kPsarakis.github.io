@@ -1,12 +1,16 @@
 ---
 permalink: /robots.txt
 ---
+# Allow all well-behaved crawlers. The previous file had two
+# conflicting `User-agent: *` blocks; the second one disallowed
+# /publications/, which blocked *every* crawler from the publications
+# page (not just Google Scholar as presumably intended). Google Scholar
+# does not use a distinct user-agent — it crawls via Googlebot — so
+# there is no standard robots.txt directive that blocks Scholar alone.
+# Removed the blanket disallow so search engines can index publications
+# normally; the `googlebot-scholar` meta tag in _includes/head.liquid
+# is a best-effort signal to Scholar specifically.
 User-agent: *
 Disallow:
-
-Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml
-
-User-agent: *
-Disallow: /publications/
 
 Sitemap: {{ site.baseurl | prepend: site.url }}/sitemap.xml

@@ -37,7 +37,15 @@
       text-align: right;
       font-size: 0.6rem;
       font-style: italic;
-      color: var(--global-text-color-light, #777);
+      /*
+       * Was var(--global-text-color-light, #777). The token doesn't
+       * exist in our theme, so the #777 fallback kicked in — which
+       * drops below 4.5:1 against dark-mode bg and was flagged by
+       * Lighthouse. Italic + 0.6rem already de-emphasizes the
+       * caption visually; using the full text token keeps it
+       * readable in both themes.
+       */
+      color: var(--global-text-color);
       padding-top: 2px;
     }
 

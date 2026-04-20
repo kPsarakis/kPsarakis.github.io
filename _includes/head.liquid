@@ -1,6 +1,17 @@
 <!-- Metadata, OpenGraph and Schema.org -->
 {% include metadata.liquid %}
 
+<!--
+  Best-effort hint to Google Scholar not to index this site. Scholar
+  does not expose a distinct user-agent so robots.txt cannot target
+  it; `googlebot-scholar` is an undocumented directive cited in the
+  community but not officially confirmed by Google. Harmless for
+  regular Googlebot (which ignores unknown names) and the only lever
+  we have short of stripping Highwire `citation_*` meta tags (which
+  this site already doesn't emit).
+-->
+<meta name="googlebot-scholar" content="noindex">
+
 <!-- Preconnect to external origins -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -113,13 +113,22 @@
 
     <!-- Links -->
     <div class="links">
+      {% comment %}
+        The shields.io badges below are purely decorative — the
+        parent <a> carries the accessible name via aria-label. We set
+        alt="" so Lighthouse's "image elements do not have [alt]
+        attributes" audit passes without screen readers announcing
+        the badge twice (once for the link, once for the image).
+      {% endcomment %}
       {% if entry.pdf %}
         <a href="{{ entry.pdf | relative_url }}" role="button" aria-label="Open PDF">
-          <img src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white">
+          <img src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white" alt="">
         </a>
       {% endif %}
       {% if entry.blog %}
-        <a href="{{ entry.blog }}" role="button"><img src="https://img.shields.io/badge/Blog-blue?logo=rss"></a>
+        <a href="{{ entry.blog }}" role="button" aria-label="Read blog post">
+          <img src="https://img.shields.io/badge/Blog-blue?logo=rss" alt="">
+        </a>
       {% endif %}
       {% if entry.video %}
         {% assign video_url = entry.video %}
@@ -128,7 +137,7 @@
         {% endunless %}
 
         <a href="{{ video_url }}" role="button" aria-label="Watch video">
-          <img src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white">
+          <img src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white" alt="">
         </a>
       {% endif %}
       {% if site.enable_publication_badges.google_scholar and entry.google_scholar_id %}

@@ -765,7 +765,17 @@ footer.sticky-bottom {
   }
 
   h2.bibliography {
-    color: var(--global-divider-color);
+    /*
+     * Year heading between bibliography groups. The original rule
+     * used --global-divider-color for the text itself, which is the
+     * hairline-divider token (intentionally near-background for
+     * subtle separators). Lighthouse flagged it for < 4.5:1 contrast
+     * because the color is literally designed to disappear against
+     * the page. Promote to --global-text-color so the year is
+     * actually readable; keep the divider token on the border-top
+     * where low contrast is correct behavior.
+     */
+    color: var(--global-text-color);
     border-top: 1px solid var(--global-divider-color);
     padding-top: 1rem;
     margin-top: 2rem;
