@@ -1,13 +1,45 @@
 {% if site.enable_google_analytics %}
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <!--
+    Google Analytics, deferred off the critical path. See the
+    IIFE below for the rationale and trigger conditions.
+  -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', '{{ site.google_analytics }}');
+    // Lighthouse flagged /gtag/js as ~65 KiB of unused JS on the
+    // critical path. Keep the dataLayer/gtag shim defined
+    // immediately so inline gtag() calls from page code still queue
+    // correctly, but postpone injecting the real gtag/js script
+    // until the earliest of: first user interaction, browser-idle,
+    // or a 2 s fallback. GA still records the pageview.
+    (function () {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+      gtag('js', new Date());
+      gtag('config', '{{ site.google_analytics }}');
+
+      var loaded = false;
+      function loadGtag() {
+        if (loaded) return;
+        loaded = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}';
+        document.head.appendChild(s);
+      }
+
+      // { once: true, passive: true } prevents scroll-jank and
+      // auto-removes the listener after firing.
+      var events = ['pointerdown', 'keydown', 'scroll', 'touchstart'];
+      events.forEach(function (ev) {
+        window.addEventListener(ev, loadGtag, { once: true, passive: true });
+      });
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGtag, { timeout: 2000 });
+      } else {
+        setTimeout(loadGtag, 2000);
+      }
+    })();
   </script>
 {% endif %}
 {% if site.enable_cronitor_analytics %}
