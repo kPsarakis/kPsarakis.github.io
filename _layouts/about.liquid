@@ -13,16 +13,32 @@ layout: default
         {% endif %}
       </h1>
       {% if page.profile.image %}
-        <img
-          src="{{ page.profile.image | prepend: 'assets/img/' | relative_url | bust_file_cache }}"
-          class="profile-mobile{% if page.profile.image_circular %} rounded-circle{% else %} rounded{% endif %}"
-          alt="{{ page.profile.image }}"
-          width="{{ page.profile.image_width | default: 423 }}"
-          height="{{ page.profile.image_height | default: 600 }}"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-        >
+        {% comment %}
+          <picture> with a media-scoped <source> so mobile fetches the
+          200×284 small variant and larger viewports fetch the master.
+          Matches the split preload in _includes/head.liquid — keep the
+          media query in sync across both files.
+        {% endcomment %}
+        <picture>
+          {% if page.profile.image_sm %}
+            <source
+              media="(max-width: 575px)"
+              srcset="{{ page.profile.image_sm | prepend: 'assets/img/' | relative_url | bust_file_cache }}"
+              width="{{ page.profile.image_sm_width | default: 200 }}"
+              height="{{ page.profile.image_sm_height | default: 284 }}"
+            >
+          {% endif %}
+          <img
+            src="{{ page.profile.image | prepend: 'assets/img/' | relative_url | bust_file_cache }}"
+            class="profile-mobile{% if page.profile.image_circular %} rounded-circle{% else %} rounded{% endif %}"
+            alt="{{ page.profile.image }}"
+            width="{{ page.profile.image_width | default: 423 }}"
+            height="{{ page.profile.image_height | default: 600 }}"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          >
+        </picture>
       {% endif %}
     </div>
     <p class="desc">{{ page.subtitle }}</p>
