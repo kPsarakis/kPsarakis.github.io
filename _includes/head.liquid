@@ -84,8 +84,17 @@
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
 
-<!-- Dark Mode -->
-<script src="{{ '/assets/js/theme.js' | relative_url | bust_file_cache }}"></script>
+<!--
+  Dark Mode — inlined because theme.js has to run before first paint
+  (it sets `data-theme` on <html>) and can't be deferred without a
+  FOUC. Lighthouse flagged the external fetch as ~450 ms of render-
+  blocking time; the minified body is a few KB, well under the cost
+  of an extra round-trip. Source lives in _includes/scripts/theme.js
+  so editors still get .js syntax highlighting.
+-->
+<script>
+  {% include scripts/theme.js %}
+</script>
 {% if site.enable_darkmode %}
   <link
     rel="stylesheet"
