@@ -119,15 +119,37 @@
         alt="" so Lighthouse's "image elements do not have [alt]
         attributes" audit passes without screen readers announcing
         the badge twice (once for the link, once for the image).
+
+        Explicit width/height on every <img>: shields.io always
+        renders at 20px tall and the widths below match the
+        intrinsic SVG widths for these specific labels (measured
+        from the served SVG). Without these attrs the browser
+        doesn't reserve the box before the image arrives, which
+        Lighthouse flagged as a CLS risk. loading="lazy" defers the
+        fetch — these are below-the-fold on the publications list.
       {% endcomment %}
       {% if entry.pdf %}
         <a href="{{ entry.pdf | relative_url }}" role="button" aria-label="Open PDF">
-          <img src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white" alt="">
+          <img
+            src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white"
+            alt=""
+            width="82"
+            height="20"
+            loading="lazy"
+            decoding="async"
+          >
         </a>
       {% endif %}
       {% if entry.blog %}
         <a href="{{ entry.blog }}" role="button" aria-label="Read blog post">
-          <img src="https://img.shields.io/badge/Blog-blue?logo=rss" alt="">
+          <img
+            src="https://img.shields.io/badge/Blog-blue?logo=rss"
+            alt=""
+            width="58"
+            height="20"
+            loading="lazy"
+            decoding="async"
+          >
         </a>
       {% endif %}
       {% if entry.video %}
@@ -137,7 +159,14 @@
         {% endunless %}
 
         <a href="{{ video_url }}" role="button" aria-label="Watch video">
-          <img src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white" alt="">
+          <img
+            src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white"
+            alt=""
+            width="94"
+            height="20"
+            loading="lazy"
+            decoding="async"
+          >
         </a>
       {% endif %}
       {% if site.enable_publication_badges.google_scholar and entry.google_scholar_id %}
@@ -162,9 +191,27 @@
               {% endif %}
             {% endfor %}
           {% endif %}
+          {% comment %}
+            Scholar badge width depends on how many digits the
+            citation count renders to. Three tiers cover everything
+            the site realistically emits: single-digit, double,
+            triple+. Height is always 20 (shields.io intrinsic).
+          {% endcomment %}
+          {% assign citation_digits = citation_count | append: '' | size %}
+          {% if citation_digits <= 1 %}
+            {% assign scholar_badge_width = 84 %}
+          {% elsif citation_digits == 2 %}
+            {% assign scholar_badge_width = 91 %}
+          {% else %}
+            {% assign scholar_badge_width = 98 %}
+          {% endif %}
           <img
             src="https://img.shields.io/badge/scholar-{{ citation_count }}-4285F4?logo=googlescholar&labelColor=beige"
             alt="{{ citation_count }} Google Scholar citations"
+            width="{{ scholar_badge_width }}"
+            height="20"
+            loading="lazy"
+            decoding="async"
           >
         </a>
       {% endif %}
