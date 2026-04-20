@@ -80,7 +80,7 @@ export default [
   },
   // Root-level CommonJS dev configs.
   {
-    files: ["*.config.cjs", "purgecss.config.js"],
+    files: ["*.config.cjs"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "commonjs",

@@ -40,7 +40,6 @@ on:
       - "requirements.txt"
       - "package.json"
       - "package-lock.json"
-      - "purgecss.config.js"
       # The deploy workflow itself
       - ".github/workflows/deploy.yml"
   pull_request:
@@ -67,7 +66,6 @@ on:
       - "requirements.txt"
       - "package.json"
       - "package-lock.json"
-      - "purgecss.config.js"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
@@ -118,14 +116,15 @@ jobs:
         # `npm install`. Gives us the pinned purgecss version instead of
         # pulling whatever `npm install -g purgecss` resolves at build time.
         run: npm ci
-      - name: Purge unused CSS 🧹
-        run: npx purgecss -c purgecss.config.js
-      - name: Inline critical CSS into every HTML page 🧬
-        # Must run AFTER purgecss so we inline the tree-shaken
-        # ~13 KiB payload, not the 600+ KiB raw SCSS output. Drops
-        # the last two render-blocking requests (~940 ms combined
-        # per Lighthouse) by replacing <link> tags with a single
-        # <style> block.
+      - name: Purge + inline critical CSS per HTML page 🧬
+        # Replaces the prior two-step (purgecss → inline) flow with
+        # one pass that purges each HTML file against only its own
+        # markup + all JS, then inlines the tailored CSS. Gives
+        # per-page coverage instead of a shared union blob — shaves
+        # another ~5-9 KiB off each HTML response (Lighthouse's
+        # "Reduce unused CSS" audit was flagging ~10 KiB of
+        # cross-page Bootstrap rules that no single page actually
+        # used).
         run: node bin/inline-critical-css.mjs
       - name: Deploy 🚀
         if: github.event_name != 'pull_request'
