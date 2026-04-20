@@ -1,1 +1,1 @@
-# RFC 9116 security contact for this site. # https://securitytxt.org/ Contact: mailto:kpsarakis94@gmail.com Preferred-Languages: en Canonical: https://kpsarakis.com/.well-known/security.txt # Expires one year from the most recent build. Expires: 2027-04-20T22:03:25Z
+# RFC 9116 security contact for this site. # https://securitytxt.org/ Contact: mailto:kpsarakis94@gmail.com Preferred-Languages: en Canonical: https://kpsarakis.com/.well-known/security.txt # Expires one year from the most recent build. Expires: 2027-04-20T22:26:47Z
