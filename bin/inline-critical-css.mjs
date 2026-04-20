@@ -44,7 +44,17 @@ async function walkHtml(dir) {
 
 async function main() {
   const cssParts = await Promise.all(CSS_FILES.map((f) => fs.readFile(f, "utf8")));
-  const combined = cssParts.join("\n");
+  let combined = cssParts.join("\n");
+  // Rewrite relative url("../X/...") references to absolute
+  // "/assets/X/..." paths. When the CSS lived at
+  // /assets/css/main.css, "../webfonts/fa-solid-900.woff2" resolved
+  // to /assets/webfonts/fa-solid-900.woff2. Once we inline the CSS
+  // into HTML at "/" or "/cv/" etc., those relatives resolve
+  // against the document URL instead and 404 — which silently
+  // strips FontAwesome + Tabler glyphs (download/theme-toggle/
+  // social/map-marker icons all disappear). baseurl is empty, so
+  // absolute /assets/... is safe.
+  combined = combined.replace(/url\(\s*(['"]?)\.\.\/([^'")]+)\1\s*\)/g, 'url("/assets/$2")');
   // <style> can contain any CSS except "</style>". PurgeCSS output
   // won't produce that literal, but be paranoid — an unexpected
   // match would break the page.
