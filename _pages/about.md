@@ -7,6 +7,14 @@ subtitle: Software Engineer @ <a href="https://www.ververica.com/">Ververica Gmb
 profile:
   align: right
   image: kyriakos.webp
+  # Natural pixel dimensions of the source file. Emitted verbatim on
+  # the <img> width/height attributes so the browser reserves the
+  # right box before bytes arrive. Fixes the Lighthouse "incorrect
+  # aspect ratio" warning (the figure.liquid default `width="100%"
+  # height="auto"` are invalid HTML attrs — Chrome was computing 0.17
+  # instead of the real 0.70) and helps CLS.
+  image_width: 423
+  image_height: 600
   image_circular: false # crops the image to make it circular
   more_info: >
     <i class="fa fa-map-marker-alt" aria-hidden="true"></i> <p>Delft, The Netherlands</p>

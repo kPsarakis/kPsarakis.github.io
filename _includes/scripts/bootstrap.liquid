@@ -1,5 +1,12 @@
-<!-- Bootstrap -->
+<!--
+  Bootstrap — deferred so the ~25 KiB bundle doesn't block render.
+  Lighthouse flagged this as ~1,350 ms of render-blocking time.
+  The only in-tree consumer (the tooltip init in misc.liquid)
+  already waits for DOMContentLoaded, which fires *after* deferred
+  scripts execute, so init order is preserved.
+-->
 <script
+  defer
   src="{{ site.third_party_libraries.bootstrap.url.js }}"
   integrity="{{ site.third_party_libraries.bootstrap.integrity.js }}"
   crossorigin="anonymous"
