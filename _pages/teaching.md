@@ -7,7 +7,7 @@ nav: true
 nav_order: 3
 ---
 
-### Courses
+## Courses
 
 - Quarter 4 2020/21/22/23/24 - **Head Teaching Assistant** - TU Delft: MSc IN4331: Web-scale Data Management.
   I created a system that evaluated the efficiency and consistency of distributed microservices developed by the student teams and, assisted the teams to reach that goal.
@@ -16,7 +16,7 @@ nav_order: 3
 - Quarter 1 2019 - **Teaching Assistant** - TU Delft: BSc CSE2520: Big Data Processing.
   I assisted students during the lab hours.
 
-### MSc Thesis Supervision
+## MSc Thesis Supervision
 
 <table class="styled-table">
     <thead>
