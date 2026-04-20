@@ -87,4 +87,14 @@ export default [
       globals: { ...globals.node },
     },
   },
+  // Node ESM scripts under bin/ (post-build tooling like the
+  // critical-CSS inliner). Needs Node globals (console, process, URL).
+  {
+    files: ["bin/**/*.mjs"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
+      globals: { ...globals.node },
+    },
+  },
 ];
