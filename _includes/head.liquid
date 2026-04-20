@@ -6,9 +6,36 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
-<!-- Preload LCP image -->
+<!--
+  Preload the two FontAwesome faces actually used above the fold
+  (social icons etc.). Lighthouse flagged the font fetches as ~464 ms
+  on the critical request chain because the browser only discovers
+  them after parsing main.css. Preloading pulls them onto the initial
+  request wave. `crossorigin` is required even for same-origin font
+  preloads — without it the request is re-issued when the CSS
+  references arrive. Keep this list tight: each preload is a
+  guaranteed download, so adding fonts the page doesn't use wastes
+  bandwidth.
+-->
+<link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/fa-solid-900.woff2' | relative_url }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/fa-brands-400.woff2' | relative_url }}" crossorigin>
+
+<!--
+  Preload LCP image. Split by viewport so phones fetch the 200×284
+  variant (~4 KiB) instead of the 423×600 master (~12 KiB); Lighthouse
+  flagged the oversized download as ~11 KiB of waste on mobile. The
+  <picture>/<img> pair in _layouts/about.liquid uses the same media
+  query so the preload matches the chosen source exactly.
+-->
 {% if page.profile.image %}
-  <link rel="preload" as="image" href="{{ page.profile.image | prepend: 'assets/img/' | relative_url | bust_file_cache }}" fetchpriority="high">
+  {% assign profile_image_full = page.profile.image | prepend: 'assets/img/' | relative_url | bust_file_cache %}
+  {% if page.profile.image_sm %}
+    {% assign profile_image_sm = page.profile.image_sm | prepend: 'assets/img/' | relative_url | bust_file_cache %}
+    <link rel="preload" as="image" href="{{ profile_image_sm }}" media="(max-width: 575px)" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ profile_image_full }}" media="(min-width: 576px)" fetchpriority="high">
+  {% else %}
+    <link rel="preload" as="image" href="{{ profile_image_full }}" fetchpriority="high">
+  {% endif %}
 {% endif %}
 
 <!--
@@ -71,8 +98,17 @@
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
 
-<!-- Dark Mode -->
-<script src="{{ '/assets/js/theme.js' | relative_url | bust_file_cache }}"></script>
+<!--
+  Dark Mode — inlined because theme.js has to run before first paint
+  (it sets `data-theme` on <html>) and can't be deferred without a
+  FOUC. Lighthouse flagged the external fetch as ~450 ms of render-
+  blocking time; the minified body is a few KB, well under the cost
+  of an extra round-trip. Source lives in _includes/scripts/theme.js
+  so editors still get .js syntax highlighting.
+-->
+<script>
+  {% include scripts/theme.js %}
+</script>
 {% if site.enable_darkmode %}
   <link
     rel="stylesheet"

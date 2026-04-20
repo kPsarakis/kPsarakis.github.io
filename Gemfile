@@ -34,3 +34,10 @@ end
 # via jekyll-twitter-plugin) that we don't use directly.
 gem 'fiddle'
 gem 'ostruct'
+
+# Windows-only: native filesystem notifications for `jekyll serve`.
+# Without wdm, Listen falls back to polling and prints the "Please add
+# the following to your Gemfile" nag on every run. Scoped to :mingw and
+# :x64_mingw so Linux/macOS CI doesn't try to build this C extension
+# (it fails there — wdm is literally a Windows FS-API wrapper).
+gem 'wdm', '>= 0.1.0', platforms: [:mingw, :x64_mingw]

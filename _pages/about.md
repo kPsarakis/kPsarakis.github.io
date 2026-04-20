@@ -7,6 +7,12 @@ subtitle: Software Engineer @ <a href="https://www.ververica.com/">Ververica Gmb
 profile:
   align: right
   image: kyriakos.webp
+  # Small variant served to narrow viewports via <picture media> in
+  # _layouts/about.liquid and a matching media-scoped <link rel=preload>
+  # in _includes/head.liquid. Natural pixel dimensions below.
+  image_sm: kyriakos-sm.webp
+  image_sm_width: 200
+  image_sm_height: 284
   # Natural pixel dimensions of the source file. Emitted verbatim on
   # the <img> width/height attributes so the browser reserves the
   # right box before bytes arrive. Fixes the Lighthouse "incorrect
