@@ -58,7 +58,7 @@ export default [
   js.configs.recommended,
   // Classic browser scripts under assets/js/.
   {
-    files: ["assets/js/**/*.js"],
+    files: ["assets/js/**/*.js", "_includes/scripts/**/*.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "script",
@@ -73,7 +73,7 @@ export default [
   // trips no-redeclare. Disable it for this one file rather than
   // scatter /* global */ comments across consumers.
   {
-    files: ["assets/js/theme.js"],
+    files: ["assets/js/theme.js", "_includes/scripts/theme.js"],
     rules: {
       "no-redeclare": "off",
     },
