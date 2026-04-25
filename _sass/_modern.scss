@@ -151,13 +151,15 @@ hr {
  * works without !important.
  */
 /*
- * Specificity note: _base.scss nests this rule under `body { ... }`
- * which compiles to `body h2.bibliography` (0,0,1,2). A bare
- * `h2.bibliography` here (0,0,1,1) loses the cascade in light mode.
- * Match the parent selector explicitly so the override wins
- * without resorting to !important.
+ * Specificity note: _base.scss nests this rule under
+ * `.publications { ... }`, compiling to `.publications h2.bibliography`
+ * (0,0,2,1). Anything weaker loses the cascade — verified by
+ * inspecting the inlined output of /publications/, where the
+ * .publications version wins despite later-source-order rules.
+ * Match the parent selector exactly so source order decides the
+ * tie in our favor (no !important needed).
  */
-body h2.bibliography {
+.publications h2.bibliography {
   color: var(--global-theme-color);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -166,7 +168,7 @@ body h2.bibliography {
   background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent) top left / 100% 1px no-repeat;
 }
 
-html[data-theme="dark"] body h2.bibliography {
+html[data-theme="dark"] .publications h2.bibliography {
   /* In dark mode the theme-color is a brighter cyan; use the
    * hover-color tier instead so the year reads with comfortable
    * contrast against the dark page tint. */
