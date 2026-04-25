@@ -174,3 +174,73 @@ html[data-theme="dark"] .publications h2.bibliography {
    * contrast against the dark page tint. */
   color: var(--global-hover-color);
 }
+
+/* -----------------------------------------------------------------------------
+ * 4. Glassmorphism navbar
+ *
+ * The original navbar in _base.scss is a flat `bg-color` with
+ * `opacity: 0.95`, which dims ALL children (including link text)
+ * not just the background — and gives no depth against the new
+ * ambient gradient. Modernized recipe:
+ *
+ *   - Semi-transparent background via color-mix(bg, transparent)
+ *     so only the surface is translucent, not the labels.
+ *   - backdrop-filter: blur + slight saturation bump so the page
+ *     content scrolling behind the navbar reads as a frosted-glass
+ *     panel (Apple / Linear / Vercel pattern). saturate(140%) keeps
+ *     blurred colors from going washed-out.
+ *   - Replace the flat 1 px border-bottom with the same fade-out
+ *     gradient the modernized hr uses for visual consistency.
+ *
+ * Specificity: _base sets `.navbar` (0,0,1,0). Same here, source
+ * order wins (modern is imported last).
+ * ---------------------------------------------------------------------------*/
+
+.navbar {
+  background-color: color-mix(in srgb, var(--global-bg-color) 78%, transparent);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  /* Override _base.scss's opacity:0.95 — the new bg color-mix
+   * already provides translucency, and opacity dims children too
+   * which we don't want for the link labels. */
+  opacity: 1;
+  /* Remove the flat 1 px border in favor of a gradient line below. */
+  border-bottom: none;
+  /* The fade-out divider as a 1 px-tall background image at the
+   * bottom edge. Uses background-image so it composes with the
+   * existing background-color above. */
+  background-image: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent);
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+}
+
+/*
+ * Browsers that don't support backdrop-filter fall back gracefully
+ * to a more opaque background so the navbar still reads cleanly
+ * over content. Safari needed the -webkit- prefix until 18; both
+ * are kept above for older builds.
+ */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .navbar {
+    background-color: color-mix(in srgb, var(--global-bg-color) 96%, transparent);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * 5. Footer gradient top
+ *
+ * The .sticky-bottom footer (the visible variant on most pages) had
+ * a flat 1 px solid divider above it — same edge-to-edge hairline
+ * the body hr's used to have. Replace with the same fade gradient
+ * for consistency.
+ *
+ * The .fixed-bottom variant uses a different bg color so it doesn't
+ * need a divider line — the color difference already separates it
+ * from page content. Left untouched.
+ * ---------------------------------------------------------------------------*/
+
+footer.sticky-bottom {
+  border-top: none;
+  background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent) top left / 100% 1px no-repeat;
+}
