@@ -31,28 +31,30 @@
 
 body {
   /*
-   * Two radial gradients near the top corners. Sized as 80% × 80%
-   * ellipses (instead of `circle`) so the glow reaches further on
-   * wide displays. The earlier 8% / 6% alphas were too subtle to
-   * perceive on bright monitors — bumped to 22% / 16% for a clearly
-   * visible (but still soft) ambient lighting effect.
+   * Two radial gradients near the top corners. Earlier alphas
+   * (8/6 → 22/16) were still too subtle on bright LCDs in light
+   * mode — bumped again to 40/30. At these values the corners
+   * read as a clearly visible blue/cyan tint that fades into the
+   * page mid-fold without competing with text contrast. Source
+   * point at -15% (above the viewport top) keeps the brightest
+   * pixel out of view so the eye perceives a soft falloff
+   * rather than a bright blob at the edge.
    *
-   * background-attachment: fixed pins the gradients to the viewport
-   * so they remain visible as the user scrolls.
+   * background-attachment: fixed pins the gradients to the
+   * viewport so they remain visible as the user scrolls.
    */
   background-image:
-    radial-gradient(ellipse 80% 80% at 15% -10%, color-mix(in srgb, var(--global-theme-color) 22%, transparent), transparent 60%),
-    radial-gradient(ellipse 80% 80% at 85% -10%, color-mix(in srgb, var(--global-hover-color) 16%, transparent), transparent 60%);
+    radial-gradient(ellipse 90% 70% at 10% -15%, color-mix(in srgb, var(--global-theme-color) 40%, transparent), transparent 65%),
+    radial-gradient(ellipse 90% 70% at 90% -15%, color-mix(in srgb, var(--global-hover-color) 30%, transparent), transparent 65%);
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
 
-/* Dark mode bg is darker so the glow needs more punch to register
- * and uses a different blend recipe. */
+/* Dark mode bg is darker so the glow needs more punch to register. */
 html[data-theme="dark"] body {
   background-image:
-    radial-gradient(ellipse 80% 80% at 15% -10%, color-mix(in srgb, var(--global-theme-color) 28%, transparent), transparent 65%),
-    radial-gradient(ellipse 80% 80% at 85% -10%, color-mix(in srgb, var(--global-hover-color) 22%, transparent), transparent 65%);
+    radial-gradient(ellipse 90% 70% at 10% -15%, color-mix(in srgb, var(--global-theme-color) 35%, transparent), transparent 65%),
+    radial-gradient(ellipse 90% 70% at 90% -15%, color-mix(in srgb, var(--global-hover-color) 28%, transparent), transparent 65%);
 }
 
 /* -----------------------------------------------------------------------------
@@ -129,13 +131,37 @@ hr {
 }
 
 /*
- * h2.bibliography uses a border-top in _base.scss for its year
- * separator. Override it with the same fade so the publications page
- * picks up the modernization too. Selector matches _base.scss's
- * `body ol.bibliography` ancestry pattern (the rule is nested under
- * `body` in the source but flattens at output).
+ * Modernized publication-year heading.
+ *
+ * The original treatment was a flat black/white year aligned to
+ * the right with a hairline divider above it — visually mute. The
+ * new look:
+ *   - Year text uses --global-theme-color (instead of the body
+ *     text color), so it reads as a colored section anchor.
+ *   - Slightly bolder weight (600 vs the inherited 300) tightens
+ *     the year glyphs so they hold their own at small sizes.
+ *   - The top divider becomes a gradient that fades to transparent
+ *     at both edges (matching the global hr recipe), so it reads
+ *     as a soft section break rather than a hard rule.
+ *   - Tabular figures + small letter-spacing give the digits a
+ *     slightly editorial / monospace cadence — a common modern
+ *     convention for date/year stamps in editorial layouts.
+ *
+ * Selector specificity matches/exceeds _base.scss so cascade order
+ * works without !important.
  */
 h2.bibliography {
+  color: var(--global-theme-color);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
   border-top: none;
   background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent) top left / 100% 1px no-repeat;
+}
+
+html[data-theme="dark"] h2.bibliography {
+  /* In dark mode the theme-color is a brighter cyan; use the
+   * hover-color tier instead so the year reads with comfortable
+   * contrast against the dark page tint. */
+  color: var(--global-hover-color);
 }
