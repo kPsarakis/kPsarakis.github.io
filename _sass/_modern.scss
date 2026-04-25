@@ -491,6 +491,14 @@ p a {
  * the same softer recipe used for cards in section 2).
  * ---------------------------------------------------------------------------*/
 
+/*
+ * The profile photo wears the .z-depth-1 utility class, which
+ * picked up the hover-lift treatment from section 2 (cards +
+ * z-depth-1 translateY -2 px on hover). User asked to remove
+ * that hover for the profile specifically — it's a static
+ * portrait, not an interactive card. Override transform +
+ * box-shadow on hover so the image stays put.
+ */
 .profile img {
   box-shadow:
     0 0 0 4px color-mix(in srgb, var(--global-theme-color) 18%, transparent),
@@ -506,7 +514,25 @@ p a {
   transition: box-shadow 0s !important;
 }
 
-html[data-theme="dark"] .profile img {
+.profile img:hover {
+  /* Disarm the .z-depth-1:hover lift + stronger shadow inherited
+   * from section 2. The profile image is a static portrait, not a
+   * clickable card. */
+  transform: none;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--global-theme-color) 18%, transparent),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/*
+ * Dark-mode override: same shadow recipe applied to both rest
+ * AND :hover so the .z-depth-1:hover stronger-shadow rule from
+ * section 2 doesn't poke through. Selector list keeps the rule
+ * to a single block.
+ */
+html[data-theme="dark"] .profile img,
+html[data-theme="dark"] .profile img:hover {
   box-shadow:
     0 0 0 4px color-mix(in srgb, var(--global-theme-color) 28%, transparent),
     0 1px 2px rgba(0, 0, 0, 0.4),
