@@ -563,31 +563,27 @@ html[data-theme="dark"] .profile img:hover {
  * Cover both with a comma-list.
  * ---------------------------------------------------------------------------*/
 
+/*
+ * Page-title presence + underline.
+ *
+ * Earlier iterations used an absolute-positioned ::after with a
+ * fixed (60 px) then percentage (28%) width. Both either
+ * undershot or overshot the actual text. Switched to
+ * text-decoration so the underline auto-matches the text width
+ * exactly — works regardless of whether the heading is a
+ * flex-1 child (about page's .post-title-row) or a standalone
+ * block (other pages). Trade-off: text-decoration takes a
+ * single color, not a gradient. Theme-color is a worthy swap.
+ */
 .post-header .post-title-row .post-title,
 .post-header h1.post-title {
-  position: relative;
   font-weight: 600;
   letter-spacing: -0.015em;
-  padding-bottom: 0.6rem;
-}
-
-.post-header .post-title-row .post-title::after,
-.post-header h1.post-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  /*
-   * Was a fixed 60 px which read as a tiny tick under wide
-   * headings like "Kyriakos Psarakis". Now scales to ~28% of
-   * the heading width with a 100 px floor so very short titles
-   * still get a visible accent. Caps at 220 px so display-sized
-   * h1s on narrow viewports don't get an oversized bar.
-   */
-  width: clamp(100px, 28%, 220px);
-  height: 4px;
-  background: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
-  border-radius: 2px;
+  text-decoration: underline;
+  text-decoration-color: var(--global-theme-color);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: none;
 }
 
 /* -----------------------------------------------------------------------------
