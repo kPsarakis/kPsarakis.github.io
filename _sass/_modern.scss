@@ -564,26 +564,42 @@ html[data-theme="dark"] .profile img:hover {
  * ---------------------------------------------------------------------------*/
 
 /*
- * Page-title presence + underline.
+ * Page-title presence + gradient underline that matches text width.
  *
- * Earlier iterations used an absolute-positioned ::after with a
- * fixed (60 px) then percentage (28%) width. Both either
- * undershot or overshot the actual text. Switched to
- * text-decoration so the underline auto-matches the text width
- * exactly — works regardless of whether the heading is a
- * flex-1 child (about page's .post-title-row) or a standalone
- * block (other pages). Trade-off: text-decoration takes a
- * single color, not a gradient. Theme-color is a worthy swap.
+ * Trick: paint the gradient via background-image on the heading
+ * itself, AND size the heading to its content (width: fit-content)
+ * so `background-size: 100%` equals text width — gives us both
+ * the gradient AND the auto-matched length.
+ *
+ * About page complication: the heading lives in a flex container
+ * (.post-title-row) with the profile picture as a sibling, and
+ * _base.scss sets `flex: 1` on .post-title so it expands to fill.
+ * Override to flex: 0 1 auto + margin-right: auto so the heading
+ * hugs its text and pushes the picture to the right, preserving
+ * the original visual layout.
+ *
+ * For the non-flex case (other pages: <h1 class="post-title">
+ * directly in <header>), flex/margin-right are no-ops — width:
+ * fit-content alone sizes to text. background-position: 0 100%
+ * + padding-bottom = 0.18em + 4px leaves the gradient bar
+ * sitting 0.18em below the text baseline (matches the previous
+ * text-underline-offset).
  */
 .post-header .post-title-row .post-title,
 .post-header h1.post-title {
+  flex: 0 1 auto;
+  width: fit-content;
+  max-width: 100%;
+  margin-right: auto;
+
   font-weight: 600;
   letter-spacing: -0.015em;
-  text-decoration: underline;
-  text-decoration-color: var(--global-theme-color);
-  text-decoration-thickness: 4px;
-  text-underline-offset: 0.18em;
-  text-decoration-skip-ink: none;
+  padding-bottom: calc(0.18em + 4px);
+
+  background-image: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
+  background-position: 0 100%;
+  background-size: 100% 4px;
+  background-repeat: no-repeat;
 }
 
 /* -----------------------------------------------------------------------------
