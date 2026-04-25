@@ -1,0 +1,131 @@
+/*******************************************************************************
+ * Modern visual layer
+ *
+ * Three small, theme-aware additions on top of the existing styles:
+ *   1. Subtle viewport-pinned radial gradient on the body background
+ *      (instead of a flat var(--global-bg-color)).
+ *   2. Softer, larger-radius shadow recipe on .card / .z-depth-1 / the
+ *      .styled-table container.
+ *   3. Gradient horizontal rules that fade out at the edges, replacing
+ *      the flat 1 px solid divider line.
+ *
+ * Each block consults --global-* tokens defined in _themes.scss (with
+ * light + html[data-theme="dark"] variants), so light and dark modes
+ * stay consistent without duplicating values here. Imported last in
+ * main.scss so it overrides _base.scss / _mdb-compat.scss where they
+ * collide.
+ ******************************************************************************/
+
+/* -----------------------------------------------------------------------------
+ * 1. Ambient background gradient
+ *
+ * Two faint radial gradients near the top corners give the page a sense
+ * of ambient lighting. background-attachment: fixed pins them to the
+ * viewport so they don't scroll with content (otherwise the effect
+ * disappears on long pages).
+ *
+ * Colors come from the existing theme tokens so the gradient breathes
+ * in the active theme color — no hardcoded hex per mode. Alphas are
+ * deliberately tiny (~6-8%) to stay restrained on an academic site.
+ * ---------------------------------------------------------------------------*/
+
+body {
+  background-image:
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--global-theme-color) 8%, transparent), transparent 45%),
+    radial-gradient(circle at 80% 0%, color-mix(in srgb, var(--global-hover-color) 6%, transparent), transparent 45%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Dark mode wants slightly stronger glow to be visible against the
+ * darker base — same gradient recipe, higher alpha. */
+html[data-theme="dark"] body {
+  background-image:
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--global-theme-color) 14%, transparent), transparent 50%),
+    radial-gradient(circle at 80% 0%, color-mix(in srgb, var(--global-hover-color) 10%, transparent), transparent 50%);
+}
+
+/* -----------------------------------------------------------------------------
+ * 2. Modernized elevation
+ *
+ * The existing _mdb-compat.scss shadow recipe (carried from MDB v4.20)
+ * is a tight, dark drop-shadow that reads as "2018." Replace with a
+ * dual-shadow stack: a tight 1 px contact shadow + a wider, softer
+ * ambient shadow. Pairs well with a slightly larger border-radius.
+ *
+ * Light mode uses near-black shadows at low alpha; dark mode uses
+ * pure-black shadows at higher alpha (otherwise they vanish against
+ * the dark surface) plus a 1 px light inset on the top edge that
+ * mimics ambient light catching the upper bevel — this is the trick
+ * Linear / Vercel use to keep cards from looking flat in dark mode.
+ * ---------------------------------------------------------------------------*/
+
+.card,
+.z-depth-1,
+.styled-table {
+  border-radius: 0.5rem;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 8px 24px rgba(0, 0, 0, 0.06);
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card:hover,
+.z-depth-1:hover {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+html[data-theme="dark"] {
+  .card,
+  .z-depth-1,
+  .styled-table {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.4),
+      0 8px 24px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .card:hover,
+  .z-depth-1:hover {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.5),
+      0 12px 32px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * 3. Gradient horizontal rules
+ *
+ * The default `hr` is `border-top: 1 px solid var(--global-divider-color)`.
+ * Replace with a 1 px-tall background gradient that fades to transparent
+ * at the left + right edges, so the rule reads as a soft division
+ * rather than a hard line all the way across. The center color is
+ * still the divider token, so it themes for free.
+ *
+ * Used by the publications-year heading border-top too (h2.bibliography)
+ * — extend that one to the same recipe for consistency.
+ * ---------------------------------------------------------------------------*/
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent);
+}
+
+/*
+ * h2.bibliography uses a border-top in _base.scss for its year
+ * separator. Override it with the same fade so the publications page
+ * picks up the modernization too. Selector matches _base.scss's
+ * `body ol.bibliography` ancestry pattern (the rule is nested under
+ * `body` in the source but flattens at output).
+ */
+h2.bibliography {
+  border-top: none;
+  background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent) top left / 100% 1px no-repeat;
+}

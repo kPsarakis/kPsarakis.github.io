@@ -21,6 +21,11 @@
 @use "cv";
 @use "tabs";
 @use "typograms";
+// Loaded last so its visual upgrades (ambient bg gradient, softer
+// shadows, gradient hr's) override the equivalent rules in _base
+// and _mdb-compat above. Theme-aware via existing --global-*
+// tokens — see _modern.scss header for details.
+@use "modern";
 
 // Third-party icon bundles (FontAwesome 6, Tabler Icons) still use the
 // legacy @import *internally* across dozens of files — that's fine,
