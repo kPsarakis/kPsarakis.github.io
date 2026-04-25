@@ -17,14 +17,6 @@
         return window.pageYOffset || document.documentElement.scrollTop || 0;
       }
 
-      // Outer height including margins, matching jQuery's outerHeight(true).
-      function outerHeightWithMargin(el) {
-        if (!el) return 0;
-        var rect = el.getBoundingClientRect();
-        var style = window.getComputedStyle(el);
-        return rect.height + parseFloat(style.marginTop || 0) + parseFloat(style.marginBottom || 0);
-      }
-
       // Full scrollable distance — document height minus viewport height.
       function getDistanceToScroll() {
         var doc = document.documentElement;
@@ -34,13 +26,17 @@
       }
 
       function initializeProgressElement() {
-        var navbarHeight = outerHeightWithMargin(document.getElementById('navbar'));
-        document.body.style.paddingTop = navbarHeight + 'px';
-        // Note: 'progress-container' is a tag selector in the original; preserve behavior.
-        document.querySelectorAll('progress-container').forEach(function (el) {
-          el.style.paddingTop = navbarHeight + 'px';
-        });
-        progressBar.style.top = navbarHeight + 'px';
+        /*
+         * The body padding-top, progress.top, and .progress-container
+         * top are all set in CSS now (with a media-query split at
+         * Bootstrap's `sm` breakpoint, matching navbar-expand-sm).
+         * The previous version measured the navbar at `load + 50 ms`
+         * and assigned inline styles, which on mobile snapped content
+         * up ~13 px after first paint (the visible "re-adjustment"
+         * during page load). All three values are now correct from
+         * first paint, so this function only has to wire up the
+         * progress bar's reactive max/value attributes.
+         */
         progressBar.setAttribute('max', getDistanceToScroll());
         progressBar.setAttribute('value', getCurrentScrollPosition());
       }
@@ -67,10 +63,16 @@
         }
       }
 
-      // Delay after full load so image resizes settle before measuring.
-      window.addEventListener('load', function () {
-        setTimeout(progressBarSetup, 50);
-      });
+      /*
+       * Was `load + 50 ms` to let images settle before measuring
+       * the navbar — that measurement is gone now (CSS handles
+       * the offset), so we can wire up scroll/resize listeners as
+       * soon as the DOM is ready. Still wait for `load` for the
+       * initial getDistanceToScroll() so document height accounts
+       * for any late-arriving content; this just removes the
+       * 50 ms artificial delay.
+       */
+      window.addEventListener('load', progressBarSetup);
     })();
   </script>
 {% endif %}

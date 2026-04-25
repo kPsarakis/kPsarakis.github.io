@@ -996,8 +996,18 @@ progress {
   /* Positioning */
   position: fixed;
   left: 0;
-  top: 56px;
+  /*
+   * Match the body.fixed-top-nav padding-top split (see
+   * _layout.scss). Keeping this in sync prevents the progress bar
+   * from sitting on top of the navbar on mobile or floating in
+   * empty space below it on desktop. Used to be a flat 56px.
+   */
+  top: 57px;
   z-index: 10;
+
+  @media (max-width: 575.98px) {
+    top: 43px;
+  }
 
   /* Dimensions */
   width: 100%;
@@ -1034,10 +1044,15 @@ progress::-moz-progress-bar {
   width: 100%;
   background-color: transparent;
   position: fixed;
-  top: 56px;
+  /* Same breakpoint split as `progress` above — see comment there. */
+  top: 57px;
   left: 0;
   height: 5px;
   display: block;
+
+  @media (max-width: 575.98px) {
+    top: 43px;
+  }
 }
 
 .progress-bar {

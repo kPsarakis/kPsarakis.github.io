@@ -20,8 +20,22 @@ body {
 }
 
 body.fixed-top-nav {
-  // Add some padding for the nav-bar.
-  padding-top: 56px;
+  /*
+   * Pad the body by exactly the rendered navbar height at each
+   * breakpoint so first paint already has the correct offset and
+   * we avoid a visible snap once the progress-bar JS measured-and-
+   * set body.style.paddingTop on `load`.
+   *
+   * Header uses Bootstrap's `navbar-expand-sm`, so below 576px the
+   * navbar collapses to a toggler-only ~43px row; from 576px up the
+   * expanded nav is ~57px tall (measured via Lighthouse against
+   * this exact site, not Bootstrap defaults).
+   */
+  padding-top: 57px;
+
+  @media (max-width: 575.98px) {
+    padding-top: 43px;
+  }
 }
 
 body.sticky-bottom-footer {
