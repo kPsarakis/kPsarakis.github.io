@@ -701,35 +701,6 @@ html {
 }
 
 /* -----------------------------------------------------------------------------
- * 15. External-link indicator
- *
- * Append a small `↗` glyph to body/table links that open in a
- * new tab so users know which links leave the site. Standard in
- * modern docs (Stripe, Vercel, Cloudflare).
- *
- * Scoped tightly to `p a[target="_blank"]` and `td a[target="_blank"]`
- * so social-icon links (which wrap an <i> instead of text) and
- * other icon-only anchors don't get an arrow. Bibliography
- * author/title links (in .author / .title divs) skipped to keep
- * publication entries clean.
- * ---------------------------------------------------------------------------*/
-
-p a[target="_blank"]::after,
-.styled-table td a[target="_blank"]::after {
-  content: "↗";
-  display: inline-block;
-  margin-left: 0.15em;
-  font-size: 0.85em;
-  color: color-mix(in srgb, var(--global-theme-color) 70%, transparent);
-  /* The arrow shouldn't pick up the link underline gradient
-   * from section 7 — but as a child of <a> it inherits the bg
-   * positioning. Override to keep the arrow visually distinct. */
-  background-image: none;
-  /* Don't underline the indicator itself, even on hover. */
-  text-decoration: none;
-}
-
-/* -----------------------------------------------------------------------------
  * 16. Heading anchor links
  *
  * common.js's addHeadingAnchors() appends an <a class="heading-anchor">#</a>
