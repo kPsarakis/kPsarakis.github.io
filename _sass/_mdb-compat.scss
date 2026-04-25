@@ -15,22 +15,64 @@
  */
 
 /*
- * Adjusted-metrics fallback for Roboto.
+ * Self-hosted Roboto (variable font) — Latin + Latin-Ext subsets.
  *
- * Google Fonts is loaded async (head.liquid uses
- * media="print" onload="this.media='all'"), so the page first
- * paints in the system fallback (Segoe UI / Helvetica Neue /
- * Arial / etc. depending on platform) and reflows once Roboto
- * actually arrives — visible as the line breaks "jumping" a
- * frame or two after first paint.
+ * Was loaded async via Google Fonts CSS earlier: even with
+ * metric-overridden fallback (still defined below), users on
+ * fast connections perceived a visible glyph-shape morph
+ * (Arial letterforms → Roboto letterforms) as the woff2
+ * arrived. Self-hosting + <link rel=preload> in head.liquid +
+ * font-display: optional means:
  *
- * Defining a synthetic "Roboto Fallback" backed by local Arial,
- * with size-adjust + ascent/descent overrides cribbed from
- * Roboto's own font metrics, makes the fallback occupy the same
- * box per glyph as Roboto. When the swap happens (display=swap
- * is set on the Google Fonts URL), glyph shapes change but
- * layout stays put. Numbers from Capsize / Google's
- * font-fallback tooling.
+ *   - The woff2 is fetched at HTML parse time, in parallel
+ *     with the rest of the document — usually finishes before
+ *     first paint, so users see Roboto immediately with no
+ *     swap.
+ *   - On slow connections where the 100 ms `optional` window
+ *     isn't met, the fallback (size-adjusted Arial) is kept
+ *     for this page load instead of swapping mid-paint. Next
+ *     visit pulls Roboto from HTTP cache, loads instantly.
+ *   - One single woff2 covers all weights 100-900 via the
+ *     wght axis — no separate files per weight.
+ *
+ * Files were downloaded once from fonts.gstatic.com and
+ * committed to assets/webfonts/. They're cache-busted per
+ * deploy by main.scss → bust_file_cache.
+ *
+ * Unicode ranges and weight axis match what Google's CSS
+ * served for Roboto v51.
+ */
+@font-face {
+  font-family: "Roboto";
+  src: url("../webfonts/Roboto-latin-VF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: optional;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../webfonts/Roboto-latin-ext-VF.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: optional;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF0-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/*
+ * Metric-matched fallback (kept as belt-and-braces).
+ *
+ * If the local Roboto woff2 doesn't meet the 100 ms `optional`
+ * deadline, this fallback (local Arial with size-adjust +
+ * ascent/descent overrides matching Roboto's metrics) is used
+ * for this page load. Same box per glyph as Roboto, so even
+ * on the rare slow-connection case, layout doesn't shift —
+ * only the letterforms differ. Numbers from Capsize.
  */
 @font-face {
   font-family: "Roboto Fallback";

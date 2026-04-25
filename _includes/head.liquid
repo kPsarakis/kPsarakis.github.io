@@ -12,9 +12,12 @@
 -->
 <meta name="googlebot-scholar" content="noindex">
 
-<!-- Preconnect to external origins -->
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--
+  Preconnect to external origins. Google's font hosts were dropped
+  when Roboto moved to self-hosted woff2 (see preload + @font-face
+  below); cdn.jsdelivr.net is still used by bootstrap-bundle JS and
+  a few other libs, so keep that one.
+-->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
 <!--
@@ -30,6 +33,22 @@
 -->
 <link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/fa-solid-900.woff2' | relative_url }}" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/fa-brands-400.woff2' | relative_url }}" crossorigin>
+<!--
+  Preload Roboto (variable font, Latin subset). Self-hosted so we
+  can fetch it at HTML parse time in parallel with the document
+  body — usually finishes before first paint, so users see Roboto
+  immediately with no FOUT/FOIT swap. The @font-face declaration
+  in _mdb-compat.scss uses font-display: optional, so on the rare
+  slow connection that misses the 100 ms deadline, the size-
+  adjusted Arial fallback is kept for that page load instead of
+  swapping mid-paint.
+
+  Latin-Ext is NOT preloaded — most pages on this site use only
+  Latin glyphs, and the browser fetches latin-ext on demand when
+  a covered codepoint is referenced. Adding it would waste ~29 KiB
+  on most page loads.
+-->
+<link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/Roboto-latin-VF.woff2' | relative_url }}" crossorigin>
 
 <!--
   Preload LCP image. Split by viewport so phones fetch the 200×284
@@ -66,16 +85,14 @@
   >
 {% endif %}
 
-<!-- Fonts & Icons (non-render-blocking) -->
+<!--
+  Fonts & Icons (non-render-blocking).
+  Roboto used to be loaded here via Google Fonts CSS; it's now
+  self-hosted (see @font-face in _mdb-compat.scss + preload above).
+  Roboto Slab was also requested but unused in any rule, dropped.
+-->
 <link rel="stylesheet" href="{{ '/assets/css/academicons.min.css' | relative_url | bust_file_cache }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ '/assets/css/scholar-icons.css' | relative_url | bust_file_cache }}" media="print" onload="this.media='all'">
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{{ site.third_party_libraries.google_fonts.url.fonts }}"
-  media="print"
-  onload="this.media='all'"
->
 
 <!-- Code Syntax Highlighting -->
 <link
