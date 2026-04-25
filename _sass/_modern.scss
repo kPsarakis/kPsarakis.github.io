@@ -600,21 +600,28 @@ html[data-theme="dark"] .profile img:hover {
 .navbar-nav .nav-item .nav-link {
   position: relative;
   background-image: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
-  background-position: 0 100%;
+  /*
+   * Center the bg horizontally so the bar grows symmetrically
+   * from the middle outwards as background-size animates from 0
+   * to 80%. With `background-position: center bottom`, the
+   * gradient's anchor stays at the horizontal midpoint regardless
+   * of width — grows left and right at the same rate.
+   */
+  background-position: center bottom;
   background-size: 0 2px;
   background-repeat: no-repeat;
   transition: background-size 220ms ease;
 
   &:hover {
-    background-size: 100% 2px;
+    background-size: 80% 2px;
   }
 }
 
-/* Active route: full-width underline drawn permanently. The
- * active state's gradient bar matches the page-title accent for
- * visual consistency. */
+/* Active route: 80%-width underline drawn permanently, also
+ * centered. The active state's gradient bar matches the
+ * page-title accent for visual consistency. */
 .navbar-nav .nav-item.active > .nav-link {
-  background-size: 100% 2px;
+  background-size: 80% 2px;
 }
 
 /* -----------------------------------------------------------------------------
