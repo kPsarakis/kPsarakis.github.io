@@ -372,3 +372,130 @@ footer.sticky-bottom {
     transform: rotate(0deg) scale(0.92);
   }
 }
+
+/* -----------------------------------------------------------------------------
+ * 7. Animated link underline (body copy only)
+ *
+ * Browser-default underlines on body links are static and read as
+ * "the 90s" against the rest of the modern visual layer. Use the
+ * background-image trick to draw a 1.5 px-tall gradient at the
+ * bottom edge of the link, sized to 0% width at rest and 100% on
+ * hover — slides in from the left over 220 ms.
+ *
+ * Scoped to `p a` so:
+ *   - Body paragraph links get the treatment (about page intro,
+ *     post bodies, etc.)
+ *   - Navbar / footer / social icons stay untouched (they live
+ *     in <ul>/<nav>/<div>, not <p>)
+ *   - Bibliography author/title links keep their existing
+ *     dashed-underline brand (not in <p>, in their own .author /
+ *     .title divs)
+ * ---------------------------------------------------------------------------*/
+
+p a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-size: 0 1.5px;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  transition: background-size 220ms ease;
+
+  &:hover {
+    background-size: 100% 1.5px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * 8. Branded text-selection + keyboard focus ring
+ *
+ * Replace the OS-default blue selection highlight (and the
+ * browser-default focus outline) with theme-colored equivalents.
+ * Tiny detail but tells users "this site has been considered" —
+ * and gives keyboard navigation a branded affordance instead of
+ * the generic browser focus ring.
+ *
+ * Selection alpha is 35% so highlighted text remains legible
+ * (color: keeps the existing text color rather than swapping to
+ * bg, which would be unreadable for a translucent overlay).
+ * ---------------------------------------------------------------------------*/
+
+::selection {
+  background: color-mix(in srgb, var(--global-theme-color) 35%, transparent);
+  color: var(--global-text-color);
+}
+
+:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+ * 9. Bibliography entry hover
+ *
+ * Each <li> in the publications list currently sits flat. Add a
+ * subtle hover state so browsing the list feels alive:
+ *   - Faint theme-tinted bg fill (~4% theme-color blended with
+ *     transparent — visible without competing for attention)
+ *   - 3 px theme-color left border that slides in from 0 px,
+ *     animated alongside a matching padding-left increase so
+ *     content doesn't visibly jump (the cell stays in place; only
+ *     the border-edge moves into view)
+ *   - 4 px border-radius so the tinted block reads as a card
+ *
+ * Scoped to .publications ol.bibliography li to match the
+ * specificity of _base.scss's existing rules.
+ * ---------------------------------------------------------------------------*/
+
+.publications ol.bibliography li {
+  position: relative;
+  border-radius: 4px;
+  /*
+   * 0 px border-left at rest, 3 px on hover. Padding-left grows
+   * by exactly the same amount so the row's content stays put;
+   * only the colored bar appears.
+   */
+  border-left: 0 solid var(--global-theme-color);
+  padding-left: 0;
+  transition:
+    background-color 200ms ease,
+    border-left-width 200ms ease,
+    padding-left 200ms ease;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--global-theme-color) 4%, transparent);
+    border-left-width: 3px;
+    padding-left: 0.5rem;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * 10. Profile image accent ring
+ *
+ * The profile photo on /about wears the .z-depth-1 utility class,
+ * which gives it a flat MDB-era drop shadow. Layer a soft
+ * theme-colored outer ring on top so the image reads as the page
+ * focal point — light mode keeps the ring restrained (~18%
+ * alpha), dark mode bumps it (~28%) since the darker base needs
+ * more saturation to register the same ring intensity.
+ *
+ * The dual box-shadow stack keeps the ring on top of a
+ * rebuilt ambient shadow (replacing _mdb-compat's flat one with
+ * the same softer recipe used for cards in section 2).
+ * ---------------------------------------------------------------------------*/
+
+.profile img {
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--global-theme-color) 18%, transparent),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 280ms ease;
+}
+
+html[data-theme="dark"] .profile img {
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--global-theme-color) 28%, transparent),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 12px 32px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
