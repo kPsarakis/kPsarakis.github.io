@@ -14,19 +14,31 @@ let toggleThemeSetting = () => {
 };
 
 // Change the theme setting and apply the theme.
-let setThemeSetting = (themeSetting) => {
+//
+// `animated` controls whether the cross-fade transition wrapper is
+// engaged. Pass `true` from user-driven toggle / system-pref
+// changes (so the swap animates), `false` from initial page load
+// (otherwise the .transition class is on <html> during initial
+// paint, applying transition:background-color/color/box-shadow to
+// every element while their styles are still resolving — that's
+// the "tables visibly readjusting on first paint" effect users
+// were seeing).
+let setThemeSetting = (themeSetting, animated = true) => {
   localStorage.setItem("theme", themeSetting);
 
   document.documentElement.setAttribute("data-theme-setting", themeSetting);
 
-  applyTheme();
+  applyTheme(animated);
 };
 
 // Apply the computed dark or light theme to the website.
-let applyTheme = () => {
+// See setThemeSetting() for why `animated` is plumbed through.
+let applyTheme = (animated = true) => {
   let theme = determineComputedTheme();
 
-  transTheme();
+  if (animated) {
+    transTheme();
+  }
   setHighlight(theme);
   setGiscusTheme(theme);
   setSearchTheme(theme);
@@ -251,7 +263,8 @@ let initTheme = () => {
 
   let themeSetting = determineThemeSetting();
 
-  setThemeSetting(themeSetting);
+  // Initial application — no animation. See setThemeSetting comment.
+  setThemeSetting(themeSetting, false);
 
   // Add event listener to the theme toggle button.
   document.addEventListener("DOMContentLoaded", function () {
