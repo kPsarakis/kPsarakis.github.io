@@ -402,6 +402,13 @@ p a {
 
   &:hover {
     background-size: 100% 1.5px;
+    /*
+     * Bootstrap 5 sets `a:hover { text-decoration: underline }` —
+     * which fires alongside our gradient-grow underline, so the
+     * link briefly shows two underlines stacked. Override on
+     * :hover so only the animated gradient is visible.
+     */
+    text-decoration: none;
   }
 }
 
