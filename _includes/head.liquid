@@ -53,6 +53,15 @@
 <link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/academicons.woff2' | relative_url }}" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/scholar-icons.woff2' | relative_url }}" crossorigin>
 <!--
+  Preload Tabler Icons subset (ti-search + ti-sun-moon +
+  ti-moon-filled + ti-sun-filled = 4 codepoints). The full
+  upstream font is 848 KiB; we subset to the four glyphs we
+  actually use → 1.3 KiB. Cheap to preload, eliminates the
+  visible "icon shows up late" flicker on the toggle button +
+  the search shortcut hint at first render.
+-->
+<link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/tabler-icons-subset.woff2' | relative_url }}" crossorigin>
+<!--
   Preload Roboto (variable font, Latin subset). Self-hosted so we
   can fetch it at HTML parse time in parallel with the document
   body — usually finishes before first paint, so users see Roboto

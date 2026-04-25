@@ -60,7 +60,63 @@
   $fa-font-path: "../webfonts",
   $fa-font-display: swap
 );
-@use "tabler-icons/tabler-icons" with (
-  $ti-font-path: "../fonts",
-  $ti-font-display: swap
-);
+/*
+ * Tabler Icons — subset edition.
+ *
+ * The full tabler-icons.woff2 ships ~3000 glyphs at 848 KiB.
+ * This site uses exactly four (ti-search, ti-sun-moon,
+ * ti-moon-filled, ti-sun-filled), so importing the full @font-face
+ * + the ~3000 :before content rules from tabler-icons.scss meant
+ * shipping the full font for 0.13% utilization. With swap +
+ * no preload (would be 848 KiB to preload!), the icons flickered
+ * in late on first render.
+ *
+ * Replaced with a 1.3 KiB subset built via fonttools on commit
+ * (assets/webfonts/tabler-icons-subset.woff2) plus four hand-
+ * written :before rules below. font-display: block — the file
+ * is small enough to preload without waste, and block keeps the
+ * slot reserved cleanly during the brief load. See preload <link>
+ * in _includes/head.liquid.
+ *
+ * If a fifth Tabler icon is ever needed: add its codepoint to
+ * the subsetter command in the README/build notes, regenerate
+ * the woff2, add the :before rule below.
+ */
+:root {
+  /* Define the family once via CSS so both the @font-face block
+   * and the .ti utility class read the same name. */
+}
+
+@font-face {
+  font-family: "tabler-icons";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../webfonts/tabler-icons-subset.woff2") format("woff2");
+}
+
+.ti {
+  font-family: "tabler-icons";
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ti-search::before {
+  content: "\eb1c";
+}
+.ti-sun-moon::before {
+  content: "\f4a3";
+}
+.ti-moon-filled::before {
+  content: "\f684";
+}
+.ti-sun-filled::before {
+  content: "\f6a9";
+}
