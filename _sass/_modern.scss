@@ -150,7 +150,14 @@ hr {
  * Selector specificity matches/exceeds _base.scss so cascade order
  * works without !important.
  */
-h2.bibliography {
+/*
+ * Specificity note: _base.scss nests this rule under `body { ... }`
+ * which compiles to `body h2.bibliography` (0,0,1,2). A bare
+ * `h2.bibliography` here (0,0,1,1) loses the cascade in light mode.
+ * Match the parent selector explicitly so the override wins
+ * without resorting to !important.
+ */
+body h2.bibliography {
   color: var(--global-theme-color);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -159,7 +166,7 @@ h2.bibliography {
   background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent) top left / 100% 1px no-repeat;
 }
 
-html[data-theme="dark"] h2.bibliography {
+html[data-theme="dark"] body h2.bibliography {
   /* In dark mode the theme-color is a brighter cyan; use the
    * hover-color tier instead so the year reads with comfortable
    * contrast against the dark page tint. */
