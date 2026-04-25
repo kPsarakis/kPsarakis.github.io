@@ -577,7 +577,14 @@ html[data-theme="dark"] .profile img:hover {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 60px;
+  /*
+   * Was a fixed 60 px which read as a tiny tick under wide
+   * headings like "Kyriakos Psarakis". Now scales to ~28% of
+   * the heading width with a 100 px floor so very short titles
+   * still get a visible accent. Caps at 220 px so display-sized
+   * h1s on narrow viewports don't get an oversized bar.
+   */
+  width: clamp(100px, 28%, 220px);
   height: 4px;
   background: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
   border-radius: 2px;
