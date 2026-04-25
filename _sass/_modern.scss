@@ -496,7 +496,14 @@ p a {
     0 0 0 4px color-mix(in srgb, var(--global-theme-color) 18%, transparent),
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 280ms ease;
+  /*
+   * Override the global theme-toggle transition (defined in
+   * _base.scss html.transition * { transition: box-shadow 180ms })
+   * for this element specifically — the ring shouldn't animate
+   * on theme swap. !important needed because the global rule is
+   * also !important.
+   */
+  transition: box-shadow 0s !important;
 }
 
 html[data-theme="dark"] .profile img {
