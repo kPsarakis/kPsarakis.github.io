@@ -850,6 +850,31 @@ article .clearfix > p:first-of-type {
  * ---------------------------------------------------------------------------*/
 
 /* -----------------------------------------------------------------------------
+ * 21a. Styled-table row hover gradient
+ *
+ * The original hover rule in _base.scss used a flat
+ * `color-mix(hover-color 35%, white)` background — works in
+ * light mode but in dark mode it produces a light-on-dark band
+ * because the mix base is hardcoded to white. Replace with a
+ * theme→hover gradient at low alpha (18%) blended over
+ * transparent, so the hover state composes with whatever the
+ * underlying row bg is in either mode.
+ *
+ * Same specificity as _base's rule (0,0,2,2). Source order wins
+ * since _modern.scss is loaded last.
+ * ---------------------------------------------------------------------------*/
+
+.styled-table tbody tr:hover,
+.styled-table tbody tr.active-row:hover {
+  background-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--global-theme-color) 18%, transparent),
+    color-mix(in srgb, var(--global-hover-color) 18%, transparent)
+  );
+}
+
+/* -----------------------------------------------------------------------------
  * 21. Gradient-colored social icons (about page bottom row)
  *
  * The .contact-icons row at the bottom of /about used a flat
