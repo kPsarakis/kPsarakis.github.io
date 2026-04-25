@@ -658,3 +658,218 @@ html[data-theme="dark"] .badge {
     0 4px 12px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
+
+/* -----------------------------------------------------------------------------
+ * 14. Custom scrollbar
+ *
+ * Browser-default scrollbars (especially the Windows Chrome
+ * fallback) read as utilitarian against the rest of the polish.
+ * A thin theme-tinted scrollbar instantly modernizes the feel
+ * without being intrusive.
+ *
+ * WebKit (Chrome / Safari / Edge): pseudo-element selectors.
+ * Firefox: scrollbar-width + scrollbar-color shorthand on root.
+ * Both fall back gracefully on unsupported browsers (just shows
+ * the OS default).
+ * ---------------------------------------------------------------------------*/
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--global-theme-color) 50%, transparent) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--global-theme-color) 35%, transparent);
+  border-radius: 5px;
+  /* 2 px transparent border simulates inset padding so the thumb
+   * doesn't touch the gutter edges — reads more refined. */
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in srgb, var(--global-theme-color) 60%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
+ * 15. External-link indicator
+ *
+ * Append a small `↗` glyph to body/table links that open in a
+ * new tab so users know which links leave the site. Standard in
+ * modern docs (Stripe, Vercel, Cloudflare).
+ *
+ * Scoped tightly to `p a[target="_blank"]` and `td a[target="_blank"]`
+ * so social-icon links (which wrap an <i> instead of text) and
+ * other icon-only anchors don't get an arrow. Bibliography
+ * author/title links (in .author / .title divs) skipped to keep
+ * publication entries clean.
+ * ---------------------------------------------------------------------------*/
+
+p a[target="_blank"]::after,
+.styled-table td a[target="_blank"]::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 0.15em;
+  font-size: 0.85em;
+  color: color-mix(in srgb, var(--global-theme-color) 70%, transparent);
+  /* The arrow shouldn't pick up the link underline gradient
+   * from section 7 — but as a child of <a> it inherits the bg
+   * positioning. Override to keep the arrow visually distinct. */
+  background-image: none;
+  /* Don't underline the indicator itself, even on hover. */
+  text-decoration: none;
+}
+
+/* -----------------------------------------------------------------------------
+ * 16. Heading anchor links
+ *
+ * common.js's addHeadingAnchors() appends an <a class="heading-anchor">#</a>
+ * to every <article h2[id]> and <article h3[id]>. Hidden by default,
+ * appears on heading hover. Click copies the section URL via the
+ * anchor's href.
+ * ---------------------------------------------------------------------------*/
+
+article :is(h2, h3) {
+  position: relative;
+
+  .heading-anchor {
+    margin-left: 0.4em;
+    font-weight: 400;
+    color: var(--global-divider-color);
+    opacity: 0;
+    transition: opacity 180ms ease;
+    text-decoration: none;
+    /* Override section 7's gradient-underline if the anchor sits
+     * inside a <p> ancestor for any reason. */
+    background-image: none;
+
+    &:hover {
+      color: var(--global-theme-color);
+    }
+  }
+
+  &:hover .heading-anchor,
+  .heading-anchor:focus-visible {
+    opacity: 1;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * 17. CV download button
+ *
+ * The .cv-embed-download anchor on /cv currently uses the bare
+ * Bootstrap .btn class (color shifts in light/dark already wired
+ * via _pages/cv.md). Modernize: theme-color border at rest,
+ * theme-color fill on hover with bg-color text, soft shadow,
+ * gentle press scale.
+ *
+ * Specificity matches _pages/cv.md's existing .cv-embed-download
+ * (0,0,1,0) — modern.scss is loaded last so source order wins.
+ * ---------------------------------------------------------------------------*/
+
+.cv-embed-download {
+  border: 1px solid color-mix(in srgb, var(--global-theme-color) 60%, transparent);
+  background: transparent;
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 120ms ease,
+    box-shadow 180ms ease;
+}
+
+.cv-embed-download:hover {
+  background-color: var(--global-theme-color);
+  border-color: var(--global-theme-color);
+  color: var(--global-bg-color);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cv-embed-download:active {
+  transform: scale(0.97);
+}
+
+/* -----------------------------------------------------------------------------
+ * 18. About-page lede
+ *
+ * The first paragraph of the about article serves as the page's
+ * intro / deck. Bump font-size + tighten line-height so it reads
+ * as a lead before the body copy continues — editorial convention.
+ * Scoped to .clearfix > p:first-of-type since the about layout
+ * wraps body content in a <div class="clearfix">.
+ * ---------------------------------------------------------------------------*/
+
+article .clearfix > p:first-of-type {
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--global-text-color) 92%, var(--global-theme-color));
+}
+
+/* -----------------------------------------------------------------------------
+ * 19. Skip-link styling
+ *
+ * <a class="visually-hidden-focusable skip-link">Skip to main content</a>
+ * already exists in _layouts/default.liquid for keyboard users.
+ * Bootstrap's .visually-hidden-focusable hides it until focused;
+ * style what shows up when it appears.
+ * ---------------------------------------------------------------------------*/
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  background: var(--global-theme-color);
+  color: var(--global-bg-color);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* -----------------------------------------------------------------------------
+ * 20. Reduced-motion respect
+ *
+ * Users with prefers-reduced-motion (vestibular sensitivity, OS
+ * "reduce motion" toggle) should get instant transitions instead
+ * of our cross-fades / lifts / underline grows. Override just the
+ * animations we added — the scoped color-only theme transition
+ * stays at 180 ms because color crossfades don't trigger motion
+ * issues; we collapse durations on transform/scale/translate-
+ * driven animations and on background-size growth.
+ * ---------------------------------------------------------------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+  /* Site-wide: collapse all transitions/animations to 0.01 ms
+   * (effectively instant; not 0 because some browsers treat 0 as
+   * "no transition" and fail to fire transitionend events that
+   * other code may depend on). */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -78,10 +78,29 @@
     });
   }
 
+  // Append a clickable `#` anchor link to every heading with an id.
+  // Kramdown auto-generates ids for h2/h3 headings on most pages (e.g.
+  // /teaching's "Courses" / "MSc Thesis Supervision"), but the ids
+  // were reachable only via the address bar without a UI affordance.
+  // Standard docs convention: show a faint `#` glyph on heading hover
+  // that links to the anchor. CSS in _modern.scss controls visibility.
+  function addHeadingAnchors() {
+    document.querySelectorAll("article h2[id], article h3[id]").forEach(function (h) {
+      if (h.querySelector(".heading-anchor")) return; // idempotent
+      var link = document.createElement("a");
+      link.className = "heading-anchor";
+      link.href = "#" + h.id;
+      link.setAttribute("aria-label", "Permalink to " + (h.textContent || "this section"));
+      link.textContent = "#";
+      h.appendChild(link);
+    });
+  }
+
   function init() {
     wireBibToggles();
     styleJupyterIframes();
     initPopovers();
+    addHeadingAnchors();
   }
 
   if (document.readyState === "loading") {
