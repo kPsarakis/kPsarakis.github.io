@@ -197,19 +197,29 @@ html[data-theme="dark"] .publications h2.bibliography {
  * ---------------------------------------------------------------------------*/
 
 .navbar {
-  background-color: color-mix(in srgb, var(--global-bg-color) 78%, transparent);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  /* Override _base.scss's opacity:0.95 — the new bg color-mix
+  /*
+   * Translucent enough that the body's ambient gradient and any
+   * scrolled content show through clearly (otherwise the glass
+   * effect is invisible at first paint, when nothing is scrolled
+   * behind the navbar yet). 65% reads as a clearly translucent
+   * panel without sacrificing label contrast.
+   */
+  background-color: color-mix(in srgb, var(--global-bg-color) 65%, transparent);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  /* Override _base.scss's opacity:0.95 — the bg color-mix above
    * already provides translucency, and opacity dims children too
    * which we don't want for the link labels. */
   opacity: 1;
-  /* Remove the flat 1 px border in favor of a gradient line below. */
   border-bottom: none;
-  /* The fade-out divider as a 1 px-tall background image at the
-   * bottom edge. Uses background-image so it composes with the
-   * existing background-color above. */
-  background-image: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent);
+  /*
+   * Bottom edge is a fade-out gradient using the theme color
+   * (instead of the muted divider) so the navbar reads as a
+   * branded panel rather than a flat strip. Slightly stronger
+   * than the body hr's so the navbar boundary is clearly
+   * articulated against the ambient gradient behind it.
+   */
+  background-image: linear-gradient(to right, transparent, color-mix(in srgb, var(--global-theme-color) 40%, transparent) 50%, transparent);
   background-position: 0 100%;
   background-size: 100% 1px;
   background-repeat: no-repeat;
@@ -240,6 +250,35 @@ html[data-theme="dark"] .publications h2.bibliography {
  * from page content. Left untouched.
  * ---------------------------------------------------------------------------*/
 
+/*
+ * The site uses footer_fixed: true → renders <footer class="fixed-bottom">,
+ * not .sticky-bottom. Style the actually-rendered variant.
+ *
+ * .fixed-bottom uses --global-footer-bg-color which is dark grey
+ * in light mode and light grey in dark mode (intentionally
+ * inverted from the page bg for contrast). On top of that we add:
+ *   - A 1 px theme-color fade-out gradient as the top edge,
+ *     matching the navbar's bottom edge for symmetry.
+ *   - A faint vertical gradient on the bg itself so the surface
+ *     has a subtle gradient depth instead of a flat color band.
+ *   - Letter-spacing on the copyright copy for editorial polish.
+ */
+footer.fixed-bottom {
+  background-image:
+    linear-gradient(to right, transparent, color-mix(in srgb, var(--global-theme-color) 50%, transparent) 50%, transparent),
+    linear-gradient(to bottom, color-mix(in srgb, var(--global-bg-color) 6%, transparent), transparent);
+  background-position:
+    0 0,
+    0 0;
+  background-size:
+    100% 1px,
+    100% 100%;
+  background-repeat: no-repeat;
+  letter-spacing: 0.01em;
+}
+
+/* The .sticky-bottom variant gets the same gradient top divider
+ * so themes that flip footer_fixed off still get the upgrade. */
 footer.sticky-bottom {
   border-top: none;
   background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent) top left / 100% 1px no-repeat;
