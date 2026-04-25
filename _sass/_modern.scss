@@ -539,3 +539,114 @@ html[data-theme="dark"] .profile img:hover {
     0 12px 32px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
+
+/* -----------------------------------------------------------------------------
+ * 11. Page-title presence
+ *
+ * `<h1 class="post-title">` headings on /publications, /teaching,
+ * /cv, etc. were rendered with body weight 300 and default
+ * letter-spacing — read as flat against the new visual layer.
+ * Editorial-grade treatment:
+ *   - Tighten letter-spacing (-0.015em) so the glyphs huddle
+ *     for that "display type" feel
+ *   - Bump weight from inherited 300 → 600 so the heading reads
+ *     as a section anchor, not body copy
+ *   - 4 px theme-color accent bar via ::after, anchored bottom-
+ *     left — short (60 px) so it reads as a tick, not a rule.
+ *
+ * Specificity: _base.scss has both a bare `.post-title { ... }`
+ * (0,0,1,0) and a `.post-header .post-title-row .post-title`
+ * (0,0,3,0) variant. Match the latter so the override wins.
+ * The about page's title sits inside `.post-title-row`, but
+ * other pages render it inside `.post-header > h1.post-title`.
+ * Cover both with a comma-list.
+ * ---------------------------------------------------------------------------*/
+
+.post-header .post-title-row .post-title,
+.post-header h1.post-title {
+  position: relative;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  padding-bottom: 0.6rem;
+}
+
+.post-header .post-title-row .post-title::after,
+.post-header h1.post-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
+  border-radius: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+ * 12. Nav link hover + active underline
+ *
+ * The navbar items had a flat color hover (text turns
+ * --global-hover-color, no underline cue). Add the same
+ * gradient-grow underline used for body links so the nav has a
+ * consistent interaction idiom — and give the active route's
+ * link a permanent full-width underline so users can see where
+ * they are at a glance.
+ *
+ * Scoped to .navbar-nav .nav-item .nav-link (matches _base's
+ * existing 0,0,3,0 selector for hover color, source order wins).
+ * ---------------------------------------------------------------------------*/
+
+.navbar-nav .nav-item .nav-link {
+  position: relative;
+  background-image: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
+  background-position: 0 100%;
+  background-size: 0 2px;
+  background-repeat: no-repeat;
+  transition: background-size 220ms ease;
+
+  &:hover {
+    background-size: 100% 2px;
+  }
+}
+
+/* Active route: full-width underline drawn permanently. The
+ * active state's gradient bar matches the page-title accent for
+ * visual consistency. */
+.navbar-nav .nav-item.active > .nav-link {
+  background-size: 100% 2px;
+}
+
+/* -----------------------------------------------------------------------------
+ * 13. Venue badge polish
+ *
+ * The venue pills on /publications (VLDB, ACM SIGMOD, etc.) use
+ * the bare `.badge` class with inline bg-color from
+ * _data/venues.yml. _mdb-compat carries the MDB v4.20 shadow
+ * recipe (0 2 5 + 0 2 10 at 16/12% — flat 2018 drop shadow).
+ * Modernize:
+ *   - Softer dual shadow matching the card recipe in section 2
+ *   - Letter-spacing 0.04em + smallcaps so multi-letter venue
+ *     codes (CIDR, ICDE, EDBT, VLDB) read as editorial venue
+ *     stamps rather than form labels
+ *   - Slightly tighter font-size (0.7rem) so the pills don't
+ *     compete with the publication title.
+ *
+ * Specificity matches _mdb-compat's `.badge` exactly (0,0,1,0);
+ * source order (modern is loaded last in main.scss) wins.
+ * ---------------------------------------------------------------------------*/
+
+.badge {
+  letter-spacing: 0.04em;
+  font-variant-caps: all-small-caps;
+  font-size: 0.7rem;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="dark"] .badge {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
