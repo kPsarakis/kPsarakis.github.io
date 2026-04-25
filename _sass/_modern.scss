@@ -72,6 +72,15 @@ html[data-theme="dark"] body {
  * Linear / Vercel use to keep cards from looking flat in dark mode.
  * ---------------------------------------------------------------------------*/
 
+/*
+ * Hover lift only applies to .card / .z-depth-1, not .styled-table
+ * (tables shouldn't levitate on hover). Keeping the transition
+ * declaration on .styled-table caused the new shadow / radius to
+ * animate in during the JS-driven class mutations on first paint
+ * — the visible "table settling" effect. Split the rules so the
+ * transition only lives on the elements that actually have a hover
+ * state.
+ */
 .card,
 .z-depth-1,
 .styled-table {
@@ -79,6 +88,10 @@ html[data-theme="dark"] body {
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.card,
+.z-depth-1 {
   transition:
     box-shadow 0.2s ease,
     transform 0.2s ease;

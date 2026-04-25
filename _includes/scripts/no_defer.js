@@ -6,6 +6,18 @@
     var isDark = typeof determineComputedTheme === "function" && determineComputedTheme() === "dark";
 
     document.querySelectorAll("table").forEach(function (table) {
+      // .styled-table tables (publications citations + teaching MSc
+      // supervision list) already carry their own theme-aware hover
+      // + dark-mode styling via `html[data-theme="dark"] .styled-table`
+      // rules in _base.scss. Tagging them here added .table-hover /
+      // .table-dark after first paint, which then triggered the 300 ms
+      // row background-color transition on _base.scss's
+      // `.styled-table tbody tr` rule — the visible "table settling"
+      // the user reported. Skip them entirely.
+      if (table.classList.contains("styled-table")) {
+        return;
+      }
+
       table.classList.toggle("table-dark", isDark);
 
       // Skip tables nested inside news / card / archive / code blocks —
