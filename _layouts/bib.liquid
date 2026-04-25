@@ -112,48 +112,30 @@
     <div class="periodical">{{ entry.note | strip }}</div>
 
     <!-- Links -->
+    {% comment %}
+      Replaced shields.io <img> badges with native HTML pill
+      buttons (.pub-btn). Wins:
+        - Theme-aware via CSS variables in _modern.scss (dark
+          mode now properly tints; the old shields.io PNGs were
+          locked to their fixed colors).
+        - No external image requests / no CLS risk from late-
+          arriving SVGs / no aspect-ratio mismatches.
+        - Real text labels for screen readers + crawlers.
+        - Modern hover and focus states.
+      Each entry.{pdf,blog,video} or scholar count maps to a
+      type-specific button with its own icon + accent color.
+    {% endcomment %}
     <div class="links">
-      {% comment %}
-        The shields.io badges below are purely decorative — the
-        parent <a> carries the accessible name via aria-label. We set
-        alt="" so Lighthouse's "image elements do not have [alt]
-        attributes" audit passes without screen readers announcing
-        the badge twice (once for the link, once for the image).
-
-        Explicit width/height on every <img>: shields.io always
-        renders at 20px tall and the widths below are the exact
-        intrinsic SVG widths served by img.shields.io for these
-        specific label + logo combinations (measured via
-        `curl URL | grep width=`, not eyeballed — an earlier version
-        of this file used estimated widths and Lighthouse's
-        "incorrect aspect ratio" audit caught the mismatch).
-        Without these attrs the browser doesn't reserve the box
-        before the image arrives, which Lighthouse flagged as a
-        CLS risk. loading="lazy" defers the fetch — these are
-        below-the-fold on the publications list.
-      {% endcomment %}
       {% if entry.pdf %}
-        <a href="{{ entry.pdf | relative_url }}" role="button" aria-label="Open PDF">
-          <img
-            src="https://img.shields.io/badge/PDF-read-991B1B?logo=adobeacrobatreader&logoColor=white"
-            alt=""
-            width="66"
-            height="20"
-            loading="lazy"
-            decoding="async"
-          >
+        <a href="{{ entry.pdf | relative_url }}" class="pub-btn pub-btn-pdf" aria-label="Open PDF">
+          <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+          <span>PDF</span>
         </a>
       {% endif %}
       {% if entry.blog %}
-        <a href="{{ entry.blog }}" role="button" aria-label="Read blog post">
-          <img
-            src="https://img.shields.io/badge/Blog-blue?logo=rss"
-            alt=""
-            width="53"
-            height="20"
-            loading="lazy"
-            decoding="async"
-          >
+        <a href="{{ entry.blog }}" class="pub-btn pub-btn-blog" aria-label="Read blog post">
+          <i class="fa-solid fa-rss" aria-hidden="true"></i>
+          <span>Blog</span>
         </a>
       {% endif %}
       {% if entry.video %}
@@ -162,61 +144,35 @@
           {% assign video_url = video_url | relative_url %}
         {% endunless %}
 
-        <a href="{{ video_url }}" role="button" aria-label="Watch video">
-          <img
-            src="https://img.shields.io/badge/Video-watch-FF0000?logo=youtube&logoColor=white"
-            alt=""
-            width="101"
-            height="20"
-            loading="lazy"
-            decoding="async"
-          >
+        <a href="{{ video_url }}" class="pub-btn pub-btn-video" aria-label="Watch video">
+          <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+          <span>Video</span>
         </a>
       {% endif %}
       {% if site.enable_publication_badges.google_scholar and entry.google_scholar_id %}
+        {% assign citation_count = 0 %}
+        {% assign scholar_id_key = site.scholar_userid | append: ':' | append: entry.google_scholar_id %}
+        {% assign publication_key = entry.google_scholar_id %}
+        {% if site.data.citations.papers[scholar_id_key] %}
+          {% assign citation_count = site.data.citations.papers[scholar_id_key].citations %}
+        {% elsif site.data.citations.papers[publication_key] %}
+          {% assign citation_count = site.data.citations.papers[publication_key].citations %}
+        {% else %}
+          {% for paper in site.data.citations.papers %}
+            {% assign paper_key = paper[0] %}
+            {% if paper_key contains entry.google_scholar_id %}
+              {% assign citation_count = paper[1].citations %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
         <a
           href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.data.socials.scholar_userid }}&citation_for_view={{ site.data.socials.scholar_userid }}:{{ entry.google_scholar_id }}"
-          aria-label="Google Scholar link"
-          role="button"
+          class="pub-btn pub-btn-scholar"
+          aria-label="{{ citation_count }} Google Scholar citations"
         >
-          {% assign citation_count = 0 %}
-          {% assign scholar_id_key = site.scholar_userid | append: ':' | append: entry.google_scholar_id %}
-          {% assign publication_key = entry.google_scholar_id %}
-          {% if site.data.citations.papers[scholar_id_key] %}
-            {% assign citation_count = site.data.citations.papers[scholar_id_key].citations %}
-          {% elsif site.data.citations.papers[publication_key] %}
-            {% assign citation_count = site.data.citations.papers[publication_key].citations %}
-          {% else %}
-            {% for paper in site.data.citations.papers %}
-              {% assign paper_key = paper[0] %}
-              {% if paper_key contains entry.google_scholar_id %}
-                {% assign citation_count = paper[1].citations %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-          {% comment %}
-            Scholar badge width depends on how many digits the
-            citation count renders to. Three tiers cover everything
-            the site realistically emits: single-digit, double,
-            triple+. Height is always 20 (shields.io intrinsic).
-          {% endcomment %}
-          {% assign citation_digits = citation_count | append: '' | size %}
-          {% if citation_digits <= 1 %}
-            {% assign scholar_badge_width = 83 %}
-          {% elsif citation_digits == 2 %}
-            {% assign scholar_badge_width = 89 %}
-          {% else %}
-            {% assign scholar_badge_width = 97 %}
-          {% endif %}
-          <img
-            src="https://img.shields.io/badge/scholar-{{ citation_count }}-4285F4?logo=googlescholar&labelColor=beige"
-            alt="{{ citation_count }} Google Scholar citations"
-            width="{{ scholar_badge_width }}"
-            height="20"
-            loading="lazy"
-            decoding="async"
-          >
+          <i class="ai ai-google-scholar" aria-hidden="true"></i>
+          <span>{{ citation_count }}</span>
         </a>
       {% endif %}
     </div>

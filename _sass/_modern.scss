@@ -924,6 +924,113 @@ article .clearfix > p:first-of-type {
   }
 }
 
+/* -----------------------------------------------------------------------------
+ * 22. Publication action buttons (.pub-btn)
+ *
+ * Replaces the shields.io image badges (PDF / Blog / Video /
+ * Scholar) under each entry on /publications with native pill
+ * buttons. Liquid in _layouts/bib.liquid emits each button with
+ * a type modifier (.pub-btn-pdf / -blog / -video / -scholar).
+ *
+ * Design:
+ *   - Outline pill at rest (1 px border, 6% bg tint)
+ *   - Solid fill on hover (full type accent color, white text)
+ *   - 1 px lift on hover, 0.97 scale on press
+ *   - Icon + label flex row, gap 0.4 rem
+ *   - 999 px radius for full pill shape
+ *   - Tabular-nums on the scholar count so single/double/triple
+ *     digit widths render consistently
+ *
+ * Type accents picked to match the original shields.io colors
+ * users may recognize (dark red for PDF, blue for blog, YouTube
+ * red for video, Google Scholar blue for scholar) but ramped
+ * for the new visual layer (slightly more saturated, theme-
+ * coordinated where reasonable).
+ * ---------------------------------------------------------------------------*/
+
+.pub-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 120ms ease,
+    box-shadow 180ms ease;
+  /* Suppress the global p-a underline gradient if a .pub-btn
+   * ever ends up inside a <p>. */
+  background-image: none;
+
+  i {
+    font-size: 0.95em;
+  }
+
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.06),
+      0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Per-type accents. CSS custom properties scoped to each
+ * variant so the same hover formula (fill + white text) reads
+ * each accent. */
+.pub-btn-pdf {
+  --pub-btn-accent: #c2185b;
+}
+.pub-btn-blog {
+  --pub-btn-accent: #1e88e5;
+}
+.pub-btn-video {
+  --pub-btn-accent: #e53935;
+}
+.pub-btn-scholar {
+  --pub-btn-accent: #4285f4;
+}
+
+.pub-btn[class*="pub-btn-"] {
+  color: var(--pub-btn-accent);
+  border-color: color-mix(in srgb, var(--pub-btn-accent) 50%, transparent);
+  background-color: color-mix(in srgb, var(--pub-btn-accent) 6%, transparent);
+
+  &:hover {
+    background-color: var(--pub-btn-accent);
+    border-color: var(--pub-btn-accent);
+    color: white;
+  }
+}
+
+/* Scholar's count gets tabular figures so 1/12/123-digit
+ * variants align cleanly when stacked vertically. */
+.pub-btn-scholar span {
+  font-variant-numeric: tabular-nums;
+}
+
+/* In dark mode the button bg tint gets a touch more saturation
+ * to compensate for the darker page surface. The text + border
+ * keep their accent colors — they're already chosen to read on
+ * dark grounds. */
+html[data-theme="dark"] .pub-btn[class*="pub-btn-"] {
+  background-color: color-mix(in srgb, var(--pub-btn-accent) 14%, transparent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Site-wide: collapse all transitions/animations to 0.01 ms
    * (effectively instant; not 0 because some browsers treat 0 as
