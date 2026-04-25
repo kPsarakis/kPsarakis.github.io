@@ -1473,7 +1473,21 @@ ninja-keys::part(ninja-input-wrapper) {
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 1rem;
-  font-family: "Inter", sans-serif;
+  /*
+   * `font-family: "Inter", sans-serif` was here originally, but Inter
+   * is never loaded anywhere on this site (no @font-face) — the
+   * declaration silently fell through to plain sans-serif, the OS
+   * default. Meanwhile the surrounding body uses the
+   * "Roboto, Roboto Fallback, ..." stack with metric overrides for
+   * stable swap. The two rendering systems had different intrinsic
+   * line metrics, so when body content reflowed during Roboto's
+   * font-display: optional swap, the table's relative position
+   * shifted — the "table readjusting on first paint" effect.
+   *
+   * Removed font-family entirely so the table inherits body's
+   * stack. Now table cells use Roboto (or the metric-matched
+   * fallback) just like everything else, layout stays consistent.
+   */
   min-width: 500px;
   border-radius: 8px;
   overflow: hidden;
