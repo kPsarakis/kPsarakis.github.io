@@ -5,15 +5,20 @@
 
 @font-face {
   font-family: "Scholar Icons";
-  src: url("../fonts/scholar-icons.eot");
   src:
-    url("../fonts/scholar-icons.eot") format("embedded-opentype"),
-    url("../fonts/scholar-icons.ttf") format("truetype"),
-    url("../fonts/scholar-icons.woff") format("woff"),
-    url("../fonts/scholar-icons.svg") format("svg");
+    url("../webfonts/scholar-icons.woff2") format("woff2"),
+    url("../fonts/scholar-icons.woff") format("woff");
   font-style: normal;
   font-weight: normal;
-  font-display: swap;
+  /*
+   * font-display: block — icon fonts have no useful fallback
+   * character (private-use codepoints render as tofu boxes), so
+   * we'd rather have a brief invisible period during font load
+   * than show garbage glyphs and swap. Combined with the woff2
+   * preload + format priority above, this period is usually
+   * imperceptible.
+   */
+  font-display: block;
 }
 
 .si {

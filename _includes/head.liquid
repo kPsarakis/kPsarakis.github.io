@@ -34,6 +34,25 @@
 <link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/fa-solid-900.woff2' | relative_url }}" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/fa-brands-400.woff2' | relative_url }}" crossorigin>
 <!--
+  Preload Academicons + Scholar-icons woff2. The /about page's
+  social row uses both font families heavily (DBLP, ORCID,
+  ResearchGate, Google Scholar, Scopus from Academicons; the few
+  Scholar-icons codepoints elsewhere). Without preload the chain
+  was: HTML → CSS link parsed → font URL discovered → font fetch
+  → render. With preload the font is fetched at HTML parse time
+  in parallel with everything else, so the icons paint with the
+  rest of the page instead of flickering in late.
+
+  Both files were converted from the upstream WOFF/TTF to woff2
+  via fonttools (76% / ~70% smaller respectively) and committed
+  alongside this change. The @font-face declarations in the icon
+  CSS now reference woff2 first, woff as fallback, and use
+  font-display: block so we get a brief invisible period rather
+  than a tofu-then-icon swap on slow connections.
+-->
+<link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/academicons.woff2' | relative_url }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ '/assets/webfonts/scholar-icons.woff2' | relative_url }}" crossorigin>
+<!--
   Preload Roboto (variable font, Latin subset). Self-hosted so we
   can fetch it at HTML parse time in parallel with the document
   body — usually finishes before first paint, so users see Roboto
@@ -86,13 +105,22 @@
 {% endif %}
 
 <!--
-  Fonts & Icons (non-render-blocking).
-  Roboto used to be loaded here via Google Fonts CSS; it's now
-  self-hosted (see @font-face in _mdb-compat.scss + preload above).
-  Roboto Slab was also requested but unused in any rule, dropped.
+  Fonts & Icons. Roboto used to be loaded here via Google Fonts
+  CSS; now self-hosted (see @font-face in _mdb-compat.scss +
+  preload above). Roboto Slab was also requested but unused in
+  any rule, dropped.
+
+  Academicons + Scholar-icons CSS were previously loaded async
+  via the media="print" / onload trick. That delayed @font-face
+  parsing until after first paint, so the icon woff URLs were
+  discovered late and icons flickered in visibly on /about. Now
+  loaded synchronously: each file is small (academicons ~7.8 KiB,
+  scholar-icons ~5 KiB), under brotli ~3 KiB each, well below the
+  threshold where async-loading wins. The woff2 fonts are
+  preloaded above so they fetch in parallel with the CSS itself.
 -->
-<link rel="stylesheet" href="{{ '/assets/css/academicons.min.css' | relative_url | bust_file_cache }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ '/assets/css/scholar-icons.css' | relative_url | bust_file_cache }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ '/assets/css/academicons.min.css' | relative_url | bust_file_cache }}">
+<link rel="stylesheet" href="{{ '/assets/css/scholar-icons.css' | relative_url | bust_file_cache }}">
 
 <!-- Code Syntax Highlighting -->
 <link
