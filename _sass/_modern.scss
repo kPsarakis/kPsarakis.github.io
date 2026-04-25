@@ -264,17 +264,37 @@ html[data-theme="dark"] .publications h2.bibliography {
  *   - Letter-spacing on the copyright copy for editorial polish.
  */
 footer.fixed-bottom {
+  /*
+   * The earlier 1-px-gradient + 6%-bg-overlay version was applied
+   * but invisible on a band this thin. Beefier recipe:
+   *   - 2 px theme-color → hover-color top accent bar so it reads
+   *     as an intentional UI line, not a hairline.
+   *   - Surface gradient that blends 25% theme-color (left) and
+   *     25% hover-color (right) into the footer base, so the band
+   *     itself has direction and warmth.
+   *   - Letter-spacing 0.03em + tabular-nums on the copyright /
+   *     last-updated line for an editorial cadence.
+   * The base --global-footer-bg-color still anchors readability
+   * (children inherit --global-footer-text-color via _base.scss).
+   */
+  background-color: var(--global-footer-bg-color);
   background-image:
-    linear-gradient(to right, transparent, color-mix(in srgb, var(--global-theme-color) 50%, transparent) 50%, transparent),
-    linear-gradient(to bottom, color-mix(in srgb, var(--global-bg-color) 6%, transparent), transparent);
+    linear-gradient(to right, transparent, var(--global-theme-color) 30%, var(--global-hover-color) 70%, transparent),
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--global-theme-color) 25%, var(--global-footer-bg-color)),
+      var(--global-footer-bg-color) 50%,
+      color-mix(in srgb, var(--global-hover-color) 25%, var(--global-footer-bg-color))
+    );
   background-position:
     0 0,
     0 0;
   background-size:
-    100% 1px,
+    100% 2px,
     100% 100%;
   background-repeat: no-repeat;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
 }
 
 /* The .sticky-bottom variant gets the same gradient top divider
