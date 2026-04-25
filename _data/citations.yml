@@ -1,10 +1,10 @@
 "metadata":
-  "last_updated": "2026-04-13 16:02:26"
+  "last_updated": "2026-04-25 22:53:55"
 "papers":
   "6L9Kz3AAAAAJ:u-x6o8ySG0sC":
     "title": "Valentine: Evaluating matching techniques for dataset discovery"
     "year": "2021"
-    "citations": 184
+    "citations": 187
   "6L9Kz3AAAAAJ:9yKSN-GCB0IC":
     "title": "Distributed Transactions on Serverless Stateful Functions"
     "year": "2021"
@@ -26,7 +26,7 @@
     "title": "Multi-label classification for automatic tag prediction in the context\
       \ of programming challenges"
     "year": "2019"
-    "citations": 11
+    "citations": 12
   "6L9Kz3AAAAAJ:WF5omc3nYNoC":
     "title": "Topio Marketplace: Search and Discovery of Geospatial Data"
     "year": "2023"
@@ -34,11 +34,11 @@
   "6L9Kz3AAAAAJ:UebtZRa9Y70C":
     "title": "CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows"
     "year": "2024"
-    "citations": 12
+    "citations": 13
   "6L9Kz3AAAAAJ:LkGwnXOMwfcC":
     "title": "Adaptive distributed streaming similarity joins"
     "year": "2023"
-    "citations": 5
+    "citations": 6
   "6L9Kz3AAAAAJ:ufrVoPGSRksC":
     "title": "Towards evaluating stream processing autoscalers"
     "year": "2023"
