@@ -849,6 +849,56 @@ article .clearfix > p:first-of-type {
  * driven animations and on background-size growth.
  * ---------------------------------------------------------------------------*/
 
+/* -----------------------------------------------------------------------------
+ * 21. Gradient-colored social icons (about page bottom row)
+ *
+ * The .contact-icons row at the bottom of /about used a flat
+ * --global-text-color for the icon glyphs with a hover swap to
+ * --global-theme-color. Match the page-title gradient idiom by
+ * painting the icons themselves in the theme→hover gradient via
+ * the `background-clip: text` trick: each icon's :before content
+ * gets the gradient as a fill, with text color transparent so the
+ * gradient shows through.
+ *
+ * Per-icon gradient (each glyph spans theme→hover internally)
+ * rather than a row-wide sweep, because the row-sweep approach
+ * needs background coordination across descendants which is
+ * fragile when the icon set changes.
+ *
+ * Hover: gentle scale + opacity bump so the icon "pops" without
+ * needing a color swap (the gradient already provides the
+ * brand presence).
+ *
+ * Selector matches _base.scss's `.social .contact-icons a i::before`
+ * exactly (0,0,3,2 specificity); modern.scss is loaded last so
+ * source order wins.
+ * ---------------------------------------------------------------------------*/
+
+.social .contact-icons a i::before {
+  background: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.social .contact-icons a:hover {
+  text-decoration: none;
+  /*
+   * Override _base's hover rule that sets color: theme-color on
+   * i::before — that would set a flat color and re-show on top
+   * of the transparent text fill, breaking the gradient.
+   */
+  i::before {
+    color: transparent;
+    transform: translateY(-2px) scale(1.08);
+    filter: brightness(1.1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Site-wide: collapse all transitions/animations to 0.01 ms
    * (effectively instant; not 0 because some browsers treat 0 as
