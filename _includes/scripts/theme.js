@@ -200,10 +200,17 @@ let setSearchTheme = (theme) => {
 };
 
 let transTheme = () => {
+  // Adds the .transition class so html + every descendant gets
+  // the scoped color-property transition defined in _base.scss
+  // (180 ms ease). Class is removed once the animation is done
+  // so subsequent style changes (hover, focus, etc.) animate
+  // with their own per-element transitions instead of the
+  // global one. Timeout matches the SCSS duration — keep them
+  // in sync if you tweak one.
   document.documentElement.classList.add("transition");
   window.setTimeout(() => {
     document.documentElement.classList.remove("transition");
-  }, 500);
+  }, 200);
 };
 
 // Determine the expected state of the theme toggle, which can be "dark", "light", or

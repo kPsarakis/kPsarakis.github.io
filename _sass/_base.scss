@@ -959,11 +959,28 @@ code {
 }
 
 // Transitioning Themes
+//
+// Was `transition: all 750 ms !important` — applied to every
+// element + ::before + ::after on the page, animating EVERY
+// property (incl. width / height / padding / transform). That's
+// both expensive (layout properties on thousands of nodes) and
+// far too slow — 750 ms reads as "the page is sticky."
+//
+// Modern theme-toggle UIs (Linear / Vercel / GitHub) cross-fade
+// the colors in 150-200 ms. Scoped to color-related properties
+// only so layout doesn't animate, and shortened to 180 ms for a
+// snappy but still-perceptible crossfade.
 html.transition,
 html.transition *,
 html.transition *:before,
 html.transition *:after {
-  transition: all 750ms !important;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    fill 180ms ease,
+    stroke 180ms ease,
+    box-shadow 180ms ease !important;
   transition-delay: 0 !important;
 }
 

@@ -316,3 +316,59 @@ footer.sticky-bottom {
   border-top: none;
   background: linear-gradient(to right, transparent, var(--global-divider-color) 50%, transparent) top left / 100% 1px no-repeat;
 }
+
+/* -----------------------------------------------------------------------------
+ * 6. Theme-toggle icon micro-interaction
+ *
+ * The toggle button cycles through three states (system /
+ * dark / light), each with its own Tabler icon. Previously the
+ * inactive icons just `display: none` and the active one
+ * appeared instantly — functional but flat.
+ *
+ * Add a tiny rotate + scale transition so the icon swap reads
+ * as a deliberate state change. The visible icon is whichever
+ * #light-toggle-{state} matches the current theme — the others
+ * are still display: none in _themes.scss. We add the
+ * transition to whichever icon IS visible, plus a transform
+ * origin at center so the rotation looks balanced.
+ *
+ * Hover: gentle scale-up (1.1x) + theme-colored glow on the
+ * icon for affordance feedback. The button itself stays
+ * background-transparent so only the icon reacts.
+ * ---------------------------------------------------------------------------*/
+
+#light-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 180ms ease;
+
+  i {
+    /* The icon itself animates when the active one changes. The
+     * rotation is subtle (8 deg) — strong enough to register as
+     * motion, gentle enough not to feel cartoonish. */
+    transition:
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 180ms ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  &:hover {
+    color: var(--global-hover-color);
+
+    i {
+      transform: rotate(-12deg) scale(1.08);
+    }
+  }
+
+  &:active i {
+    transform: rotate(0deg) scale(0.92);
+  }
+}
