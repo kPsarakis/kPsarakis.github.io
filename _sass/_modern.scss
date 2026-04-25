@@ -392,7 +392,8 @@ footer.sticky-bottom {
  *     .title divs)
  * ---------------------------------------------------------------------------*/
 
-p a {
+p a,
+.styled-table td a {
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0 100%;
   background-size: 0 1.5px;
