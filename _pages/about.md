@@ -23,7 +23,7 @@ profile:
   image_height: 600
   image_circular: false # crops the image to make it circular
   more_info: >
-    <i class="fa fa-map-marker-alt" aria-hidden="true"></i> <p>Delft, The Netherlands</p>
+    <i class="ti ti-map-pin location-pin" aria-hidden="true"></i> <p>Delft, The Netherlands</p>
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"

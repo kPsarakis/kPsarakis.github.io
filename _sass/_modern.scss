@@ -508,6 +508,13 @@ p a,
  */
 .profile img {
   box-shadow:
+    /* Linear-style 1 px white inset on the top edge — gives the
+     * photo a subtle bevel so it reads as a refined panel rather
+     * than a flat rounded rectangle. Inset shadow paints inside
+     * the element, so it sits between the image and the outer
+     * ring without competing with the soft ambient drop shadow
+     * below it. */
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
     0 0 0 4px color-mix(in srgb, var(--global-theme-color) 18%, transparent),
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(0, 0, 0, 0.08);
@@ -524,12 +531,34 @@ p a,
 .profile img:hover {
   /* Disarm the .z-depth-1:hover lift + stronger shadow inherited
    * from section 2. The profile image is a static portrait, not a
-   * clickable card. */
+   * clickable card. Restate the rest shadow stack including the
+   * top-edge bevel so the inherited :hover rule has nothing to
+   * override. */
   transform: none;
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
     0 0 0 4px color-mix(in srgb, var(--global-theme-color) 18%, transparent),
     0 1px 2px rgba(0, 0, 0, 0.04),
     0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/*
+ * Location pin (about page profile metadata, "Delft, The
+ * Netherlands"). Switched from FontAwesome's fa-map-marker-alt
+ * to Tabler's ti-map-pin (added to the subset woff2 in
+ * eb1c,f4a3,f684,f6a9 → eb1c,f4a3,f684,f6a9,eae8). Theme-color
+ * the glyph so the metadata line reads as part of the brand
+ * layer instead of generic body color.
+ */
+.location-pin {
+  color: var(--global-theme-color);
+  font-size: 1em;
+  margin-right: 0.15em;
+  vertical-align: -0.05em;
+}
+
+html[data-theme="dark"] .location-pin {
+  color: var(--global-hover-color);
 }
 
 /*
@@ -540,11 +569,15 @@ p a,
  */
 html[data-theme="dark"] .profile img,
 html[data-theme="dark"] .profile img:hover {
+  /* Dark-mode top-edge inset is dialed up slightly (8% vs the
+   * 5% we had before, and the new light-mode 50% — different
+   * scale because dark surfaces need stronger highlights to
+   * read as a bevel). */
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 0 0 4px color-mix(in srgb, var(--global-theme-color) 28%, transparent),
     0 1px 2px rgba(0, 0, 0, 0.4),
-    0 12px 32px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 12px 32px rgba(0, 0, 0, 0.55);
 }
 
 /* -----------------------------------------------------------------------------
