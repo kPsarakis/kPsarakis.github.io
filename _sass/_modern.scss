@@ -602,23 +602,15 @@ html[data-theme="dark"] .info-icon {
     margin: 0;
   }
 
-  /* Subtitle-style links — slightly muted at rest, theme-color
-   * on hover. No animated gradient underline (would compete with
-   * the small vertical rhythm of the three lines). */
-  a {
-    color: var(--global-text-color);
-    border-bottom: 1px dotted color-mix(in srgb, var(--global-theme-color) 50%, transparent);
-    text-decoration: none;
-    transition: color 180ms ease;
-
-    &:hover {
-      color: var(--global-theme-color);
-    }
-  }
-}
-
-html[data-theme="dark"] .profile .more-info .info-line a:hover {
-  color: var(--global-hover-color);
+  /*
+   * No <a> override here intentionally. Each status line's link
+   * sits inside a <p>, so the global `p a` rule (section 7)
+   * applies — gradient-grow underline on hover, matching every
+   * other body link on the site. An earlier custom dotted-
+   * underline rule on .info-line a was outranking that rule on
+   * specificity (0,0,3,1 vs 0,0,0,2) and breaking the
+   * consistency.
+   */
 }
 
 /*
