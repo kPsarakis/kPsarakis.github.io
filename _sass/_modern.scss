@@ -543,21 +543,36 @@ p a,
 }
 
 /*
- * Location pin (about page profile metadata, "Delft, The
- * Netherlands"). Switched from FontAwesome's fa-map-marker-alt
- * to Tabler's ti-map-pin (added to the subset woff2 in
- * eb1c,f4a3,f684,f6a9 → eb1c,f4a3,f684,f6a9,eae8). Theme-color
- * the glyph so the metadata line reads as part of the brand
- * layer instead of generic body color.
+ * Profile-info-line icons (.info-icon).
+ *
+ * Three icons render alongside the about-page status lines:
+ *   - fa-briefcase    (Software Engineer)
+ *   - fa-scroll       (PhD)
+ *   - ti-map-pin      (location)
+ *
+ * Emoji prefixes (💼, 📜, 📍) were tried first but emojis
+ * render as fixed-palette OS bitmaps and don't inherit `color`,
+ * so they couldn't be theme-tinted to match the rest of the
+ * brand layer. Icon-font glyphs do inherit `color`, so we get
+ * a consistent theme-blue stamp across all three lines.
+ *
+ * Class kept generic (.info-icon) so future status lines can
+ * reuse the rule without renaming.
  */
-.location-pin {
+.info-icon {
   color: var(--global-theme-color);
   font-size: 1em;
-  margin-right: 0.15em;
+  margin-right: 0.25em;
   vertical-align: -0.05em;
+  /* Slight width reservation so the three glyphs (different
+   * native widths in their respective fonts) align vertically
+   * across the three lines. */
+  display: inline-block;
+  width: 1em;
+  text-align: center;
 }
 
-html[data-theme="dark"] .location-pin {
+html[data-theme="dark"] .info-icon {
   color: var(--global-hover-color);
 }
 

@@ -26,9 +26,9 @@ profile:
   image_height: 600
   image_circular: false # crops the image to make it circular
   more_info: >
-    <div class="info-line">💼 <p>Software Engineer @ <a href="https://www.ververica.com/">Ververica GmbH</a></p></div>
-    <div class="info-line">📜 <p>PhD in Data Systems from <a href="https://www.tudelft.nl/en/">TU Delft</a></p></div>
-    <div class="info-line"><i class="ti ti-map-pin location-pin" aria-hidden="true"></i> <p>Delft, The Netherlands</p></div>
+    <div class="info-line"><i class="fa-solid fa-briefcase info-icon" aria-hidden="true"></i> <p>Software Engineer, <a href="https://www.ververica.com/">Ververica</a></p></div>
+    <div class="info-line"><i class="fa-solid fa-scroll info-icon" aria-hidden="true"></i> <p>PhD in Data Systems, <a href="https://www.tudelft.nl/en/">TU Delft</a></p></div>
+    <div class="info-line"><i class="ti ti-map-pin info-icon" aria-hidden="true"></i> <p>Delft, The Netherlands</p></div>
 
 news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
