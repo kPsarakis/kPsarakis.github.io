@@ -1003,17 +1003,26 @@ article .clearfix > p:first-of-type {
  * variant so the same hover formula (fill + white text) reads
  * each accent. Colors picked to match the icon's expected
  * brand association so text + icon read as a unified pair. */
+/*
+ * Four distinct color families so no two buttons read as
+ * "same kind of thing" at a glance:
+ *   pdf      red    (document / Adobe association)
+ *   blog     orange (RSS-feed convention)
+ *   video    purple (distinct from PDF's red — YouTube red was
+ *                    too close)
+ *   scholar  blue   (Google-Scholar association)
+ */
 .pub-btn-pdf {
-  --pub-btn-accent: #dc2626; // Adobe-leaning red (was magenta)
+  --pub-btn-accent: #dc2626;
 }
 .pub-btn-blog {
-  --pub-btn-accent: #2563eb; // RSS / blog blue
+  --pub-btn-accent: #f59e0b;
 }
 .pub-btn-video {
-  --pub-btn-accent: #ea2929; // YouTube red
+  --pub-btn-accent: #7c3aed;
 }
 .pub-btn-scholar {
-  --pub-btn-accent: #4285f4; // Google brand blue
+  --pub-btn-accent: #4285f4;
 }
 
 .pub-btn[class*="pub-btn-"] {
