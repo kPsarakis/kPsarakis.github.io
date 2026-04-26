@@ -33,23 +33,21 @@ nav_order: 4
   }
 
   /*
-   * Bootstrap's bare .btn has no explicit color, so the "Download
-   * PDF" anchor inherits --global-text-color. In dark mode that's a
-   * light-grey-on-dark-grey combo that reads fine for body copy but
-   * washes out as a button label, and hovering gave no feedback
-   * because there were no rules targeting this anchor's :hover.
+   * Light mode: filled-button look — white text on the theme-
+   * color background applied via _modern.scss's section 17.
+   * Both rest and hover keep white text; the bg darkens on hover
+   * (handled in _modern.scss) for affordance feedback.
    *
-   * Light mode: keep the current dark-blue theme color (good
-   * contrast on white). Dark mode: promote the brighter hover tier
-   * to the default so the label actually pops, and keep the
-   * brightest variant for :hover interaction feedback.
+   * Dark mode: keep the previous outline look — bright hover-
+   * color text at rest, brightest tier on hover, since the
+   * filled-fill hadn't been requested for that mode.
    */
   .cv-embed-download {
-    color: var(--global-theme-color);
+    color: var(--global-bg-color);
   }
 
   .cv-embed-download:hover {
-    color: var(--global-hover-color);
+    color: var(--global-bg-color);
   }
 
   html[data-theme="dark"] .cv-embed-download {
