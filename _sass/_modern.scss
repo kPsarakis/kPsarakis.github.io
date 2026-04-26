@@ -1014,17 +1014,32 @@ article .clearfix > p:first-of-type {
  * ---------------------------------------------------------------------------*/
 
 /*
- * Social row alignment.
+ * Social row width + centering.
  *
- * _base.scss has `.social { text-align: center }`. The about page
- * uses a left-aligned reading column with a right-floating
- * profile picture, so a centered social row pulled the icons
- * away from the body-copy column they're conceptually attached
- * to. Left-align so the row sits directly under the last
- * paragraph, anchored to the same left edge as the prose.
+ * _base.scss has `.social { text-align: center }` which centered
+ * the icons across the full article width — produced big gaps
+ * between glyphs because they spread under both the body-text
+ * column AND the right-floating profile picture column.
+ *
+ * Constrain the row's max-width to ~65% (≈ the body-text
+ * column width when the profile floats right at 30% + gap), and
+ * leave it left-aligned within the article so the icons sit
+ * directly under the last paragraph. Inside that box, keep
+ * text-align: center so the icons are centered RELATIVE TO THE
+ * BODY-TEXT COLUMN, not the full page.
+ *
+ * On narrow viewports (<576 px) the profile picture stacks
+ * inline with the title (.profile-mobile in _base.scss) and
+ * .profile is hidden — body content takes full width — so
+ * release the max-width and let the row center across the page.
  */
 .social {
-  text-align: left;
+  text-align: center;
+  max-width: 65%;
+
+  @media (max-width: 575.98px) {
+    max-width: 100%;
+  }
 }
 
 .social .contact-icons a i::before {
