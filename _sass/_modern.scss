@@ -1037,20 +1037,30 @@ article .clearfix > p:first-of-type {
   text-align: center;
   max-width: 65%;
   /*
-   * Cut the vertical gap between the last paragraph and the
-   * social icons to about half what it was. Two contributors:
-   *   1. The .contact-icons font-size: 2.5rem in _base.scss
-   *      multiplies inherited line-height: 1.5 → ~60 px of
-   *      line-box space at top + bottom of the row. Tighten
-   *      to line-height: 1 below.
-   *   2. The default block margins. Small explicit margin-top
-   *      gives the icons breathing room without floor-of-page
-   *      feel.
+   * Aggressive gap-tightening to the body text above. The
+   * earlier 0.75rem margin-top still left visible white space
+   * because the previous paragraph's bottom margin (~1rem) +
+   * .contact-icons font-size 2.5rem with default line-height
+   * stacked into a ~60-80 px gap.
+   *
+   * Pull the row up with a negative margin-top so it sits just
+   * below the last paragraph's text rather than below its
+   * bottom-margin too, and tighten line-height + remove the
+   * empty .contact-note's height contribution.
    */
-  margin-top: 0.75rem;
+  margin-top: -0.5rem;
 
   .contact-icons {
     line-height: 1;
+  }
+
+  /*
+   * The .contact-note div is empty (site.contact_note unset)
+   * but its presence still claimed an empty paragraph's worth
+   * of space below the icons. Hide when empty.
+   */
+  .contact-note:empty {
+    display: none;
   }
 
   @media (max-width: 575.98px) {
