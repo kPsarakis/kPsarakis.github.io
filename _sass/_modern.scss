@@ -972,6 +972,16 @@ article .clearfix > p:first-of-type {
    * ever ends up inside a <p>. */
   background-image: none;
 
+  /* Force both icon and label to inherit the button's color
+   * so they always render in the same accent. Some browsers /
+   * Bootstrap defaults can re-paint <i>::before via the icon-
+   * font cascade, so the explicit override avoids drift. */
+  i,
+  span {
+    color: inherit;
+    line-height: 1;
+  }
+
   i {
     font-size: 0.95em;
   }
@@ -991,18 +1001,19 @@ article .clearfix > p:first-of-type {
 
 /* Per-type accents. CSS custom properties scoped to each
  * variant so the same hover formula (fill + white text) reads
- * each accent. */
+ * each accent. Colors picked to match the icon's expected
+ * brand association so text + icon read as a unified pair. */
 .pub-btn-pdf {
-  --pub-btn-accent: #c2185b;
+  --pub-btn-accent: #dc2626; // Adobe-leaning red (was magenta)
 }
 .pub-btn-blog {
-  --pub-btn-accent: #1e88e5;
+  --pub-btn-accent: #2563eb; // RSS / blog blue
 }
 .pub-btn-video {
-  --pub-btn-accent: #e53935;
+  --pub-btn-accent: #ea2929; // YouTube red
 }
 .pub-btn-scholar {
-  --pub-btn-accent: #4285f4;
+  --pub-btn-accent: #4285f4; // Google brand blue
 }
 
 .pub-btn[class*="pub-btn-"] {
