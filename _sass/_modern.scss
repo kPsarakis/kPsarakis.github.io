@@ -1014,57 +1014,30 @@ article .clearfix > p:first-of-type {
  * ---------------------------------------------------------------------------*/
 
 /*
- * Social row width + centering.
+ * Social row.
  *
- * _base.scss has `.social { text-align: center }` which centered
- * the icons across the full article width — produced big gaps
- * between glyphs because they spread under both the body-text
- * column AND the right-floating profile picture column.
+ * The block now lives inside .clearfix (alongside body content)
+ * via _layouts/about.liquid, so it inherits the floating-photo
+ * column width naturally — inline content (the icons) wraps
+ * around the profile-picture float on desktop and takes full
+ * width on mobile (where .profile is hidden via display:none
+ * at <576 px). No max-width / negative-margin hacks needed; the
+ * layout adapts at every breakpoint.
  *
- * Constrain the row's max-width to ~65% (≈ the body-text
- * column width when the profile floats right at 30% + gap), and
- * leave it left-aligned within the article so the icons sit
- * directly under the last paragraph. Inside that box, keep
- * text-align: center so the icons are centered RELATIVE TO THE
- * BODY-TEXT COLUMN, not the full page.
- *
- * On narrow viewports (<576 px) the profile picture stacks
- * inline with the title (.profile-mobile in _base.scss) and
- * .profile is hidden — body content takes full width — so
- * release the max-width and let the row center across the page.
+ * Just keep text-align: center, tighten line-height on the icon
+ * row, and hide the empty contact-note placeholder so it
+ * doesn't claim a line-height of empty space.
  */
 .social {
   text-align: center;
-  max-width: 65%;
-  /*
-   * Aggressive gap-tightening to the body text above. The
-   * earlier 0.75rem margin-top still left visible white space
-   * because the previous paragraph's bottom margin (~1rem) +
-   * .contact-icons font-size 2.5rem with default line-height
-   * stacked into a ~60-80 px gap.
-   *
-   * Pull the row up with a negative margin-top so it sits just
-   * below the last paragraph's text rather than below its
-   * bottom-margin too, and tighten line-height + remove the
-   * empty .contact-note's height contribution.
-   */
-  margin-top: -0.5rem;
+  margin-top: 0.5rem;
 
   .contact-icons {
     line-height: 1;
   }
 
-  /*
-   * The .contact-note div is empty (site.contact_note unset)
-   * but its presence still claimed an empty paragraph's worth
-   * of space below the icons. Hide when empty.
-   */
   .contact-note:empty {
     display: none;
-  }
-
-  @media (max-width: 575.98px) {
-    max-width: 100%;
   }
 }
 
