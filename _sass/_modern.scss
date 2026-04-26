@@ -173,7 +173,13 @@ hr {
  * tie in our favor (no !important needed).
  */
 .publications h2.bibliography {
-  color: var(--global-theme-color);
+  /*
+   * 70% theme-color blended with transparent — softens the year
+   * stamp so it reads as a section anchor rather than competing
+   * with the publication titles below it. Same recipe in dark
+   * mode (with hover-color for better contrast).
+   */
+  color: color-mix(in srgb, var(--global-theme-color) 70%, transparent);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
@@ -184,8 +190,8 @@ hr {
 html[data-theme="dark"] .publications h2.bibliography {
   /* In dark mode the theme-color is a brighter cyan; use the
    * hover-color tier instead so the year reads with comfortable
-   * contrast against the dark page tint. */
-  color: var(--global-hover-color);
+   * contrast against the dark page tint. Same 70% softening. */
+  color: color-mix(in srgb, var(--global-hover-color) 70%, transparent);
 }
 
 /* -----------------------------------------------------------------------------
