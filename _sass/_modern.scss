@@ -562,6 +562,51 @@ html[data-theme="dark"] .location-pin {
 }
 
 /*
+ * Profile status lines — about.md `more_info` now emits three
+ * .info-line <div>s (role / education / location). Each sits
+ * on its own row beneath the profile picture and gets typography
+ * suited to the brand layer rather than _base.scss's monospace
+ * fallback (which read as "code stamp" against the rest of the
+ * polished copy).
+ *
+ * Selector specificity matches `.profile .more-info p` (0,0,3,1)
+ * inherited rules so the overrides apply where needed.
+ */
+.profile .more-info .info-line {
+  display: block;
+  margin: 0.25rem 0;
+  font-family: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.01em;
+  color: var(--global-text-color);
+
+  /* Inline-block <p> from _base keeps the icon + text aligned
+   * on one row; ensure no extra whitespace between them. */
+  p {
+    display: inline-block;
+    margin: 0;
+  }
+
+  /* Subtitle-style links — slightly muted at rest, theme-color
+   * on hover. No animated gradient underline (would compete with
+   * the small vertical rhythm of the three lines). */
+  a {
+    color: var(--global-text-color);
+    border-bottom: 1px dotted color-mix(in srgb, var(--global-theme-color) 50%, transparent);
+    text-decoration: none;
+    transition: color 180ms ease;
+
+    &:hover {
+      color: var(--global-theme-color);
+    }
+  }
+}
+
+html[data-theme="dark"] .profile .more-info .info-line a:hover {
+  color: var(--global-hover-color);
+}
+
+/*
  * Dark-mode override: same shadow recipe applied to both rest
  * AND :hover so the .z-depth-1:hover stronger-shadow rule from
  * section 2 doesn't poke through. Selector list keeps the rule

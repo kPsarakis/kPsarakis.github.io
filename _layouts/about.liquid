@@ -41,7 +41,9 @@ layout: default
         </picture>
       {% endif %}
     </div>
-    <p class="desc">{{ page.subtitle }}</p>
+    {% if page.subtitle %}
+      <p class="desc">{{ page.subtitle }}</p>
+    {% endif %}
   </header>
 
   <article>
