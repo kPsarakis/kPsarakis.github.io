@@ -33,17 +33,17 @@ nav_order: 4
   }
 
   /*
-   * Light mode: filled-button look — white text on the theme-
-   * color background applied via _modern.scss's section 17.
-   * Both rest and hover keep white text; the bg darkens on hover
-   * (handled in _modern.scss) for affordance feedback.
+   * Light mode rest: outline look — theme-color text + icon on
+   * a transparent bg (border + bg styling in _modern.scss
+   * section 17). On hover, bg fills with theme-color and text
+   * inverts to bg-color (white) — handled by the :hover rule
+   * below.
    *
-   * Dark mode: keep the previous outline look — bright hover-
-   * color text at rest, brightest tier on hover, since the
-   * filled-fill hadn't been requested for that mode.
+   * Dark mode: keep the brighter hover-color tier at rest, and
+   * the brightest variant on hover for interaction feedback.
    */
   .cv-embed-download {
-    color: var(--global-bg-color);
+    color: var(--global-theme-color);
   }
 
   .cv-embed-download:hover {

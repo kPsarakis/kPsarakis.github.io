@@ -773,24 +773,27 @@ article :is(h2, h3) {
  * ---------------------------------------------------------------------------*/
 
 /*
- * Light-mode CV download button: filled primary look — theme-
- * color bg + white text at rest, slightly darker theme-color
- * bg on hover (color-mix with black) for affordance feedback.
+ * CV download button.
  *
- * Dark mode override below restores the outline style: the
- * theme tokens swap to brighter cyan in dark, which reads
- * better as text-on-transparent than as bg fill.
+ * Rest: outline look — transparent bg, theme-color border at
+ * 60% alpha (subtle outline), text color set per-mode in cv.md
+ * (theme-color in light, hover-color in dark).
+ *
+ * Hover: filled — theme-color bg in light mode, hover-color bg
+ * in dark mode, white-ish text inverted via cv.md's :hover
+ * rule (--global-bg-color in light, --global-hover-text-color
+ * in dark).
  */
 .cv-embed-download {
-  background-color: var(--global-theme-color);
-  border: 1px solid var(--global-theme-color);
+  background-color: transparent;
+  border: 1px solid color-mix(in srgb, var(--global-theme-color) 60%, transparent);
   padding: 0.4rem 1rem;
   border-radius: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.01em;
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.06),
-    0 4px 12px rgba(0, 0, 0, 0.1);
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06);
   transition:
     background-color 180ms ease,
     color 180ms ease,
@@ -800,31 +803,27 @@ article :is(h2, h3) {
 }
 
 .cv-embed-download:hover {
-  /* Darken bg ~15% via color-mix with black for hover feedback. */
-  background-color: color-mix(in srgb, var(--global-theme-color) 85%, black);
-  border-color: color-mix(in srgb, var(--global-theme-color) 85%, black);
+  background-color: var(--global-theme-color);
+  border-color: var(--global-theme-color);
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.14);
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .cv-embed-download:active {
   transform: scale(0.97);
 }
 
-/* Dark mode: outline look (transparent bg, hover-color text +
- * border) — the brighter cyan in dark mode reads better as a
- * text + outline than as a filled background. */
+/* Dark mode: outline border uses hover-color (matches the
+ * brighter text color for that mode), and hover fills with
+ * hover-color. */
 html[data-theme="dark"] .cv-embed-download {
-  background-color: transparent;
   border-color: color-mix(in srgb, var(--global-hover-color) 60%, transparent);
 }
 
 html[data-theme="dark"] .cv-embed-download:hover {
   background-color: var(--global-hover-color);
   border-color: var(--global-hover-color);
-  /* Text color overridden in cv.md's inline <style> to
-   * --global-hover-text-color (white-ish) on dark hover. */
 }
 
 /* -----------------------------------------------------------------------------
