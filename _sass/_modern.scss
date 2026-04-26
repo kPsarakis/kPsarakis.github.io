@@ -1013,6 +1013,20 @@ article .clearfix > p:first-of-type {
  * source order wins.
  * ---------------------------------------------------------------------------*/
 
+/*
+ * Social row alignment.
+ *
+ * _base.scss has `.social { text-align: center }`. The about page
+ * uses a left-aligned reading column with a right-floating
+ * profile picture, so a centered social row pulled the icons
+ * away from the body-copy column they're conceptually attached
+ * to. Left-align so the row sits directly under the last
+ * paragraph, anchored to the same left edge as the prose.
+ */
+.social {
+  text-align: left;
+}
+
 .social .contact-icons a i::before {
   background: linear-gradient(to right, var(--global-theme-color), var(--global-hover-color));
   background-clip: text;
