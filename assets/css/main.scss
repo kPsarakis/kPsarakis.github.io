@@ -92,7 +92,15 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("../webfonts/tabler-icons-subset.woff2") format("woff2");
+  /*
+   * Filename includes a -vN suffix used to bust Cloudflare's
+   * 1-month cache rule for /assets/* when the subset changes.
+   * If you regenerate the subset (e.g. add a 6th codepoint),
+   * bump this to -v3.woff2 and rename the file in
+   * assets/webfonts/ + the matching preload <link> in
+   * _includes/head.liquid.
+   */
+  src: url("../webfonts/tabler-icons-subset-v2.woff2") format("woff2");
 }
 
 .ti {
