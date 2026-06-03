@@ -1,18 +1,18 @@
 "metadata":
-  "last_updated": "2026-04-25 22:53:55"
+  "last_updated": "2026-06-03 21:49:42"
 "papers":
   "6L9Kz3AAAAAJ:u-x6o8ySG0sC":
     "title": "Valentine: Evaluating matching techniques for dataset discovery"
     "year": "2021"
-    "citations": 187
+    "citations": 199
   "6L9Kz3AAAAAJ:9yKSN-GCB0IC":
     "title": "Distributed Transactions on Serverless Stateful Functions"
     "year": "2021"
-    "citations": 41
+    "citations": 42
   "6L9Kz3AAAAAJ:2osOgNQ5qMEC":
     "title": "Valentine in Action: Matching Tabular Data at Scale"
     "year": "2021"
-    "citations": 18
+    "citations": 20
   "6L9Kz3AAAAAJ:eQOLeE2rZwMC":
     "title": "Stateful Entities: Object-oriented Cloud Applications as Distributed\
       \ Dataflows"
@@ -21,12 +21,12 @@
   "6L9Kz3AAAAAJ:IjCSPb-OGe4C":
     "title": "Transactions Across Serverless Functions Leveraging Stateful Dataflows"
     "year": "2022"
-    "citations": 19
+    "citations": 20
   "6L9Kz3AAAAAJ:roLk4NBRz8UC":
     "title": "Multi-label classification for automatic tag prediction in the context\
       \ of programming challenges"
     "year": "2019"
-    "citations": 12
+    "citations": 13
   "6L9Kz3AAAAAJ:WF5omc3nYNoC":
     "title": "Topio Marketplace: Search and Discovery of Geospatial Data"
     "year": "2023"
@@ -34,7 +34,7 @@
   "6L9Kz3AAAAAJ:UebtZRa9Y70C":
     "title": "CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows"
     "year": "2024"
-    "citations": 13
+    "citations": 14
   "6L9Kz3AAAAAJ:LkGwnXOMwfcC":
     "title": "Adaptive distributed streaming similarity joins"
     "year": "2023"
@@ -50,7 +50,7 @@
   "6L9Kz3AAAAAJ:hqOjcs7Dif8C":
     "title": "Evaluating stream processing autoscalers"
     "year": "2024"
-    "citations": 4
+    "citations": 5
   "6L9Kz3AAAAAJ:3fE2CSJIrl8C":
     "title": "Styx: Transactional Stateful Functions on Streaming Dataflows"
     "year": "2023"
@@ -96,5 +96,9 @@
     "citations": 0
   "6L9Kz3AAAAAJ:-f6ydRqryjwC":
     "title": "Event Horizon: Asymmetric Dependencies for Fast Geo-Distributed Operations"
+    "year": "2026"
+    "citations": 1
+  "6L9Kz3AAAAAJ:HDshCWvjkbEC":
+    "title": "The Missing Dimensions in Geo-Distributed Database Evaluation"
     "year": "2026"
     "citations": 0
