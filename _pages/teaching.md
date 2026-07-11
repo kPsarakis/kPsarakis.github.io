@@ -28,6 +28,11 @@ nav_order: 3
     </thead>
     <tbody>
         <tr class="active-row">
+            <td><a href="https://www.linkedin.com/in/alexandros-dimakos/">Alexandros Dimakos</a></td>
+            <td><a href="https://resolver.tudelft.nl/uuid:8f3920ee-1447-4a23-8216-afc3d7c35390">Compiling Imperative Object-Oriented Programs into Stateful Serverless Workflows</a></td>
+            <td><a href="https://resolver.tudelft.nl/uuid:8f3920ee-1447-4a23-8216-afc3d7c35390">2026</a></td>
+        </tr>
+        <tr class="active-row">
             <td><a href="https://www.linkedin.com/in/smruti-kshirsagar/">Smruti Kshirsagar</a></td>
             <td><a href="https://resolver.tudelft.nl/uuid:60d4f13b-19d7-4f3e-9477-75566477d7df">Global-State Querying in Stream Processing using Snapshots (H-Styx)</a></td>
             <td><a href="https://resolver.tudelft.nl/uuid:60d4f13b-19d7-4f3e-9477-75566477d7df">2025</a></td>

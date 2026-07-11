@@ -1,10 +1,10 @@
 "metadata":
-  "last_updated": "2026-06-22 22:32:48"
+  "last_updated": "2026-07-11 10:35:34"
 "papers":
   "6L9Kz3AAAAAJ:u-x6o8ySG0sC":
     "title": "Valentine: Evaluating matching techniques for dataset discovery"
     "year": "2021"
-    "citations": 205
+    "citations": 209
   "6L9Kz3AAAAAJ:9yKSN-GCB0IC":
     "title": "Distributed Transactions on Serverless Stateful Functions"
     "year": "2021"
@@ -12,7 +12,7 @@
   "6L9Kz3AAAAAJ:2osOgNQ5qMEC":
     "title": "Valentine in Action: Matching Tabular Data at Scale"
     "year": "2021"
-    "citations": 19
+    "citations": 21
   "6L9Kz3AAAAAJ:eQOLeE2rZwMC":
     "title": "Stateful Entities: Object-oriented Cloud Applications as Distributed\
       \ Dataflows"
@@ -34,7 +34,7 @@
   "6L9Kz3AAAAAJ:UebtZRa9Y70C":
     "title": "CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows"
     "year": "2024"
-    "citations": 16
+    "citations": 17
   "6L9Kz3AAAAAJ:LkGwnXOMwfcC":
     "title": "Adaptive distributed streaming similarity joins"
     "year": "2023"
@@ -75,7 +75,7 @@
   "6L9Kz3AAAAAJ:mVmsd5A6BfQC":
     "title": "Styx: Transactional Stateful Functions on Streaming Dataflows"
     "year": "2025"
-    "citations": 13
+    "citations": 14
   "6L9Kz3AAAAAJ:dhFuZR0502QC":
     "title": "Transactional Cloud Applications: Status Quo, Challenges, and Opportunities"
     "year": "2025"
