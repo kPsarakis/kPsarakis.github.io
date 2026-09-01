@@ -1,0 +1,113 @@
+name: Check origin certificate expiry
+
+# This domain is proxied through Cloudflare, which means GitHub's
+# Let's Encrypt renewal for the Pages custom domain can fail silently:
+# the ACME validation lands on Cloudflare's edge instead of reaching
+# Pages. On SSL/TLS mode "Full (strict)" that surfaces as a hard 526
+# the moment the origin cert lapses; on "Full" it never surfaces at
+# all, because Cloudflare stops validating the origin cert entirely.
+# Either way the failure starts weeks before anyone notices it, so
+# check the origin directly on a schedule.
+#
+# Note this deliberately inspects the *origin* certificate served by
+# GitHub Pages, not the edge certificate. Requesting https://<domain>
+# only ever tells you about Cloudflare's own certificate, which renews
+# reliably and is not the thing that breaks.
+
+on:
+  schedule:
+    # Daily at 06:00 UTC. Cheap enough to run often, and the point is
+    # catching a stuck renewal early rather than eventually.
+    - cron: "0 6 * * *"
+  workflow_dispatch: # Allow manual triggering
+
+env:
+  # Custom domain served by Pages — keep in sync with the CNAME file
+  # that the deploy workflow publishes to gh-pages.
+  DOMAIN: kpsarakis.com
+  # Pages origin hostname. Resolves straight to GitHub's servers and is
+  # never proxied through Cloudflare, which is what lets the check
+  # reach past the edge to the certificate that actually expires.
+  ORIGIN_HOST: kPsarakis.github.io
+  # Fail below this many days remaining. GitHub attempts renewal well
+  # ahead of this, so anything under three weeks means renewal is stuck
+  # and the custom domain needs re-saving in Settings → Pages.
+  MIN_DAYS: "21"
+
+permissions:
+  contents: read
+
+jobs:
+  check-origin-cert:
+    # available images: https://github.com/actions/runner-images#available-images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the certificate on every Pages origin 🔐
+        run: |
+          set -euo pipefail
+
+          # Renewal rolls out per-server, so a partially-failed renewal
+          # shows up as one stale address among four. Check them all
+          # rather than whichever one a single connection lands on.
+          # getent rather than dig: always present on the runner image.
+          ips=$(getent ahostsv4 "$ORIGIN_HOST" | awk '{print $1}' | sort -u)
+          if [ -z "$ips" ]; then
+            echo "::error::Could not resolve $ORIGIN_HOST"
+            exit 1
+          fi
+
+          now=$(date +%s)
+          failed=0
+
+          for ip in $ips; do
+            # SNI is the custom domain, so GitHub answers with the
+            # Let's Encrypt cert issued for it rather than *.github.io.
+            end=$(timeout 20 openssl s_client -connect "$ip:443" -servername "$DOMAIN" </dev/null 2>/dev/null \
+              | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2 || true)
+
+            if [ -z "$end" ]; then
+              echo "::error::$ip — no certificate returned for $DOMAIN"
+              failed=1
+              continue
+            fi
+
+            # Compare seconds, not days: bash integer division truncates
+            # toward zero, so a cert that lapsed an hour ago would report
+            # "expires in 0 days" rather than taking the expired branch.
+            secs=$(( $(date -d "$end" +%s) - now ))
+            days=$(( secs / 86400 ))
+
+            if [ "$secs" -le 0 ]; then
+              echo "::error::$ip — certificate for $DOMAIN EXPIRED on $end"
+              failed=1
+            elif [ "$days" -lt "$MIN_DAYS" ]; then
+              echo "::error::$ip — certificate for $DOMAIN expires in $days day(s) ($end); renewal has likely failed"
+              failed=1
+            else
+              echo "$ip — OK, $days day(s) remaining ($end)"
+            fi
+          done
+
+          if [ "$failed" -ne 0 ]; then
+            echo "::error::Origin certificate needs attention — see the remediation steps in the log below"
+            echo "To force GitHub to reissue the certificate:"
+            echo "  1. Cloudflare → DNS: set the apex and www records to \"DNS only\" (grey cloud)"
+            echo "  2. GitHub → Settings → Pages: clear the custom domain, save, re-enter it, save"
+            echo "  3. Wait for \"Certificate is being provisioned\" to become \"HTTPS is enforced\""
+            echo "  4. Re-enable the Cloudflare proxy if desired"
+            exit 1
+          fi
+
+      - name: Check the site responds through Cloudflare 🌐
+        # Runs even when the check above fails, so a red run always
+        # reports both the cert state and the visitor-facing symptom.
+        # A 526 here is Cloudflare refusing the origin certificate.
+        if: ${{ !cancelled() }}
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -m 30 --retry 2 --retry-delay 5 "https://$DOMAIN/")
+          if [ "$code" != "200" ]; then
+            echo "::error::https://$DOMAIN/ returned HTTP $code (526 means Cloudflare could not validate the origin certificate)"
+            exit 1
+          fi
+          echo "https://$DOMAIN/ → HTTP $code"
