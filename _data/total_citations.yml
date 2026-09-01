@@ -1,16 +1,16 @@
 sources:
   google_scholar:
-    total_citations: 404
+    total_citations: 437
     h_index: 9
-    i10_index: 8
-    updated: 11-Jul-2026
+    i10_index: 9
+    updated: 1-Sep-2026
 
   scopus:
-    total_citations: 175
+    total_citations: 179
     h_index: 5
-    updated: 11-Jul-2026
+    updated: 1-Sep-2026
 
   researchgate:
-    total_citations: 253
+    total_citations: 270
     h_index: 6
-    updated: 11-Jul-2026
+    updated: 1-Sep-2026

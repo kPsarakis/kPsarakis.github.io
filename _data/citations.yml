@@ -1,23 +1,23 @@
 "metadata":
-  "last_updated": "2026-07-11 10:35:34"
+  "last_updated": "2026-09-01 11:39:08"
 "papers":
   "6L9Kz3AAAAAJ:u-x6o8ySG0sC":
     "title": "Valentine: Evaluating matching techniques for dataset discovery"
     "year": "2021"
-    "citations": 209
+    "citations": 228
   "6L9Kz3AAAAAJ:9yKSN-GCB0IC":
     "title": "Distributed Transactions on Serverless Stateful Functions"
     "year": "2021"
-    "citations": 43
+    "citations": 44
   "6L9Kz3AAAAAJ:2osOgNQ5qMEC":
     "title": "Valentine in Action: Matching Tabular Data at Scale"
     "year": "2021"
-    "citations": 21
+    "citations": 24
   "6L9Kz3AAAAAJ:eQOLeE2rZwMC":
     "title": "Stateful Entities: Object-oriented Cloud Applications as Distributed\
       \ Dataflows"
     "year": "2024"
-    "citations": 18
+    "citations": 19
   "6L9Kz3AAAAAJ:IjCSPb-OGe4C":
     "title": "Transactions Across Serverless Functions Leveraging Stateful Dataflows"
     "year": "2022"
@@ -34,7 +34,7 @@
   "6L9Kz3AAAAAJ:UebtZRa9Y70C":
     "title": "CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows"
     "year": "2024"
-    "citations": 17
+    "citations": 18
   "6L9Kz3AAAAAJ:LkGwnXOMwfcC":
     "title": "Adaptive distributed streaming similarity joins"
     "year": "2023"
@@ -42,15 +42,15 @@
   "6L9Kz3AAAAAJ:ufrVoPGSRksC":
     "title": "Towards evaluating stream processing autoscalers"
     "year": "2023"
-    "citations": 4
+    "citations": 5
   "6L9Kz3AAAAAJ:qxL8FJ1GzNcC":
     "title": "Transactional Cloud Applications Go with the (Data) Flow"
     "year": "2025"
-    "citations": 9
+    "citations": 10
   "6L9Kz3AAAAAJ:hqOjcs7Dif8C":
     "title": "Evaluating stream processing autoscalers"
     "year": "2024"
-    "citations": 6
+    "citations": 7
   "6L9Kz3AAAAAJ:3fE2CSJIrl8C":
     "title": "Styx: Transactional Stateful Functions on Streaming Dataflows"
     "year": "2023"
@@ -75,13 +75,13 @@
   "6L9Kz3AAAAAJ:mVmsd5A6BfQC":
     "title": "Styx: Transactional Stateful Functions on Streaming Dataflows"
     "year": "2025"
-    "citations": 14
+    "citations": 17
   "6L9Kz3AAAAAJ:dhFuZR0502QC":
     "title": "Transactional Cloud Applications: Status Quo, Challenges, and Opportunities"
     "year": "2025"
-    "citations": 3
+    "citations": 4
   "6L9Kz3AAAAAJ:L8Ckcad2t8MC":
-    "title": "Styx in Action: Transactional Cloud Applications Made Easy"
+    "title": "Styx in action: Transactional cloud applications made easy"
     "year": "2025"
     "citations": 1
   "6L9Kz3AAAAAJ:IWHjjKOFINEC":
@@ -101,8 +101,12 @@
   "6L9Kz3AAAAAJ:HDshCWvjkbEC":
     "title": "The Missing Dimensions in Geo-Distributed Database Evaluation"
     "year": "2026"
-    "citations": 0
+    "citations": 1
   "6L9Kz3AAAAAJ:TQgYirikUcIC":
     "title": "State Migration in Styx: Towards Serverless Transactional Functions"
     "year": "2026"
+    "citations": 0
+  "6L9Kz3AAAAAJ:R3hNpaxXUhUC":
+    "title": "Outlier Detection Using Spark Streaming"
+    "year": "2017"
     "citations": 0
