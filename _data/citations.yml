@@ -1,14 +1,14 @@
 "metadata":
-  "last_updated": "2026-09-01 11:39:08"
+  "last_updated": "2026-10-03 09:16:31"
 "papers":
   "6L9Kz3AAAAAJ:u-x6o8ySG0sC":
     "title": "Valentine: Evaluating matching techniques for dataset discovery"
     "year": "2021"
-    "citations": 228
+    "citations": 237
   "6L9Kz3AAAAAJ:9yKSN-GCB0IC":
     "title": "Distributed Transactions on Serverless Stateful Functions"
     "year": "2021"
-    "citations": 44
+    "citations": 45
   "6L9Kz3AAAAAJ:2osOgNQ5qMEC":
     "title": "Valentine in Action: Matching Tabular Data at Scale"
     "year": "2021"
@@ -34,7 +34,7 @@
   "6L9Kz3AAAAAJ:UebtZRa9Y70C":
     "title": "CheckMate: Evaluating Checkpointing Protocols for Streaming Dataflows"
     "year": "2024"
-    "citations": 18
+    "citations": 19
   "6L9Kz3AAAAAJ:LkGwnXOMwfcC":
     "title": "Adaptive distributed streaming similarity joins"
     "year": "2023"
@@ -50,7 +50,7 @@
   "6L9Kz3AAAAAJ:hqOjcs7Dif8C":
     "title": "Evaluating stream processing autoscalers"
     "year": "2024"
-    "citations": 7
+    "citations": 8
   "6L9Kz3AAAAAJ:3fE2CSJIrl8C":
     "title": "Styx: Transactional Stateful Functions on Streaming Dataflows"
     "year": "2023"
